@@ -25,6 +25,12 @@ export interface CourseData {
   syllabus?: { title: string; modules?: number; }[];
 }
 
+const CATEGORY_META: Record<CourseData['category'], { label: string; cls: string }> = {
+  paid: { label: 'Paid', cls: 'text-cyan-300 bg-cyan-500/10 border-cyan-500/25' },
+  free: { label: 'Free', cls: 'text-green-300 bg-green-500/10 border-green-500/25' },
+  upcoming: { label: 'Upcoming', cls: 'text-blue-300 bg-blue-500/10 border-blue-500/25' },
+};
+
 const CourseCard = ({ course }: { course: CourseData }) => {
   const { isOverclocked } = useOverclock();
   const [showSyllabus, setShowSyllabus] = useState(false);
@@ -153,6 +159,12 @@ const CourseCard = ({ course }: { course: CourseData }) => {
 
           {/* META TAGS */}
           <div className="flex flex-wrap gap-2 mb-5 min-h-[28px]">
+            <span className={twMerge(clsx(
+              "text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border",
+              CATEGORY_META[course.category].cls
+            ))}>
+              {CATEGORY_META[course.category].label}
+            </span>
             {course.duration && (
               <span className="text-[10px] font-bold text-gray-300 uppercase tracking-wider bg-white/5 border border-white/10 px-2 py-1 rounded">
                 {course.duration}

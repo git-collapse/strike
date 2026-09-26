@@ -48,6 +48,16 @@ const HeroCodePanel = () => {
     setTimeout(() => setPhase('done'), 650);
   };
 
+  // Streamed console output: lines reveal in sequence for a "playground" feel.
+  const outContainer = {
+    hidden: {},
+    show: { transition: { staggerChildren: reduce ? 0 : 0.14, delayChildren: 0.05 } },
+  };
+  const outLine = {
+    hidden: reduce ? { opacity: 0 } : { opacity: 0, x: -6 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.25 } },
+  };
+
   return (
     <motion.div
       className="mt-16 max-w-6xl mx-auto px-1"
@@ -56,7 +66,7 @@ const HeroCodePanel = () => {
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
-      <div className="grid lg:grid-cols-[1.4fr_1fr] rounded-2xl border border-white/10 bg-[#0b0b0f] overflow-hidden shadow-[0_0_60px_rgba(6,182,212,0.08)]">
+      <div className="grid lg:grid-cols-[1.4fr_1fr] rounded-2xl border border-white/10 bg-[#0b0b0f] overflow-hidden shadow-[0_0_60px_rgba(6,182,212,0.08)] transition-shadow duration-500 hover:shadow-[0_0_80px_rgba(6,182,212,0.16)]">
         {/* Editor pane */}
         <div className="border-b lg:border-b-0 lg:border-r border-white/10">
           <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-[#0e0e13]">
@@ -77,9 +87,14 @@ const HeroCodePanel = () => {
                 <span className="whitespace-pre">{line.map((tok, j) => <span key={j} className={tok.c}>{tok.t}</span>)}</span>
               </div>
             ))}
+            {/* Editor caret — reads as a live cursor; static under reduced-motion */}
+            <div className="flex" aria-hidden="true">
+              <span className="w-7 shrink-0" />
+              <span className={`inline-block w-[7px] h-[15px] translate-y-0.5 bg-cyan-400/80 ${reduce ? '' : 'animate-pulse'}`} />
+            </div>
           </pre>
           <AnimatePresence>
-            {phase === 'done' && (
+            {phase !== 'ready' && (
               <motion.div
                 initial={reduce ? false : { opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
@@ -87,10 +102,28 @@ const HeroCodePanel = () => {
                 transition={{ duration: 0.35, ease: 'easeOut' }}
                 className="border-t border-white/10 bg-black/50 px-4 py-3 font-mono text-[12.5px] leading-6 overflow-hidden"
               >
-                {OUTPUT.map((o) => (
-                  <div key={o} className="text-slate-300"><span className="text-cyan-500">&gt;</span> {o}</div>
-                ))}
-                <div className="text-emerald-400 flex items-center gap-1.5 mt-1"><CheckCircle2 size={14} /> {'{ status: "success" }'}</div>
+                {phase === 'running' ? (
+                  <div className="text-amber-400 flex items-center gap-2">
+                    <Loader2 size={13} className="animate-spin" /> executing strike.js
+                    <span className="inline-flex gap-0.5">
+                      <span className="animate-pulse">.</span>
+                      <span className="animate-pulse [animation-delay:150ms]">.</span>
+                      <span className="animate-pulse [animation-delay:300ms]">.</span>
+                    </span>
+                  </div>
+                ) : (
+                  <motion.div variants={outContainer} initial="hidden" animate="show">
+                    {OUTPUT.map((o) => (
+                      <motion.div key={o} variants={outLine} className="text-slate-300">
+                        <span className="text-cyan-500">&gt;</span> {o}
+                      </motion.div>
+                    ))}
+                    <motion.div variants={outLine} className="text-emerald-400 flex items-center gap-1.5 mt-1">
+                      <CheckCircle2 size={14} /> {'{ status: "success" }'}
+                      <span className={`inline-block w-[7px] h-[14px] bg-emerald-400/70 ml-0.5 ${reduce ? '' : 'animate-pulse'}`} aria-hidden="true" />
+                    </motion.div>
+                  </motion.div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>

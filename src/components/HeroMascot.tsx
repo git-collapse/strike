@@ -1,14 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useOverclock } from '../context/OverclockContext';
 import { Zap } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 
+// Friendly one-liners the mascot cycles through on tap. Personality only — no
+// pricing or urgency here; the sale funnel stays owned by the floating robot.
+const MASCOT_LINES = [
+  "Hey! I'm Volt ⚡",
+  'Explore the courses below 👇',
+  'Psst… check the assistant in the corner.',
+  'Ready to level up?',
+];
+
 export const HeroMascot = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { isOverclocked } = useOverclock();
   const shouldReduceMotion = useReducedMotion();
+
+  // Tap interaction: cycle a speech bubble that auto-dismisses. Touch-friendly
+  // (the whole mascot is a button) and keyboard-accessible.
+  const [bubble, setBubble] = useState<number | null>(null);
+  const hideTimer = useRef<number | undefined>(undefined);
+
+  const handleTap = () => {
+    setBubble((prev) => (prev === null ? 0 : (prev + 1) % MASCOT_LINES.length));
+  };
+
+  useEffect(() => {
+    if (bubble === null) return;
+    window.clearTimeout(hideTimer.current);
+    hideTimer.current = window.setTimeout(() => setBubble(null), 2800);
+    return () => window.clearTimeout(hideTimer.current);
+  }, [bubble]);
   
   return (
     <motion.div
@@ -33,7 +58,27 @@ export const HeroMascot = () => {
         transition={{ repeat: Infinity, duration: isOverclocked ? 4 : 6, ease: "easeInOut" }}
         className="relative z-20"
       >
-        <div className="relative">
+        <motion.button
+          type="button"
+          onClick={handleTap}
+          whileTap={shouldReduceMotion ? undefined : { scale: 0.93, rotate: -2 }}
+          aria-label="Say hi to the Strike mascot"
+          className="relative block w-full rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+        >
+          {/* Tap speech bubble (distinct from the Overclock tooltip) */}
+          <AnimatePresence>
+            {bubble !== null && (
+              <motion.span
+                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.9 }}
+                animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+                exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.9 }}
+                className="absolute -top-3 left-2 sm:left-6 z-40 bg-white text-black text-sm font-bold px-4 py-2 rounded-2xl rounded-bl-sm shadow-[0_10px_25px_rgba(0,0,0,0.45)] pointer-events-none whitespace-nowrap"
+              >
+                {MASCOT_LINES[bubble]}
+              </motion.span>
+            )}
+          </AnimatePresence>
+
           <img
             src="/robot_mascot.jpg"
             alt="Strike Retro-Futuristic Robot Mascot"
@@ -91,7 +136,7 @@ export const HeroMascot = () => {
             )}
           </AnimatePresence>
 
-        </div>
+        </motion.button>
       </motion.div>
 
       {/* Grant Unlocked Tooltip */}

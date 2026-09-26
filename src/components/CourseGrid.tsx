@@ -344,51 +344,60 @@ const CourseGrid = () => {
           Learn from the best with hands-on projects and guided practice.
         </p>
 
-        {/* Category Filter Buttons */}
+        {/* Category Filter Buttons — animated sliding pill marks the active tab */}
         <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
           {[
             { id: 'all', label: 'All Courses' },
             { id: 'paid', label: 'Paid Courses' },
             { id: 'free', label: 'Free Courses' },
             { id: 'upcoming', label: 'Upcoming Courses' }
-          ].map(tab => (
-            <button 
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              className={twMerge(
-                clsx(
-                  "px-5 py-2.5 rounded-full text-sm font-bold transition-all focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black",
-                  activeTab === tab.id 
-                    ? "bg-white text-black border border-white" 
-                    : "bg-white/5 border border-white/10 text-white hover:bg-white/10"
-                )
-              )}
-            >
-              {tab.label}
-            </button>
-          ))}
+          ].map(tab => {
+            const active = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                aria-pressed={active}
+                className={twMerge(
+                  clsx(
+                    "relative px-5 py-2.5 rounded-full text-sm font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black",
+                    active ? "text-black" : "bg-white/5 border border-white/10 text-white hover:bg-white/10"
+                  )
+                )}
+              >
+                {active && (
+                  <motion.span
+                    layoutId="courseFilterPill"
+                    className="absolute inset-0 rounded-full bg-white"
+                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                  />
+                )}
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* SINGLE DYNAMIC GRID */}
+      {/* SINGLE DYNAMIC GRID — keyed remount swaps content instantly, then the
+          new set animates in (no dependency on an exit animation completing). */}
       {filteredCourses.length > 0 ? (
-        <motion.div 
+        <motion.div
           key={activeTab}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch empty-space-zone"
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
+          animate="show"
           variants={{
             hidden: {},
             show: {
               transition: {
-                staggerChildren: 0.1
+                staggerChildren: 0.06
               }
             }
           }}
         >
           {filteredCourses.map(course => (
-            <motion.div 
+            <motion.div
               key={course.id}
               variants={{
                 hidden: { opacity: 0, y: 20 },
@@ -405,8 +414,8 @@ const CourseGrid = () => {
         <div className="text-center py-20 bg-[#111] rounded-2xl border border-white/5 flex flex-col items-center justify-center animate-in fade-in duration-300">
           <p className="text-xl font-bold text-gray-300 mb-2">No courses found</p>
           <p className="text-gray-500">There are currently no courses matching this category.</p>
-          <button 
-            onClick={() => setActiveTab('all')} 
+          <button
+            onClick={() => setActiveTab('all')}
             className="mt-6 text-accent-primary hover:text-white transition-colors text-sm font-bold"
           >
             Clear Filter
