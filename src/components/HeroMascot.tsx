@@ -1,0 +1,96 @@
+import { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useOverclock } from '../context/OverclockContext';
+import { Zap } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
+import clsx from 'clsx';
+
+export const HeroMascot = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const { isOverclocked } = useOverclock();
+  const shouldReduceMotion = useReducedMotion();
+  
+  return (
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.9, rotate: shouldReduceMotion ? 0 : -2 }}
+      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+      className="flex-1 w-full max-w-xl mx-auto lg:max-w-none lg:w-auto relative group mt-10 lg:mt-0"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Mascot Image with floating animation */}
+      <motion.div
+        animate={shouldReduceMotion ? {} : { 
+          y: isOverclocked ? [0, -12, 0] : [0, -6, 0],
+          rotate: [0, 0.5, -0.5, 0],
+          scale: isOverclocked ? [1.02, 1.05, 1.02] : [1, 1.005, 1] 
+        }}
+        transition={{ repeat: Infinity, duration: isOverclocked ? 4 : 6, ease: "easeInOut" }}
+        className="relative z-20"
+      >
+        <div className="relative">
+          <img 
+            src="/robot_mascot.jpg" 
+            alt="Strike Retro-Futuristic Robot Mascot" 
+            className={twMerge(clsx(
+              "w-full h-auto object-cover transition-all duration-700",
+              isHovered ? "brightness-110" : "",
+              isOverclocked ? "drop-shadow-[0_0_20px_rgba(34,211,238,0.5)]" : ""
+            ))}
+            style={{
+              maskImage: 'radial-gradient(circle at center, black 50%, transparent 100%)',
+              WebkitMaskImage: 'radial-gradient(circle at center, black 50%, transparent 100%)'
+            }}
+          />
+          
+          {/* Ambient Tiny Particles / Technical Lines */}
+          <AnimatePresence>
+            {!shouldReduceMotion && (
+              <>
+                <motion.div
+                  animate={{ y: [0, -20, 0], x: [0, 10, 0], opacity: [0, 0.8, 0] }}
+                  transition={{ repeat: Infinity, duration: 4, delay: 0.2 }}
+                  className="absolute top-1/4 -left-4 w-1.5 h-1.5 bg-cyan-400 rounded-full blur-[1px]"
+                />
+                <motion.div
+                  animate={{ y: [0, 15, 0], x: [0, -10, 0], opacity: [0, 0.6, 0] }}
+                  transition={{ repeat: Infinity, duration: 5, delay: 1 }}
+                  className="absolute bottom-1/3 -right-3 w-2 h-2 bg-blue-500 rounded-full blur-[1px]"
+                />
+                <motion.div
+                  animate={{ scaleY: [0, 1, 0], opacity: [0, 0.5, 0], originY: 1 }}
+                  transition={{ repeat: Infinity, duration: 3, delay: 1.5 }}
+                  className="absolute top-1/2 -right-6 w-px h-16 bg-gradient-to-b from-transparent via-cyan-400 to-transparent"
+                />
+              </>
+            )}
+          </AnimatePresence>
+
+        </div>
+      </motion.div>
+
+      {/* Grant Unlocked Tooltip */}
+      <AnimatePresence>
+        {isOverclocked && (
+          <motion.div
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.9 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.9 }}
+            className="absolute -top-6 right-0 bg-white/10 backdrop-blur-md border border-cyan-400/50 text-cyan-400 px-5 py-2.5 rounded-2xl rounded-br-sm font-bold text-sm shadow-[0_10px_25px_rgba(34,211,238,0.2)] z-30 pointer-events-none whitespace-nowrap flex items-center gap-2"
+          >
+            <Zap size={14} className="animate-pulse text-cyan-400" />
+            Developer Grant Unlocked
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Subtle background glow */}
+      <div className={twMerge(clsx(
+        "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-cyan-500/20 blur-[60px] -z-10 rounded-full transition-all duration-700",
+        isHovered ? "opacity-100 scale-105" : "opacity-50",
+        isOverclocked ? "bg-cyan-400/30 scale-110" : ""
+      ))}></div>
+    </motion.div>
+  );
+};

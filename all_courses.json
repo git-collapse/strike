@@ -1,0 +1,2688 @@
+{
+  "success": true,
+  "message": "Public courses fetched successfully",
+  "data": [
+    {
+      "id": "6aa4399e0be430641da2080d",
+      "courseId": "thunder-web",
+      "title": "Thunder: 100 Days of Code",
+      "shortTitle": "Thunder: 100 Days of Code",
+      "description": "Web Development + System Design + Security + DevOps",
+      "philosophy": [],
+      "imageUrl": "https://dolia18uq98lp.cloudfront.net/course/028bc14e-679b-4ca7-8ee8-22ce93a522d6.png",
+      "videoUrl": "https://res.cloudinary.com/dues5j0h5/video/upload/q_auto/IMG_0987_1_pu33dt.mp4",
+      "stats": "100+ Hours",
+      "totalProblems": null,
+      "modules": [
+        {
+          "id": "phase-1-module-1",
+          "title": "PHASE 1: JavaScript Mastery - Module 1: Introduction to JavaScript",
+          "topics": [
+            "Introduction to JavaScript",
+            "Role in Web Development",
+            "State of JavaScript in 2026",
+            "Future Scope of JavaScript",
+            "JavaScript Engine vs Runtime",
+            "Introduction to V8 JavaScript Engine",
+            "How JavaScript Code Executes."
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-2",
+          "title": "Module 2: JavaScript Fundamentals",
+          "topics": [
+            "Hello, World Program",
+            "Comments in JavaScript",
+            "Variables (`var`, `let`, `const`)",
+            "Primitive Data Types",
+            "Operators - Arithmetic, Comparison, Logical, Assignment",
+            "Type Coercion",
+            "Introduction to Memory (Stack vs Heap - basic idea)"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-3",
+          "title": "Module 3: Control Flow",
+          "topics": [
+            "Conditional Statements - `if-else`, `switch`, Ternary Operator",
+            "Loops - `for`, `while`, `do-while`",
+            "Break and Continue"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-4",
+          "title": "Module 4: Functions and Execution Context",
+          "topics": [
+            "What is a Function",
+            "Function Declaration, Expression, Arrow Functions",
+            "Parameters and Arguments",
+            "Return Values",
+            "Default and Rest Parameters",
+            "Execution Context - Global Execution Context, Function Execution Context",
+            "Creation Phase and Execution Phase",
+            "Hoisting",
+            "Scope - Global, Function, Block Scope"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-5",
+          "title": "Module 5: Call Stack and Closures",
+          "topics": [
+            "Call Stack",
+            "Stack Frames",
+            "Function Invocation Flow",
+            "Closures (Introduction)",
+            "Closures with Memory Reference",
+            "Practical Use Cases of Closures"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-6",
+          "title": "Module 6: Data Types Deep Dive",
+          "topics": [
+            "Strings",
+            "Arrays - Array Methods (`map`, `filter`, `reduce`, etc.), Iteration Techniques",
+            "Objects (Basics)",
+            "Date and Time"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-7",
+          "title": "Module 7: Objects in JavaScript",
+          "topics": [
+            "Object Properties and Methods",
+            "Object References and Copying",
+            "Optional Chaining",
+            "JSON (JavaScript Object Notation)",
+            "Symbol Data Type"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-8",
+          "title": "Module 8: Modern JavaScript (ES6+)",
+          "topics": [
+            "Template Literals",
+            "Destructuring (Arrays and Objects)",
+            "Spread and Rest Operator",
+            "Default Parameters",
+            "Modules (`import` / `export`)",
+            "Maps and Sets",
+            "WeakMap and WeakSet"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-9",
+          "title": "Module 9: Object-Oriented JavaScript",
+          "topics": [
+            "Introduction to OOP",
+            "Classes and Objects",
+            "Constructors",
+            "`this` Keyword (Basics)",
+            "Prototypal Inheritance",
+            "Encapsulation (Private Fields)",
+            "Polymorphism"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-10",
+          "title": "Module 10: Asynchronous JavaScript",
+          "topics": [
+            "Synchronous vs Asynchronous Execution",
+            "`setTimeout` and `setInterval`",
+            "Callbacks",
+            "Callback Hell",
+            "Promises",
+            "Promise Chaining",
+            "`async` and `await`",
+            "Error Handling using `try-catch`"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-11",
+          "title": "Module 11: Event Loop and Async Internals",
+          "topics": [
+            "JavaScript Single Thread Model",
+            "Web APIs (Browser Environment)",
+            "Callback Queue (Task Queue)",
+            "Microtask Queue",
+            "Event Loop",
+            "Microtask vs Macrotask",
+            "Execution Order Deep Dive"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-12",
+          "title": "Module 12: DOM Manipulation",
+          "topics": [
+            "DOM Introduction",
+            "DOM Tree",
+            "Selecting Elements",
+            "Updating Content",
+            "Adding and Removing Elements"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-13",
+          "title": "Module 13: Event Handling",
+          "topics": [
+            "Browser Events",
+            "Event Listeners",
+            "Event Bubbling and Capturing",
+            "Event Delegation",
+            "Prevent Default",
+            "Stop Propagation"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-1-module-14",
+          "title": "Module 14: Network Requests and Advanced Concepts",
+          "topics": [
+            "HTTP Basics",
+            "Fetch API",
+            "Handling API Responses",
+            "Error Handling in Requests",
+            "CORS (Cross-Origin Requests)",
+            "Deep Dive into `this` Keyword",
+            "`call`, `apply`, `bind`",
+            "Advanced Error Handling",
+            "Custom Errors",
+            "Introduction to Garbage Collection",
+            "High-Level Optimization in V8 JavaScript Engine",
+            "10 Projects on javascript"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-1",
+          "title": "Phase2: Backend Mastery - Module 1: Backend Fundamentals and Node.js Introduction",
+          "topics": [
+            "What is Backend Development",
+            "Client-Server Architecture",
+            "Need for JavaScript on Server",
+            "Introduction to Node.js",
+            "How Node.js runs JavaScript",
+            "Event-driven and Non-blocking nature"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-2",
+          "title": "Module 2: Node.js Basics",
+          "topics": [
+            "Running JavaScript outside the browser",
+            "Global objects (`process`, `__dirname`, etc.)",
+            "Modules in Node.js - CommonJS (`require`, `module.exports`)",
+            "Creating a basic project structure"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-3",
+          "title": "Module 3: Core Node.js (Only What You Need)",
+          "topics": [
+            "File System (`fs`) - Reading files, Writing files",
+            "Understanding async vs sync code in Node.js",
+            "Intro to Streams (very basic intuition)"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-4",
+          "title": "Module 4: Building Your First Server",
+          "topics": [
+            "Creating HTTP server using Node.js",
+            "Request and Response objects",
+            "Handling routes manually",
+            "HTTP Methods - GET, POST, PUT, DELETE",
+            "Sending JSON data",
+            "Limitation discussion: Why raw Node.js is painful -> leads to Express"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-5",
+          "title": "Module 5: Introduction to Express.js",
+          "topics": [
+            "Why Express.js",
+            "Setting up Express server",
+            "Basic routing",
+            "Handling requests and responses",
+            "Sending JSON"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-6",
+          "title": "Module 6: Routing and Middleware",
+          "topics": [
+            "Route parameters",
+            "Query parameters",
+            "Middleware concept (very important)",
+            "Built-in middleware (`express.json`)",
+            "Custom middleware",
+            "Request lifecycle in Express"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-7",
+          "title": "Module 7: REST API Development",
+          "topics": [
+            "REST principles (practical, not theory heavy)",
+            "CRUD operations",
+            "Designing endpoints",
+            "Handling request body",
+            "Status codes (important ones only)",
+            "Centralized error handling"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-8",
+          "title": "Module 8: MongoDB Basics",
+          "topics": [
+            "Why database is needed",
+            "SQL vs NoSQL (quick comparison)",
+            "Introduction to MongoDB",
+            "Collections and Documents",
+            "Basic CRUD operations"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-9",
+          "title": "Module 9: MongoDB with Mongoose",
+          "topics": [
+            "Introduction to Mongoose",
+            "Creating schemas and models",
+            "CRUD using Mongoose",
+            "Data validation",
+            "Simple relationships"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-10",
+          "title": "Module 10: Authentication (Core Only)",
+          "topics": [
+            "Authentication vs Authorization",
+            "User signup and login flow",
+            "Password hashing using bcryptjs",
+            "JWT basics",
+            "Protecting routes using middleware"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-11",
+          "title": "Module 11: File Uploads (Practical Feature)",
+          "topics": [
+            "Handling file uploads using Multer",
+            "Storing files locally",
+            "Returning file URLs"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-2-module-13",
+          "title": "Module 13: AI Integration",
+          "topics": [
+            "What is LLM",
+            "Vector Database",
+            "Integrating AI",
+            "AI Agent",
+            "Projects"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-3-module-1",
+          "title": "Phase 3: System Thinking and Backend Scaling Basics - Module 1: Introduction to System Thinking",
+          "topics": [
+            "What is System Design (practical meaning)",
+            "Difference between coding vs designing systems",
+            "Understanding scale (users, requests, data)",
+            "Latency vs Throughput (intuition only)",
+            "Monolith vs Microservices (high level overview)"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-3-module-2",
+          "title": "Module 2: Backend Performance Basics",
+          "topics": [
+            "What happens when traffic increases",
+            "Identifying bottlenecks - CPU, Memory, Database",
+            "Introduction to horizontal vs vertical scaling",
+            "Why naive backend breaks under load"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-3-module-3",
+          "title": "Module 3: Rate Limiting (Core Concept + Implementation)",
+          "topics": [
+            "What is Rate Limiting and why it is needed",
+            "Real-world use cases (login, APIs, payment endpoints)",
+            "Types of Rate Limiting - Fixed Window, Sliding Window (basic idea)",
+            "Implementing Rate Limiting in Express.js",
+            "Using middleware for rate limiting",
+            "Intro to tools like Redis (conceptual, optional)"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-3-module-4",
+          "title": "Module 4: MongoDB Architecture Basics",
+          "topics": [
+            "How MongoDB works internally (high level)",
+            "Collections, Documents, Indexes revisited",
+            "What are Indexes and why they matter",
+            "Query performance basics",
+            "Replication (primary-secondary concept)",
+            "Sharding (very basic intuition, no deep dive)",
+            "When MongoDB becomes slow and why"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-3-module-5",
+          "title": "Module 5: Caching Fundamentals",
+          "topics": [
+            "What is caching",
+            "Why caching improves performance",
+            "Where to use caching - API responses, Database queries",
+            "Intro to Redis",
+            "Cache invalidation problem"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-3-module-6",
+          "title": "Module 6: Real-Time Systems with WebSockets",
+          "topics": [
+            "Why HTTP is not enough for real-time apps",
+            "Polling vs WebSockets vs SSE (high level)",
+            "Introduction to WebSockets",
+            "How WebSocket connection works internally (upgrade request)",
+            "Building real-time features using Socket.IO",
+            "Sending and receiving real-time data",
+            "Handling multiple clients"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-3-module-7",
+          "title": "Module 7: System Design Thinking (Applied Basics)",
+          "topics": [
+            "Breaking a feature into components",
+            "Designing APIs for a feature",
+            "Handling data flow between client and server",
+            "Basic fault tolerance thinking",
+            "Simple scalability decisions",
+            "Build one project"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-1",
+          "title": "Phase 4: Advanced System Design (Internals + HLD) - Module 1: Advanced System Design Foundations",
+          "topics": [
+            "Revisiting scalability with real numbers (RPS, storage, bandwidth)",
+            "Latency vs Throughput (quantitative understanding)",
+            "Availability vs Consistency (practical trade-offs)",
+            "CAP Theorem (applied, not theoretical)",
+            "Identifying bottlenecks in large-scale systems"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-2",
+          "title": "Module 2: Core Architecture Components (Deep Understanding)",
+          "topics": [
+            "API Gateway (routing, authentication, aggregation)",
+            "Load Balancers - L4 vs L7, Algorithms (Round Robin, Least Connections, IP Hash etc)",
+            "Reverse Proxy",
+            "Stateless vs Stateful services",
+            "Service-to-service communication (sync vs async)"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-3",
+          "title": "Module 3: Database Scaling",
+          "topics": [
+            "Database Replication - Master-Slave Architecture",
+            "Database Sharding",
+            "Consistent Hashing - Problem with traditional hashing, Hash ring, Node addition/removal, Load distribution, Use in caching and distributed systems",
+            "Eventual Consistency",
+            "Gossip Protocol and Merkle Tree",
+            "Leader Election and Distributed Coordination",
+            "Data Backups and Disaster Recovery"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-4",
+          "title": "Module 4: Database Internals (MongoDB Focused)",
+          "topics": [
+            "Internal working of MongoDB",
+            "Storage engine (high level)",
+            "Indexing deep dive",
+            "B+ Tree - Why B+ Tree is used in databases, Disk-based access optimization, Structure and traversal, Search complexity, Range queries efficiency, Query execution using indexes, Read vs write trade-offs, Replication and sharding (internal reasoning)"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-5",
+          "title": "Module 5: Searching Systems and Elastic Search",
+          "topics": [
+            "Why databases fail for search use cases",
+            "Introduction to Elastic search",
+            "Inverted Index - Concept and structure, Tokenization and indexing, Mapping terms to documents, Query phase vs indexing phase, Ranking and relevance (intuition), Distributed search - Shards and replicas, Syncing DB with search engine"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-6",
+          "title": "Module 6: Caching and Distributed Caching",
+          "topics": [
+            "Revisiting caching at scale",
+            "Cache strategies (deep)",
+            "Cache invalidation challenges",
+            "Internals of Redis (high level)",
+            "Data eviction strategies (LRU, LFU, FIFO etc)"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-7",
+          "title": "Module 7: Messaging Systems and Kafka Internals",
+          "topics": [
+            "Why messaging systems are required",
+            "Queue vs Pub/Sub model",
+            "Introduction to Apache Kafka",
+            "Kafka Internals - Topics and partitions, Producers and consumers, Consumer groups, Offset management, Message ordering guarantees, Log-based storage system, Partitioning strategy, Fault tolerance and replication, Why Kafka is highly scalable"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-8",
+          "title": "Module 8: Advanced Rate Limiting",
+          "topics": [
+            "Revisiting rate limiting at scale",
+            "Algorithms (Deep) - Fixed Window, Sliding Window, Token Bucket, Leaky Bucket",
+            "Distributed rate limiting challenges",
+            "Storing counters in cache/datastore",
+            "Designing rate limiter for real systems"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-9",
+          "title": "Module 9: System Design Patterns",
+          "topics": [
+            "Microservices vs Monoliths",
+            "Strangler pattern - Decomposition by Business Logic, Decomposition by Sub-Domains",
+            "SAGA Pattern - Choreography-based, Orchestration-based",
+            "CQRS Pattern (Command Query Responsibility Segregation)",
+            "Circuit breaker pattern"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-10",
+          "title": "Module 10: Modern Design Infrastructure",
+          "topics": [
+            "Content Delivery Networks (CDN)",
+            "Object Storage (S3-like systems)",
+            "Media Processing Pipelines",
+            "Search Systems",
+            "Recommendation Systems"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-11",
+          "title": "Module 11: Observability and Debugging",
+          "topics": [
+            "Logging systems",
+            "Metrics and monitoring",
+            "Distributed tracing (basic idea)",
+            "Debugging production systems"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-4-module-12",
+          "title": "Module 12: Security in System Design",
+          "topics": [
+            "Secure system architecture",
+            "Authentication vs Authorization at scale",
+            "API protection strategies",
+            "Rate limiting as a security layer",
+            "Handling common attack patterns (high level)"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-1",
+          "title": "Phase 5: Frontend Development (React, TypeScript, Tailwind) - Module 1: Frontend Architecture and React Introduction",
+          "topics": [
+            "Role of frontend in full-stack systems",
+            "SPA vs MPA",
+            "Why React",
+            "Virtual DOM",
+            "Project setup (Vite)",
+            "Folder structure"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-2",
+          "title": "Module 2: React Fundamentals",
+          "topics": [
+            "JSX",
+            "Functional Components",
+            "Props",
+            "Conditional Rendering",
+            "Lists and Keys",
+            "Event Handling"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-3",
+          "title": "Module 3: State and Component Thinking",
+          "topics": [
+            "What is state",
+            "`useState`",
+            "Controlled vs uncontrolled components",
+            "Lifting state up",
+            "Component communication"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-4",
+          "title": "Module 4: Side Effects and Data Fetching",
+          "topics": [
+            "`useEffect`",
+            "Dependency array",
+            "API calls",
+            "Cleanup",
+            "Common mistakes"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-5",
+          "title": "Module 5: Advanced Hooks",
+          "topics": [
+            "`useRef`",
+            "`useMemo`",
+            "`useCallback`",
+            "Custom hooks",
+            "Optimization basics"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-6",
+          "title": "Module 6: Routing",
+          "topics": [
+            "Introduction to React Router",
+            "Dynamic routes",
+            "Protected routes",
+            "Navigation patterns"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-7",
+          "title": "Module 7: API Integration and Auth Flow",
+          "topics": [
+            "Connecting to backend APIs",
+            "Handling loading and error states",
+            "JWT flow (login/logout)",
+            "Token storage basics"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-8",
+          "title": "Module 8: Introduction to TypeScript",
+          "topics": [
+            "Why TypeScript",
+            "Basic types",
+            "Interfaces vs types",
+            "Functions with types",
+            "Type inference"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-9",
+          "title": "Module 9: TypeScript with React",
+          "topics": [
+            "Typing props",
+            "Typing hooks",
+            "Forms and events",
+            "API response typing",
+            "Common pitfalls"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-10",
+          "title": "Module 10: Styling with Tailwind CSS",
+          "topics": [
+            "Introduction to Tailwind CSS",
+            "Utility-first approach",
+            "Layout (flex, grid)",
+            "Responsive design",
+            "Reusable UI components"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-11",
+          "title": "Module 11: State Management (Redux and Alternatives)",
+          "topics": [
+            "Why Global State?",
+            "Problem with prop drilling",
+            "When local state fails",
+            "Introduction to Redux",
+            "Core concepts - Store, Actions, Reducers",
+            "Using Redux Toolkit",
+            "Why Redux Toolkit simplifies Redux",
+            "Creating slices",
+            "Configuring store",
+            "Dispatching actions",
+            "Accessing state with hooks",
+            "Async State Management",
+            "Handling API calls with Redux",
+            "Loading, success, error states",
+            "Alternatives (Important for maturity)",
+            "Context API (when to use)",
+            "Why not always Redux"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-12",
+          "title": "Module 12: Forms and Validation",
+          "topics": [
+            "Controlled forms",
+            "Form validation",
+            "Error handling",
+            "UX best practices"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-5-module-13",
+          "title": "Module 13: Performance Optimization",
+          "topics": [
+            "Re-rendering behavior",
+            "Memoization",
+            "Lazy loading",
+            "Code splitting"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-6-project-1",
+          "title": "Phase 6: Capstone Projects - Project 1: Cloud Video Storage System (S3-like)",
+          "topics": [
+            "What You Will Build: Video upload system (large file handling), Secure access using presigned URLs, Video processing pipeline (basic transcoding workflow), Video streaming system (HLS-based playback), Storage and metadata management, Basic CDN-style delivery (conceptual).",
+            "Tools & Technologies: Backend: Node.js, Express.js; Database: MongoDB; Caching: Redis; Messaging / Queue: Apache Kafka; Streaming: HLS (implementation level); Frontend: React + TypeScript + Tailwind CSS."
+          ],
+          "contentType": "paragraph"
+        },
+        {
+          "id": "phase-6-project-2",
+          "title": "Project 2: Quick Commerce Platform (Blinkit-style + AI)",
+          "topics": [
+            "What You Will Build: Full e-commerce flow (products, cart, orders), Real-time rider tracking on map, Order lifecycle management (state machine), Inventory and product management, Search and filtering system, Multi-channel notification system.",
+            "AI Features: AI-powered product recommendations, Semantic product search using vector embeddings, AI agent for user assistance (chat/query handling).",
+            "Tools & Technologies: Backend: Node.js, Express.js; Database: MongoDB; Caching: Redis; Real-time: WebSockets; Messaging: Apache Kafka; Search: Elasticsearch; Vector Search: Vector DB (for embeddings-based search); AI Integration: LLM APIs / AI agent framework (basic usage); Frontend: React + TypeScript + Tailwind CSS + Redux Toolkit."
+          ],
+          "contentType": "paragraph"
+        },
+        {
+          "id": "phase-7-module-1",
+          "title": "Phase 7: DevOps - Module 1: DevOps Foundations & Linux",
+          "topics": [
+            "DevOps philosophy, CALMS framework, DORA metrics (deployment frequency, lead time, MTTR, change failure rate)",
+            "DevOps vs. SRE vs. Platform Engineering - when each model fits",
+            "Linux essentials: filesystem hierarchy, permissions (chmod, chown), processes & systemd",
+            "Package managers (apt, yum/dnf) and core networking utilities (ss, curl, dig, nslookup)",
+            "Bash scripting for automation: variables, loops, conditionals, cron scheduling"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-2",
+          "title": "Module 2: Git & Version Control Mastery",
+          "topics": [
+            "Git internals: objects, refs, the staging area, and how commits actually work",
+            "Branching strategies: Gitflow, trunk-based development, GitHub Flow",
+            "Merge vs. rebase, cherry-pick, stash, and git bisect for debugging history",
+            "Monorepo vs. polyrepo trade-offs",
+            "Pull request workflows, code review etiquette, signed commits"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-3",
+          "title": "Module 3: Networking, DNS & TLS Essentials",
+          "topics": [
+            "TCP/IP refresher, subnetting and CIDR notation (focused on what DevOps actually needs)",
+            "DNS resolution chain, TTL, and common record types (A, CNAME, MX)",
+            "Load balancing concepts: round-robin, least-connection, sticky sessions",
+            "SSL/TLS handshake, certificate management, Let's Encrypt automation",
+            "Reverse proxies and API gateways at a high level"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-4",
+          "title": "Module 4: CI/CD with Jenkins & GitHub Actions",
+          "topics": [
+            "CI vs. continuous delivery vs. continuous deployment - what each really means",
+            "Jenkins architecture, Declarative Pipelines (Jenkinsfile), shared libraries",
+            "GitHub Actions: workflows, runners, matrix builds, OIDC auth, reusable workflows",
+            "Secrets management, build caching, parallel jobs",
+            "Deployment strategies: blue/green, canary, rolling, feature flags",
+            "Artifact management with Nexus / Artifactory"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-5",
+          "title": "Module 5: Docker & Containerisation",
+          "topics": [
+            "Container vs. VM internals: namespaces, cgroups, union filesystems",
+            "Dockerfile best practices: multi-stage builds, layer caching, small base images",
+            "Image registries (Docker Hub, ECR, GCR, Harbor) and tagging strategies",
+            "Docker networking modes and volume management",
+            "Docker Compose for multi-service local development",
+            "Image scanning: Trivy, Snyk, Docker Scout"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-6",
+          "title": "Module 6: Kubernetes Core",
+          "topics": [
+            "Architecture: control plane, etcd, kube-scheduler, kubelet, kube-proxy",
+            "Core workloads: Pods, ReplicaSets, Deployments, DaemonSets, StatefulSets",
+            "Services: ClusterIP, NodePort, LoadBalancer - when to use which",
+            "ConfigMaps & Secrets, environment configuration patterns",
+            "Resource requests/limits and the QoS classes",
+            "kubectl workflows and debugging Pods"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-7",
+          "title": "Module 7: Kubernetes in Production",
+          "topics": [
+            "Ingress controllers (Nginx, Traefik) and TLS termination",
+            "Persistent Volumes, StorageClasses, dynamic provisioning",
+            "Autoscaling: HPA, VPA, and the Cluster Autoscaler",
+            "RBAC, ServiceAccounts, and least-privilege workloads",
+            "Network policies and Pod Security Standards",
+            "Common production pitfalls and troubleshooting playbook"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-8",
+          "title": "Module 8: Helm & GitOps",
+          "topics": [
+            "Helm charts: templates, values, hooks, chart dependencies",
+            "Chart repositories and OCI registries",
+            "GitOps principles: declarative state, pull-based reconciliation",
+            "ArgoCD: app-of-apps pattern, sync policies, automated rollbacks",
+            "Flux CD as an alternative - push vs. pull deployment models"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-9",
+          "title": "Module 9: Terraform & Infrastructure as Code",
+          "topics": [
+            "IaC concepts: declarative vs. imperative, idempotency, drift",
+            "Terraform building blocks: providers, resources, state, workspaces, modules",
+            "Remote state with S3 + DynamoDB locking, Terraform Cloud",
+            "Writing reusable modules and managing multi-environment infra",
+            "Ansible for configuration management - playbooks, roles, inventories",
+            "Terraform vs. Ansible vs. Pulumi - when to reach for which"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-10",
+          "title": "Module 10: Cloud Platforms (AWS / GCP / Azure)",
+          "topics": [
+            "Core services side-by-side: compute (EC2/GCE/VMs), networking (VPC), storage (S3/GCS/Blob)",
+            "Managed Kubernetes: EKS, GKE, AKS - provisioning, node pools, upgrades",
+            "IAM, service accounts, and least-privilege role design",
+            "Cost optimisation: spot/preemptible instances, right-sizing, reserved capacity",
+            "Project: Provision an EKS cluster with Terraform and deploy a Java app via ArgoCD"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-11",
+          "title": "Module 11: Observability - Metrics, Logs & Traces",
+          "topics": [
+            "The three pillars of observability and when each matters",
+            "Prometheus: scrape model, exporters, service discovery, recording & alerting rules",
+            "PromQL essentials: rate(), histogram_quantile(), alert expressions",
+            "Grafana dashboards, data sources, and alert routing",
+            "Log aggregation with Loki / ELK; structured logging and correlation IDs",
+            "Distributed tracing with OpenTelemetry & Jaeger",
+            "Monitoring for Node.js apps"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-12",
+          "title": "Module 12: DevSecOps, SRE & Capstone",
+          "topics": [
+            "Shift-left security: SAST (SonarQube), DAST (OWASP ZAP), dependency scanning (Snyk, Dependabot)",
+            "Secrets management: GitLeaks detection, HashiCorp Vault, AWS Secrets Manager",
+            "Container hardening: non-root users, read-only filesystems, distroless images",
+            "SRE practices: SLIs, SLOs, SLAs, error budgets, toil elimination",
+            "Incident management: on-call runbooks, PagerDuty/OpsGenie, blameless retrospectives",
+            "Chaos engineering with LitmusChaos / Chaos Mesh",
+            "Capstone: Java app -> CI/CD -> container -> Kubernetes -> fully monitored & secured"
+          ],
+          "contentType": "list"
+        }
+      ],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "JavaScript Mastery",
+        "Backend Mastery",
+        "System Thinking and Backend Scaling Basics",
+        "Advanced System Design (Internals + HLD)",
+        "Frontend Development (React, TypeScript, Tailwind)",
+        "Capstone Projects",
+        "DevOps"
+      ],
+      "duration": "Validity: 2 Years",
+      "level": "Beginner to Advanced",
+      "buyLink": "https://rohittnegi.akamai.net.in/new-courses/18-web-development-system-design-security-devops-new",
+      "price": 5499,
+      "originalPrice": 7999,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": false,
+      "showOnLanding": true,
+      "cardBadgeLabel": "Live",
+      "cardIsPopular": true,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": false,
+      "isComboCourse": false,
+      "displayOrder": 0,
+      "cardTitle": "Thunder: 100 Days of Code",
+      "cardDescription": "Web Development + System Design + Security + DevOps",
+      "cardStats": "100+ Hours",
+      "cardDuration": "100 Days",
+      "cardLevel": "Prerequiste: HTML and CSS",
+      "cardImageUrl": "https://dolia18uq98lp.cloudfront.net/course/028bc14e-679b-4ca7-8ee8-22ce93a522d6.png",
+      "createdAt": "2026-09-11T17:25:50.108Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399a0be430641da207ea",
+      "courseId": "devops",
+      "title": "DevOps: From Foundations to Production",
+      "shortTitle": "DevOps Course",
+      "description": "Linux + Git + CI/CD + Docker + Kubernetes + Terraform + Cloud + Observability",
+      "philosophy": [],
+      "imageUrl": "https://dolia18uq98lp.cloudfront.net/course/3047d244-fa7e-4a7b-8dc4-4169948a9742.png",
+      "videoUrl": null,
+      "stats": "40+ Hours | 12 Modules",
+      "totalProblems": null,
+      "modules": [
+        {
+          "id": "phase-7-module-1",
+          "title": "Module 1: DevOps Foundations & Linux",
+          "topics": [
+            "DevOps philosophy, CALMS framework, DORA metrics (deployment frequency, lead time, MTTR, change failure rate)",
+            "DevOps vs. SRE vs. Platform Engineering - when each model fits",
+            "Linux essentials: filesystem hierarchy, permissions (chmod, chown), processes & systemd",
+            "Package managers (apt, yum/dnf) and core networking utilities (ss, curl, dig, nslookup)",
+            "Bash scripting for automation: variables, loops, conditionals, cron scheduling"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-2",
+          "title": "Module 2: Git & Version Control Mastery",
+          "topics": [
+            "Git internals: objects, refs, the staging area, and how commits actually work",
+            "Branching strategies: Gitflow, trunk-based development, GitHub Flow",
+            "Merge vs. rebase, cherry-pick, stash, and git bisect for debugging history",
+            "Monorepo vs. polyrepo trade-offs",
+            "Pull request workflows, code review etiquette, signed commits"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-3",
+          "title": "Module 3: Networking, DNS & TLS Essentials",
+          "topics": [
+            "TCP/IP refresher, subnetting and CIDR notation (focused on what DevOps actually needs)",
+            "DNS resolution chain, TTL, and common record types (A, CNAME, MX)",
+            "Load balancing concepts: round-robin, least-connection, sticky sessions",
+            "SSL/TLS handshake, certificate management, Let's Encrypt automation",
+            "Reverse proxies and API gateways at a high level"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-4",
+          "title": "Module 4: CI/CD with Jenkins & GitHub Actions",
+          "topics": [
+            "CI vs. continuous delivery vs. continuous deployment - what each really means",
+            "Jenkins architecture, Declarative Pipelines (Jenkinsfile), shared libraries",
+            "GitHub Actions: workflows, runners, matrix builds, OIDC auth, reusable workflows",
+            "Secrets management, build caching, parallel jobs",
+            "Deployment strategies: blue/green, canary, rolling, feature flags",
+            "Artifact management with Nexus / Artifactory"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-5",
+          "title": "Module 5: Docker & Containerisation",
+          "topics": [
+            "Container vs. VM internals: namespaces, cgroups, union filesystems",
+            "Dockerfile best practices: multi-stage builds, layer caching, small base images",
+            "Image registries (Docker Hub, ECR, GCR, Harbor) and tagging strategies",
+            "Docker networking modes and volume management",
+            "Docker Compose for multi-service local development",
+            "Image scanning: Trivy, Snyk, Docker Scout"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-6",
+          "title": "Module 6: Kubernetes Core",
+          "topics": [
+            "Architecture: control plane, etcd, kube-scheduler, kubelet, kube-proxy",
+            "Core workloads: Pods, ReplicaSets, Deployments, DaemonSets, StatefulSets",
+            "Services: ClusterIP, NodePort, LoadBalancer - when to use which",
+            "ConfigMaps & Secrets, environment configuration patterns",
+            "Resource requests/limits and the QoS classes",
+            "kubectl workflows and debugging Pods"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-7",
+          "title": "Module 7: Kubernetes in Production",
+          "topics": [
+            "Ingress controllers (Nginx, Traefik) and TLS termination",
+            "Persistent Volumes, StorageClasses, dynamic provisioning",
+            "Autoscaling: HPA, VPA, and the Cluster Autoscaler",
+            "RBAC, ServiceAccounts, and least-privilege workloads",
+            "Network policies and Pod Security Standards",
+            "Common production pitfalls and troubleshooting playbook"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-8",
+          "title": "Module 8: Helm & GitOps",
+          "topics": [
+            "Helm charts: templates, values, hooks, chart dependencies",
+            "Chart repositories and OCI registries",
+            "GitOps principles: declarative state, pull-based reconciliation",
+            "ArgoCD: app-of-apps pattern, sync policies, automated rollbacks",
+            "Flux CD as an alternative - push vs. pull deployment models"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-9",
+          "title": "Module 9: Terraform & Infrastructure as Code",
+          "topics": [
+            "IaC concepts: declarative vs. imperative, idempotency, drift",
+            "Terraform building blocks: providers, resources, state, workspaces, modules",
+            "Remote state with S3 + DynamoDB locking, Terraform Cloud",
+            "Writing reusable modules and managing multi-environment infra",
+            "Ansible for configuration management - playbooks, roles, inventories",
+            "Terraform vs. Ansible vs. Pulumi - when to reach for which"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-10",
+          "title": "Module 10: Cloud Platforms (AWS / GCP / Azure)",
+          "topics": [
+            "Core services side-by-side: compute (EC2/GCE/VMs), networking (VPC), storage (S3/GCS/Blob)",
+            "Managed Kubernetes: EKS, GKE, AKS - provisioning, node pools, upgrades",
+            "IAM, service accounts, and least-privilege role design",
+            "Cost optimisation: spot/preemptible instances, right-sizing, reserved capacity",
+            "Project: Provision an EKS cluster with Terraform and deploy a Java app via ArgoCD"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-11",
+          "title": "Module 11: Observability - Metrics, Logs & Traces",
+          "topics": [
+            "The three pillars of observability and when each matters",
+            "Prometheus: scrape model, exporters, service discovery, recording & alerting rules",
+            "PromQL essentials: rate(), histogram_quantile(), alert expressions",
+            "Grafana dashboards, data sources, and alert routing",
+            "Log aggregation with Loki / ELK; structured logging and correlation IDs",
+            "Distributed tracing with OpenTelemetry & Jaeger",
+            "Monitoring for Node.js apps"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "phase-7-module-12",
+          "title": "Module 12: DevSecOps, SRE & Capstone",
+          "topics": [
+            "Shift-left security: SAST (SonarQube), DAST (OWASP ZAP), dependency scanning (Snyk, Dependabot)",
+            "Secrets management: GitLeaks detection, HashiCorp Vault, AWS Secrets Manager",
+            "Container hardening: non-root users, read-only filesystems, distroless images",
+            "SRE practices: SLIs, SLOs, SLAs, error budgets, toil elimination",
+            "Incident management: on-call runbooks, PagerDuty/OpsGenie, blameless retrospectives",
+            "Chaos engineering with LitmusChaos / Chaos Mesh",
+            "Capstone: Java app -> CI/CD -> container -> Kubernetes -> fully monitored & secured"
+          ],
+          "contentType": "list"
+        }
+      ],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "DevOps Foundations & Linux",
+        "Git & Version Control Mastery",
+        "CI/CD with Jenkins & GitHub Actions",
+        "Docker & Containerisation",
+        "Kubernetes Core & Production",
+        "Terraform & Infrastructure as Code",
+        "Cloud Platforms (AWS / GCP / Azure)",
+        "Observability - Metrics, Logs & Traces",
+        "DevSecOps & SRE Practices"
+      ],
+      "duration": "Validity: 2 Years",
+      "level": "Beginner to Advanced",
+      "buyLink": "https://rohittnegi.akamai.net.in/new-courses/20",
+      "price": 2999,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Aditya",
+        "title": "DevOps & Cloud Lead, Strike",
+        "signatureUrl": "/aditya-sign.svg"
+      },
+      "isUpcoming": false,
+      "showOnLanding": true,
+      "cardBadgeLabel": "Live",
+      "cardIsPopular": true,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": false,
+      "isComboCourse": false,
+      "displayOrder": 1,
+      "cardTitle": "Devops: From Foundations to Production",
+      "cardDescription": "Linux + CI/CD + Docker + Kubernetes + Terraform + Cloud",
+      "cardStats": "12 Modules",
+      "cardDuration": "8 weeks",
+      "cardLevel": "Beginner to Advanced",
+      "cardImageUrl": "https://dolia18uq98lp.cloudfront.net/course/3047d244-fa7e-4a7b-8dc4-4169948a9742.png",
+      "createdAt": "2026-09-11T17:25:46.627Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399f0be430641da2080e",
+      "courseId": "combo",
+      "title": "Complete DSA + GenAI Combo: From Algorithms to AI Agents",
+      "shortTitle": "DSA and GENAI Course",
+      "description": "Master the complete tech stack! This comprehensive combo course combines Data Structures & Algorithms with Generative AI Engineering. Start with C++ and DSA fundamentals, solve 300+ problems, then dive into building autonomous AI agents. Perfect for those who want to become full-stack AI engineers with strong algorithmic foundations.",
+      "philosophy": [],
+      "imageUrl": "https://dolia18uq98lp.cloudfront.net/course/61baa760-861e-4fbc-bce4-557dc37bd941.png",
+      "videoUrl": null,
+      "stats": "100+ hrs",
+      "totalProblems": null,
+      "modules": [
+        {
+          "id": "combo-intro",
+          "title": "Getting Started: Your Journey Overview",
+          "topics": [
+            "Course Structure & Learning Path",
+            "Setting up Development Environment for DSA & AI",
+            "How to Balance DSA Practice with AI Projects",
+            "Career Paths: SWE vs AI Engineer vs Full-Stack AI"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "combo-dsa-1",
+          "title": "Part 1: C++ & DSA Fundamentals",
+          "topics": [
+            "C++ Programming Foundations",
+            "Time & Space Complexity Analysis",
+            "Arrays, Strings, and Basic Algorithms",
+            "Searching & Sorting Algorithms",
+            "STL (Standard Template Library)",
+            "Object-Oriented Programming for Data Structures"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "combo-dsa-2",
+          "title": "Part 2: Data Structures Deep Dive",
+          "topics": [
+            "Linked Lists, Stacks, Queues",
+            "Trees: Binary Trees, BST, Heaps",
+            "Hashing and Hash Tables",
+            "Graphs: Representation, Traversals",
+            "Advanced Trees: AVL, B-Trees",
+            "100+ Problems Solved"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "combo-dsa-3",
+          "title": "Part 3: Advanced Algorithms",
+          "topics": [
+            "Backtracking & Divide and Conquer",
+            "Greedy Algorithms",
+            "Dynamic Programming (All patterns)",
+            "Graph Algorithms: MST, Shortest Paths, Topological Sort",
+            "Sliding Window & Two Pointers",
+            "Bit Manipulation",
+            "200+ Problems Solved Total"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "combo-ai-1",
+          "title": "Part 4: AI Fundamentals & Theory",
+          "topics": [
+            "Introduction to Generative AI",
+            "Understanding Large Language Models",
+            "Tokens, Prompts, and Context Windows",
+            "Deep Learning Intuition",
+            "Transformer Architecture Deep Dive",
+            "Vector Embeddings & Vector Databases"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "combo-ai-2",
+          "title": "Part 5: Building AI Applications",
+          "topics": [
+            "LangChain Framework Mastery",
+            "Building RAG (Retrieval-Augmented Generation) Systems",
+            "Creating Your First AI Agent",
+            "Tool Use & Function Calling",
+            "Agent Memory Implementation",
+            "Project: Research Assistant Agent"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "combo-ai-3",
+          "title": "Part 6: Advanced AI & Multi-Agent Systems",
+          "topics": [
+            "LangGraph for Complex Workflows",
+            "Building Multi-Agent Systems",
+            "Human-in-the-Loop Design",
+            "Graph RAG & Multi-Modal Agents",
+            "Advanced Data Techniques",
+            "Project: Collaborative AI Team"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "combo-ai-4",
+          "title": "Part 7: Production AI & Deployment",
+          "topics": [
+            "Architecting AI for Scale",
+            "Cloud Deployment on AWS",
+            "MCP (Model Control Plane) Server",
+            "Fine-Tuning Custom Models",
+            "LangSmith for Observability",
+            "Automated Evaluation & Testing",
+            "Final Capstone: Full-Stack AI Agent"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "combo-integration",
+          "title": "Part 8: Integration & Career Prep",
+          "topics": [
+            "Using DSA in AI Systems (Efficient algorithms for AI)",
+            "Building AI-Powered Coding Assistants",
+            "System Design for AI Applications",
+            "Interview Preparation: DSA + AI Combined",
+            "Portfolio Project: AI System with Strong Algorithmic Foundation",
+            "Career Guidance & Job Search Strategies"
+          ],
+          "contentType": "list"
+        }
+      ],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "300+ DSA Problems + 50+ AI Topics",
+        "Complete C++ Mastery",
+        "Build Autonomous AI Agents",
+        "End-to-End Technical Interview Prep",
+        "Real-world Projects in Both Domains",
+        "Production-Ready AI Deployment Skills",
+        "Advanced Algorithms + Modern AI",
+        "Best Value - Save 30% vs Individual Courses"
+      ],
+      "duration": "Validity : 3 years",
+      "level": "Beginner to Advanced",
+      "buyLink": "https://rohittnegi.akamai.net.in/new-courses/9",
+      "price": 5499,
+      "originalPrice": 7999,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": false,
+      "showOnLanding": true,
+      "cardBadgeLabel": null,
+      "cardIsPopular": true,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": true,
+      "displayOrder": 2,
+      "cardTitle": "DSA + GenAI Combo",
+      "cardDescription": "Complete tech stack with DSA and AI",
+      "cardStats": "100+ Hours",
+      "cardDuration": "4 months",
+      "cardLevel": "Beginner to Advanced",
+      "cardImageUrl": "https://dolia18uq98lp.cloudfront.net/course/ba49073c-074e-405b-86f6-b9e2370dfc68.png",
+      "createdAt": "2026-09-11T17:25:51.670Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa439990be430641da207e8",
+      "courseId": "689ecf2b6793e719cdee9efc",
+      "title": "Data Structures and Algorithms in C++: From Beginner to Advanced",
+      "shortTitle": "Data Structure and Algorithm Premium Course",
+      "description": "Welcome to the ultimate guide to Data Structures and Algorithms (DSA) in C++! This comprehensive course is designed to take you from the basic principles of programming to a level of proficiency where you can confidently solve complex computational problems. We will start with a solid foundation in C++, explore fundamental and advanced data structures, master key algorithmic paradigms, and even touch upon modern applications.",
+      "philosophy": [],
+      "imageUrl": "https://dolia18uq98lp.cloudfront.net/course/caa46009-ca64-4dce-94d7-7357e6bdc251.png",
+      "videoUrl": null,
+      "stats": "100+ hrs",
+      "totalProblems": 300,
+      "modules": [
+        {
+          "id": "module-1",
+          "title": "C++ Foundations for DSA",
+          "topics": [
+            "Introduction to C++ & Course Setup",
+            "Variables, Data Types & I/O",
+            "Operators, Conditionals & Loops",
+            "Functions in C++",
+            "Pointers & Dynamic Memory"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "module-2",
+          "title": "Core Concepts of Algorithmic Analysis",
+          "topics": [
+            "Time & Space Complexity",
+            "Asymptotic Notations: Big O, Omega, Theta",
+            "Analyzing iterative and recursive code",
+            "Recursion and the call stack",
+            "Solving problems: Factorial, Fibonacci, Tower of Hanoi"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "module-3",
+          "title": "Basic Data Structures & Algorithms",
+          "topics": [
+            "Arrays & Dynamic Arrays",
+            "Strings manipulation",
+            "Linear Search & Binary Search",
+            "Sorting Algorithms: Bubble, Selection, Insertion Sort",
+            "Efficient Sorts: Merge Sort, Quick Sort"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "module-4",
+          "title": "The C++ Standard Template Library (STL)",
+          "topics": [
+            "Introduction to STL",
+            "Sequence Containers: vector, string, list, deque",
+            "Container Adaptors: stack, queue, priority_queue",
+            "Associative Containers: set, map, multiset, multimap",
+            "Unordered Containers: unordered_set, unordered_map",
+            "STL Algorithms & Functors"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "module-5",
+          "title": "Object-Oriented Programming (OOP) for Data Structures",
+          "topics": [
+            "Classes and Objects",
+            "The Four Pillars: Encapsulation, Abstraction, Inheritance, Polymorphism",
+            "Constructors & Destructors",
+            "Building Data Structures as Classes"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "module-6",
+          "title": "Linear Data Structures",
+          "topics": [
+            "Linked Lists: Singly, Doubly, and Circular",
+            "Implementation: Insertion, Deletion, Traversal, Searching",
+            "Stacks: LIFO principle and applications",
+            "Queues: FIFO principle and applications",
+            "Circular Queues and Deques"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "module-7",
+          "title": "Non-Linear Data Structures",
+          "topics": [
+            "Trees - Core Concepts and Terminology",
+            "Binary Trees and Traversals",
+            "Binary Search Trees (BST)",
+            "Heaps & Priority Queues",
+            "Heap Sort implementation",
+            "Hashing and Hash Tables"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "module-8",
+          "title": "Advanced Algorithmic Paradigms",
+          "topics": [
+            "Backtracking: N-Queens, Sudoku Solver, Maze problems",
+            "Divide and Conquer technique",
+            "Greedy Algorithms: Fractional Knapsack, Activity Selection, Huffman Coding",
+            "Dynamic Programming: Memoization vs Tabulation",
+            "Classic DP Problems: 0/1 Knapsack, Coin Change, LCS, LIS, Edit Distance",
+            "Sliding Window Technique"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "module-9",
+          "title": "Graphs",
+          "topics": [
+            "Graph Theory Fundamentals",
+            "Graph Representation: Adjacency Matrix vs List",
+            "BFS and DFS Traversal",
+            "Minimum Spanning Tree: Prim's and Kruskal's",
+            "Shortest Path: Dijkstra's, Bellman-Ford, Floyd Warshall",
+            "Topological Sort and Kahn's Algorithm",
+            "Strongly Connected Components: Kosaraju's, Tarjan's"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "module-10",
+          "title": "Advanced Data Structures & Topics",
+          "topics": [
+            "Bit Manipulation techniques",
+            "Tries (Prefix Trees)",
+            "Self-Balancing Trees: AVL Trees and Rotations",
+            "B-Trees and B+ Trees",
+            "Vector Databases (Conceptual)"
+          ],
+          "contentType": "list"
+        }
+      ],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "300+ Problems Solved",
+        "Complete C++ Mastery",
+        "Interview Preparation",
+        "Real-world Applications",
+        "Self-Balancing Trees",
+        "Advanced Graph Algorithms"
+      ],
+      "duration": "Validity: 3 Years",
+      "level": "Beginner to Advanced",
+      "buyLink": "https://rohittnegi.akamai.net.in/new-courses/11",
+      "price": 3999,
+      "originalPrice": 4999,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": false,
+      "showOnLanding": true,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 3,
+      "cardTitle": "Data Structure & Algorithms",
+      "cardDescription": "Master DSA with C++ from basics to advanced level",
+      "cardStats": "100+ Hours",
+      "cardDuration": "4 months",
+      "cardLevel": "Beginner to Advanced",
+      "cardImageUrl": "https://dolia18uq98lp.cloudfront.net/course/ba49073c-074e-405b-86f6-b9e2370dfc68.png",
+      "createdAt": "2026-09-11T17:25:45.805Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399a0be430641da207e9",
+      "courseId": "689ee05f1d8fc292bd27df7c",
+      "title": "The Complete Generative AI Engineering Bootcamp: Build & Deploy Autonomous AI Agents",
+      "shortTitle": "GENAI Live Course",
+      "description": "This is the definitive course for anyone serious about building the next generation of AI. We will take you on a comprehensive journey from zero to hero, starting with the fundamental concepts of Generative AI and the Transformer architecture. You will then immediately apply this knowledge to build, test, and deploy sophisticated, autonomous AI agents capable of reasoning, planning, and using tools to solve complex problems.",
+      "philosophy": [],
+      "imageUrl": "https://dolia18uq98lp.cloudfront.net/course/e5d4d382-6966-4928-bd0b-955b56fdbf14.jpg",
+      "videoUrl": null,
+      "stats": "50+ hrs",
+      "totalProblems": null,
+      "modules": [
+        {
+          "id": "part-1-module-1",
+          "title": "The New Age of AI: Introduction to Generative AI",
+          "topics": [
+            "The AI Landscape: AI, ML, Deep Learning, and Generative AI",
+            "What is Generative AI?",
+            "A High-Level Look at LLMs",
+            "The GenAI Ecosystem: Key Players and Models"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-1-module-2",
+          "title": "How Language Models Think: Tokens, Prompts, and Predictions",
+          "topics": [
+            "From Text to Numbers: Tokenization",
+            "The Core Interaction: Prompts, Completions, Context Window",
+            "The Predictive Engine: Autoregressive nature of LLMs",
+            "Parametric Knowledge vs Source Knowledge"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-1-module-3",
+          "title": "Unlocking the Black Box: An Intuition for Deep Learning",
+          "topics": [
+            "The Building Blocks: Artificial Neurons and Neural Networks",
+            "The Learning Process: Loss Functions, Gradient Descent, Backpropagation",
+            "Why 'Deep' Learning? The power of multiple layers"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-1-module-4",
+          "title": "The Engine of Modern LLMs: The Transformer Architecture",
+          "topics": [
+            "The Core Innovation: Self-Attention Mechanism",
+            "Positional Encodings",
+            "Deconstructing the Transformer: Key components walkthrough"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-1-module-5",
+          "title": "Representing Meaning: Embeddings & Vector Databases",
+          "topics": [
+            "What are Vector Embeddings?",
+            "The Need for Vector Databases",
+            "Approximate Nearest Neighbor (ANN) search algorithms",
+            "Hands-On: Setting up Qdrant, Pinecone, or PG Vector"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-2-module-6",
+          "title": "The Modern AI Stack: Introduction to LangChain",
+          "topics": [
+            "Why LangChain? Philosophy of composing LLM calls",
+            "Core LangChain Components: Models, Prompts, Output Parsers",
+            "Building Your First LLM Chain"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-2-module-7",
+          "title": "Building the Knowledge Base for Agents: RAG In-Depth",
+          "topics": [
+            "Architecting the Full RAG Pipeline",
+            "Ingestion, Chunking, Embedding, Indexing, Retrieval, Generation",
+            "Practical Implementation: Chat with Your Documents",
+            "Laying the Foundation for intelligent agents"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-2-module-8",
+          "title": "Building Your First Autonomous AI Agent",
+          "topics": [
+            "The Anatomy of an AI Agent: Core reasoning loop",
+            "Giving Your Agent Superpowers: Web browsing, code execution, APIs",
+            "Creating an Agent with Memory: Short-term and long-term",
+            "Project: Build a Research Assistant Agent"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-2-module-9",
+          "title": "Building Multi-Agent Systems with LangGraph",
+          "topics": [
+            "The Limits of Single Agents",
+            "Introduction to LangGraph: States, nodes, and edges",
+            "Designing for Control: Human-in-the-Loop interruptions",
+            "Project: Build a Collaborative AI Team"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-2-module-10",
+          "title": "Making Agents Smarter: Advanced Data Techniques",
+          "topics": [
+            "Graph RAG: Knowledge graphs for complex relationships",
+            "Multi-Modal Agents: Processing text, images, and other data types"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-3-module-11",
+          "title": "Taking Your Agents to Production: Deployment and Scaling",
+          "topics": [
+            "Architecting for Scale: AI agent as microservice",
+            "Cloud Deployment Mastery: AWS hosting and scaling",
+            "Introducing the MCP (Model Control Plane) Server",
+            "The Art of Fine-Tuning: Customizing base models"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-3-module-12",
+          "title": "Evaluating and Debugging Your Agents",
+          "topics": [
+            "Observability for LLMs: Using LangSmith",
+            "Measuring Agent Performance: Key metrics",
+            "Automated Evaluation: LLM as a Judge technique"
+          ],
+          "contentType": "list"
+        },
+        {
+          "id": "part-3-module-13",
+          "title": "Capstone Project: Build a Full-Stack Autonomous AI Agent",
+          "topics": [
+            "Build a Major project using All knowledge of GenAI"
+          ],
+          "contentType": "list"
+        }
+      ],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "Build Autonomous AI Agents",
+        "LangChain & LangGraph Mastery",
+        "RAG Implementation",
+        "Multi-Agent Systems",
+        "Production Deployment",
+        "Real-world Projects"
+      ],
+      "duration": "Validity: 3 Years",
+      "level": "Intermediate to Advanced",
+      "buyLink": "https://rohittnegi.akamai.net.in/new-courses/10",
+      "price": 3999,
+      "originalPrice": 4999,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": false,
+      "showOnLanding": true,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 4,
+      "cardTitle": "Generative AI",
+      "cardDescription": "Build autonomous AI agents from scratch",
+      "cardStats": "50+ Hours",
+      "cardDuration": "4 months",
+      "cardLevel": "Intermediate to Advanced",
+      "cardImageUrl": "https://dolia18uq98lp.cloudfront.net/course/ba49073c-074e-405b-86f6-b9e2370dfc68.png",
+      "createdAt": "2026-09-11T17:25:46.339Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399a0be430641da207eb",
+      "courseId": "nexus-webdev",
+      "title": "Web Development",
+      "shortTitle": "Web Development",
+      "description": "Complete recorded course on Web Development from Beginner to Advance Level. Gain hands-on experience in HTML, CSS, JavaScript and full-stack development with React, TypeScript, Next.js, Node.js and MongoDB. Build robust web applications, launch them to production, and develop the skills to become a sought-after developer.",
+      "philosophy": [],
+      "imageUrl": "https://dolia18uq98lp.cloudfront.net/course/d3f702b7-3268-4796-8d50-2a74b9825272.png",
+      "videoUrl": null,
+      "stats": "2024 Course",
+      "totalProblems": null,
+      "modules": [
+        {
+          "id": "nexus-web-fundamentals",
+          "title": "Part 1: Web Development - Internet, HTML & CSS",
+          "topics": [
+            "Basics of Internet - How the Web Works",
+            "HTML - Document Structure, Semantic Tags, Forms & Inputs",
+            "CSS - Selectors, Box Model, Flexbox & Grid",
+            "Responsive Design & Media Queries",
+            "CSS Animations & Transitions",
+            "Project: Build a Responsive Landing Page"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "nexus-js-foundations",
+          "title": "Part 2: Web Development - JavaScript Fundamentals",
+          "topics": [
+            "Introduction to JavaScript & How Code Executes",
+            "Variables, Data Types & Operators",
+            "Control Flow - Conditionals & Loops",
+            "Functions & Execution Context",
+            "Arrays, Objects & Modern ES6+ Features",
+            "DOM Manipulation & Events",
+            "Async JavaScript - Callbacks, Promises & async/await"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "nexus-react-frontend",
+          "title": "Part 3: Web Development - React, TypeScript & Next.js",
+          "topics": [
+            "React Fundamentals - Components, Props & State",
+            "Hooks - useState, useEffect, useContext",
+            "Advanced Hooks & Custom Hooks",
+            "React Router & Client-side Routing",
+            "State Management with Context & Redux Toolkit",
+            "TypeScript - Types, Interfaces & Generics",
+            "Next.js - App Router, SSR & API Routes",
+            "Project: Build a Full Frontend App"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "nexus-backend",
+          "title": "Part 4: Web Development - Backend & Databases",
+          "topics": [
+            "Node.js - Event Loop, Modules & NPM",
+            "Express.js - Routing, Middleware & APIs",
+            "REST API Design & Best Practices",
+            "MongoDB & Mongoose - Schemas, CRUD & Aggregation",
+            "Authentication & Authorization - JWT, Sessions & OAuth",
+            "WebSockets & WebRTC - Real-time Communication",
+            "File Uploads & Third-party API Integration",
+            "Project: Full Stack Application"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "nexus-deploy",
+          "title": "Part 5: Web Development - Advance Projects with Deployment",
+          "topics": [
+            "Environment Variables & Configuration",
+            "Error Handling & Logging",
+            "Security Best Practices - Input Validation, Rate Limiting",
+            "Testing Fundamentals & Test Automation",
+            "CI/CD Pipelines & Version Control with Git",
+            "Deployment - Vercel, Netlify, AWS & Docker",
+            "Capstone: Production-Ready Full Stack Project"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "nexus-web-part6",
+          "title": "Part 6: Web Development - Testing, Deployment & Career Launch",
+          "topics": [
+            "Unit & integration testing with Vitest/Jest",
+            "Deploying full-stack apps (frontend + backend + database)",
+            "Environment configuration & secrets management",
+            "CI/CD pipelines and automated deployment",
+            "Project documentation & portfolio building",
+            "Interview preparation and job-hunting strategy"
+          ],
+          "contentType": null
+        }
+      ],
+      "capstoneProjects": [],
+      "courseInfo": [
+        "No Prerequisite Required",
+        "2024 recorded course - learn at your own pace",
+        "Doubt support: Discord Group",
+        "Industry Grade Projects"
+      ],
+      "highlights": [
+        "Complete Web Development Stack",
+        "Full Stack Development Mastery",
+        "React, TypeScript & Next.js",
+        "Node.js, Express & MongoDB Backend",
+        "REST APIs & Authentication",
+        "Real-time Apps with WebSockets",
+        "Advance Projects with Deployment"
+      ],
+      "duration": "Recorded",
+      "level": "Beginner to Advance",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": false,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 5,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:46.905Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399b0be430641da207ec",
+      "courseId": "nexus-blockchain",
+      "title": "Blockchain",
+      "shortTitle": "Blockchain",
+      "description": "Complete recorded course on Blockchain from fundamentals to advanced. Explore blockchain internals, cryptography, Ethereum, Solana, smart contracts with Solidity, and Rust. Build and deploy full decentralized applications (dApps) and gain in-demand blockchain skills.",
+      "philosophy": [],
+      "imageUrl": "https://dolia18uq98lp.cloudfront.net/course/55c5eb3f-0b95-47c0-aa58-55868156d8c8.png",
+      "videoUrl": null,
+      "stats": "Recorded Course",
+      "totalProblems": null,
+      "modules": [
+        {
+          "id": "nexus-blockchain-fundamentals",
+          "title": "Part 1: Blockchain - Fundamentals & Cryptography",
+          "topics": [
+            "Blockchain Introduction - What & Why",
+            "Cryptographic Foundations - Hashing & Digital Signatures",
+            "Blockchain Internal Working - Blocks, Mining & Consensus",
+            "Distributed Ledgers & Nodes",
+            "Public vs Private Blockchains",
+            "Wallets, Keys & Transactions"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "nexus-ethereum-solana",
+          "title": "Part 2: Blockchain - Ethereum, Solana & Smart Contracts",
+          "topics": [
+            "Ethereum and its Ecosystem",
+            "Solana Client Side Apps",
+            "Introduction to Smart Contracts",
+            "Solidity - From Basic to Advance",
+            "Web3.js & Ethers.js - Interacting with the Blockchain",
+            "Project: Build & Deploy a Smart Contract"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "nexus-rust-advance",
+          "title": "Part 3: Blockchain - Rust, Advance & Deployment",
+          "topics": [
+            "Rust Fundamentals - Ownership, Borrowing & Lifetimes",
+            "Rust for Solana Programs (Advanced)",
+            "Advance Blockchain Projects",
+            "On-chain & Off-chain Architecture",
+            "Project Deployment & Testing on Testnets",
+            "Security Best Practices for Smart Contracts",
+            "Capstone: Full Decentralized Application (dApp)"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "nexus-blockchain-part4",
+          "title": "Part 4: Blockchain - Security, DeFi & Real-World dApps",
+          "topics": [
+            "Smart contract security & common vulnerabilities (reentrancy, overflow uses)",
+            "Auditing patterns and best practices",
+            "Decentralized Finance (DeFi) fundamentals - tokens, liquidity pools, DEX",
+            "Building a DeFi-style dApp end-to-end",
+            "Wallet integration (MetaMask) & transaction UX",
+            "Capstone: deploy & secure a complete dApp on the testnet"
+          ],
+          "contentType": null
+        }
+      ],
+      "capstoneProjects": [],
+      "courseInfo": [
+        "No Prerequisite Required",
+        "Recorded course - learn at your own pace",
+        "Doubt support: Discord Group",
+        "Industry Grade Projects"
+      ],
+      "highlights": [
+        "Blockchain Fundamentals & Internal Working",
+        "Cryptographic Foundations",
+        "Ethereum & Solana Ecosystem",
+        "Smart Contracts with Solidity",
+        "Rust from Basic to Advance",
+        "Web3.js & Ethers.js",
+        "Advance Projects with Deployment"
+      ],
+      "duration": "Recorded",
+      "level": "Beginner to Advance",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": false,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 6,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:47.071Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399b0be430641da207ed",
+      "courseId": "system-design",
+      "title": "High Level Design (HLD): System Design Mastery",
+      "shortTitle": "High Level Design",
+      "description": "Master designing scalable, distributed, production-grade systems. Learn the HLD interview framework, architecture patterns, load balancing, caching, database design, message queues, and real-world system design problems from URL shorteners to YouTube, WhatsApp and Twitter.",
+      "philosophy": [],
+      "imageUrl": "https://dolia18uq98lp.cloudfront.net/course/1eaa1b1d-c354-4f80-81bf-d4c35cc2b5a2.jpeg",
+      "videoUrl": null,
+      "stats": "Recorded Course",
+      "totalProblems": null,
+      "modules": [
+        {
+          "id": "hld-foundation-1",
+          "title": "Part 1: System Design Foundations",
+          "topics": [
+            "What is System Design? Goals, Trade-offs & Protocols",
+            "HLD vs LLD - Difference & When to Use Each",
+            "HLD Interview Framework & Thinking Process",
+            "Requirements Gathering - Functional & Non-Functional",
+            "Capacity Estimation - Traffic, Storage & Bandwidth",
+            "Estimation Mini Use Case: How Many Users Can We Serve"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-cap-1",
+          "title": "Part 2: CAP Theorem, Consistency & Availability",
+          "topics": [
+            "CAP Theorem Explained Simply",
+            "Consistency vs Availability Trade-offs",
+            "ACID vs BASE Transactions",
+            "Strong vs Eventual vs Causal Consistency",
+            "Quorums & Replication Strategies",
+            "Mini Use Case: Designing a Highly Available Shopping Cart"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-architecture-1",
+          "title": "Part 3: Architecture Patterns",
+          "topics": [
+            "Monolith vs Microservices - Pros, Cons & Trade-offs",
+            "Service-Oriented Architecture (SOA)",
+            "Serverless Architecture & Event-Driven Design",
+            "Monolith to Microservices Migration Strategy",
+            "API Gateway & Backend-for-Frontend (BFF) Pattern",
+            "Mini Use Case: Choosing Architecture for a Startup"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-scaling-1",
+          "title": "Part 4: Load Balancing & Scaling",
+          "topics": [
+            "Horizontal vs Vertical Scaling",
+            "Load Balancing Algorithms - Round Robin, Least Connections, IP Hash",
+            "Load Balancer Layers - L4 vs L7",
+            "Consistent Hashing & How it Solves Rebalancing",
+            "Auto Scaling & Traffic Management",
+            "Scaling to Millions of Users - Step by Step"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-caching-1",
+          "title": "Part 5: Caching & Performance",
+          "topics": [
+            "Caching - Types, When, Where & Why",
+            "Cache Strategies - Cache Aside, Read Through, Write Through",
+            "Cache Eviction Policies - LRU, LFU, TTL",
+            "Redis vs Memcached",
+            "Cache Invalidation & the Thundering Herd Problem",
+            "CDN & Static Content Delivery"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-database-1",
+          "title": "Part 6: Database Design & Storage",
+          "topics": [
+            "SQL vs NoSQL - When to Use Which",
+            "Database Indexing & Query Optimization",
+            "Sharding - Strategies, Keys & Hotspots",
+            "Replication - Master-Slave, Leaderless & Multi-Leader",
+            "Data Partitioning & Distributed Storage",
+            "Blob/File Storage vs Relational Databases",
+            "Mini Use Case: Designing the Database for a Social App"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-messaging-1",
+          "title": "Part 7: Message Queues & Async Processing",
+          "topics": [
+            "Messaging Queues - Why & When",
+            "Pub-Sub Model vs Point-to-Point",
+            "Kafka - Topics, Partitions, Producers & Consumers",
+            "RabbitMQ - Exchanges, Queues & Bindings",
+            "Event-Driven vs Request-Response Architecture",
+            "Handling Duplicate & Out-of-Order Messages",
+            "Mini Use Case: Designing an Order Processing Pipeline"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-security-1",
+          "title": "Part 8: Security, Authentication & Rate Limiting",
+          "topics": [
+            "Designing Authentication & Authorization",
+            "JWT vs Sessions - Pros & Cons at Scale",
+            "OAuth 2.0 & SSO Providers (Google, GitHub)",
+            "API Gateway - Routing, Filtering & Security",
+            "Rate Limiting & Building a Rate Limiter (Leaky/Token Bucket)",
+            "Distributed Rate Limiting with Redis"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-observability-1",
+          "title": "Part 9: Monitoring, Logging & Health Checks",
+          "topics": [
+            "Monitoring Metrics - Latency, Traffic, Errors, Saturation",
+            "Distributed Tracing & Correlation IDs",
+            "Log Aggregation & Structured Logging",
+            "Health Checks - Liveness vs Readiness Probes",
+            "Alerting, SLIs, SLOs & Error Budgets",
+            "Mini Use Case: Setting Up Observability for a Microservice"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-features-1",
+          "title": "Part 10: Designing Search & Notifications",
+          "topics": [
+            "Designing Search - Inverted Index, Ranking & Search APIs",
+            "Autocomplete & Typeahead Suggestions",
+            "Full-Text Search with Elasticsearch vs PostgreSQL",
+            "Notification System - Email, SMS & Push (Fan-out) Design",
+            "Real-time Delivery - WebSockets, Polling & SSE",
+            "Mini Case Study: Designing Search for an E-commerce App"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-problems-1",
+          "title": "Part 11: System Design Problem 1-4",
+          "topics": [
+            "Building URL Shortener like Bit.ly",
+            "Building a News Feed (Instagram Feed Design)",
+            "Building Zomato/Swiggy (Food Delivery)",
+            "Building YouTube (Video Streaming Service)",
+            "Deep Dive: Data Flow, Components & Bottlenecks for Each"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "hld-problems-2",
+          "title": "Part 12: System Design Problem 5-7 + Capstone",
+          "topics": [
+            "Building WhatsApp/Chat App (Real-time Messaging)",
+            "Building Google Docs (Collaborative Editing & OT/CRDT)",
+            "Designing Twitter (Social Graph & Timeline)",
+            "Comparing Designs - Trade-offs Across All Problems",
+            "Capstone: Design a Full Production System End-to-End"
+          ],
+          "contentType": null
+        }
+      ],
+      "capstoneProjects": [],
+      "courseInfo": [
+        "No Prerequisite Required",
+        "Recorded course - learn at your own pace",
+        "Real-world system design problems & case studies",
+        "Doubt support: Discord Group",
+        "Industry Grade Projects"
+      ],
+      "highlights": [
+        "HLD Interview Framework & Thinking Process",
+        "Architecture Patterns - Monolith vs Microservices",
+        "Load Balancing, Caching & Consistent Hashing",
+        "Database Design - SQL vs NoSQL, Sharding & Indexing",
+        "Message Queues, Pub-Sub, Kafka & RabbitMQ",
+        "Design Search, Notification & File Upload Systems",
+        "Complete System Design Problems (Bit.ly to Twitter)"
+      ],
+      "duration": "Recorded",
+      "level": "Intermediate to Advanced",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": false,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 7,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:47.232Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399b0be430641da207ee",
+      "courseId": "dsa-premium",
+      "title": "Data Structures & Algorithms (DSA) Mastery in C++",
+      "shortTitle": "DSA Mastery in C++",
+      "description": "Welcome to the ultimate guide to Data Structures and Algorithms (DSA) in C++! This comprehensive course takes you from the basics of programming all the way to advanced problem solving. Start with a solid C++ foundation, then master arrays, strings, recursion, linked lists, stacks, queues, trees, graphs, dynamic programming, tries and segment trees. Solve hundreds of curated problems and build the confidence to crack technical interviews and real-world challenges.",
+      "philosophy": [],
+      "imageUrl": "https://dolia18uq98lp.cloudfront.net/course/62ec6cfc-3d7c-4e82-a454-92a1970c0cca.jpeg",
+      "videoUrl": null,
+      "stats": "2024 Course | 80 Lectures",
+      "totalProblems": null,
+      "modules": [
+        {
+          "id": "dsa-module-1",
+          "title": "C++ Foundations for Programming",
+          "topics": [
+            "Introduction to Programming",
+            "Introduction to C++ & Writing First Code",
+            "Variables, Data Types & I/O",
+            "Operators, Conditionals & Loops",
+            "Pattern Printing & Basic Maths",
+            "Number Systems: Decimal to Binary",
+            "Functions in C++"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-2",
+          "title": "Arrays & Sorting Algorithms",
+          "topics": [
+            "Introduction to Arrays",
+            "Basic Questions on Array",
+            "Printing Array Elements",
+            "Searching & Sorting Fundamentals",
+            "Sorting Algorithms: Selection, Bubble, Insertion",
+            "Two Pointer Technique",
+            "2-D Arrays in Detail",
+            "Arrays with Vectors"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-3",
+          "title": "Complexity Analysis & Binary Search",
+          "topics": [
+            "Time and Space Complexity",
+            "Asymptotic Notations: Big O, Omega, Theta",
+            "Analyzing Iterative and Recursive Code",
+            "Binary Search & Applications",
+            "Binary Search in Detail",
+            "Problem Solving with Binary Search"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-4",
+          "title": "Strings & KMP Algorithm",
+          "topics": [
+            "String Manipulation Fundamentals",
+            "String Hard Questions",
+            "Pattern Matching Approaches",
+            "KMP Algorithm in Depth",
+            "String Problems for Interviews"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-5",
+          "title": "Pointers & Recursion",
+          "topics": [
+            "Pointers in C++",
+            "Advanced Pointers & Dynamic Memory",
+            "Introduction to Recursion",
+            "Recursion with 2D Arrays",
+            "Merge Sort & Quick Sort",
+            "Recursion Problems: Robber House, Palindrome, Permutation",
+            "Divide and Conquer Technique"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-6",
+          "title": "Object-Oriented Programming for DSA",
+          "topics": [
+            "Classes and Objects",
+            "The Four Pillars: Encapsulation, Abstraction, Inheritance, Polymorphism",
+            "Constructors & Destructors",
+            "Building Data Structures as Classes"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-7",
+          "title": "Linear Data Structures: Linked Lists, Stacks & Queues",
+          "topics": [
+            "Linked Lists: Insertion, Deletion, Traversal",
+            "Linked List Advanced Problems",
+            "Stacks: LIFO principle & Implementation",
+            "Stack Medium & Hard Questions",
+            "Queues: FIFO principle & Implementation",
+            "Queue Advanced Problems",
+            "Circular Queues & Deques"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-8",
+          "title": "Trees, Binary Search Trees & Balanced Trees",
+          "topics": [
+            "Trees: Core Concepts & Terminology",
+            "Binary Tree Traversals & Views",
+            "Tree Question Practice & Hard Problems",
+            "Binary Search Trees (BST)",
+            "BST Medium & Hard Problems",
+            "Balanced Binary Search Trees",
+            "AVL Trees & Rotations"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-9",
+          "title": "Heaps & Hashing",
+          "topics": [
+            "Heaps & Priority Queues",
+            "Heap Sort Implementation",
+            "Heap Medium & Hard Questions",
+            "Heap Hard Problem Solving",
+            "Hashing & Hash Tables",
+            "Maps: unordered_map vs map",
+            "Hashing Problems for Interviews"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-10",
+          "title": "Graphs - Traversals & Topological Sort",
+          "topics": [
+            "Graph Theory Fundamentals",
+            "Graph Representation: Adjacency Matrix vs List",
+            "BFS and DFS Traversal",
+            "Detecting Cycles in Graphs",
+            "BFS in Advance",
+            "Directed Graphs & Topological Sort",
+            "Graph Problems for Interviews"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-11",
+          "title": "Graphs - Shortest Path, MST & SCC",
+          "topics": [
+            "Spanning Trees & Shortest Distance",
+            "Advanced Graphs",
+            "Prim's & Kruskal's Algorithm (MST)",
+            "Strongly Connected Components",
+            "Bellman-Ford & Floyd-Warshall",
+            "Graph Advanced: Euler Paths",
+            "Articulation Points"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-12",
+          "title": "Dynamic Programming",
+          "topics": [
+            "Introduction to Dynamic Programming",
+            "DP Problems: House Robber, Coin Change",
+            "Knapsack Problem (0/1 & Fractional)",
+            "Knapsack: Full Problem Solving",
+            "LCS & Palindrome (Longest Palindromic Subsequence)",
+            "LIS, LCS & LAP Patterns",
+            "Grid DP & Stock Problems",
+            "How to Define Rows & Columns in DP",
+            "Stock & Player Game Problems",
+            "Advanced DP Questions"
+          ],
+          "contentType": null
+        },
+        {
+          "id": "dsa-module-13",
+          "title": "Advanced Data Structures",
+          "topics": [
+            "Tries (Prefix Trees) & Implementation",
+            "Segment Trees",
+            "Bit Manipulation Techniques",
+            "Advanced Problem Solving"
+          ],
+          "contentType": null
+        }
+      ],
+      "capstoneProjects": [
+        "3 Final Projects / Capstone"
+      ],
+      "courseInfo": [
+        "No Prerequisite Required",
+        "Recorded course - learn at your own pace",
+        "80+ hours of in-depth video lectures",
+        "Doubt support: Discord Group",
+        "Hundreds of curated coding problems"
+      ],
+      "highlights": [
+        "Complete C++ Programming Foundation",
+        "Recursion, OOP & Problem Solving Mastery",
+        "Data Structures - Stacks, Queues, Trees, Graphs",
+        "Advanced Trees - BST, AVL, Heap & Trie",
+        "Hashing & Maps - Unordered vs Ordered",
+        "Graph Algorithms - BFS, DFS, MST, SCC & Shortest Path",
+        "Dynamic Programming - All Major Patterns",
+        "Segment Trees & Advanced Topics"
+      ],
+      "duration": "Recorded",
+      "level": "Beginner to Advanced",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": false,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 8,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:47.404Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399b0be430641da207ef",
+      "courseId": "lld",
+      "title": "LLD: Low Level Design",
+      "shortTitle": "LLD",
+      "description": "Master Object-Oriented Design, Design Patterns, SOLID Principles, and Schema Design with real-world case studies.",
+      "philosophy": [],
+      "imageUrl": "",
+      "videoUrl": null,
+      "stats": "Upcoming Course",
+      "totalProblems": null,
+      "modules": [],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "Object-Oriented Programming (OOP) Deep Dive",
+        "SOLID & DRY Principles in Practice",
+        "Creational, Structural & Behavioral Design Patterns",
+        "UML & Class Diagram Modeling",
+        "Concurrency & Multithreading in LLD",
+        "Real-world Machine Coding Rounds (Parking Lot, Elevator, Splitwise)"
+      ],
+      "duration": "Live & Recorded",
+      "level": "Intermediate to Advanced",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Aditya Tandon",
+        "title": "Lead Instructor, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": true,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 9,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:47.563Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399b0be430641da207f0",
+      "courseId": "dsa-java",
+      "title": "Data Structures & Algorithms in Java",
+      "shortTitle": "DSA in Java",
+      "description": "Complete DSA from scratch to advanced in Java covering Collections framework, algorithmic paradigms, and interview problems.",
+      "philosophy": [],
+      "imageUrl": "",
+      "videoUrl": null,
+      "stats": "Upcoming Course",
+      "totalProblems": null,
+      "modules": [],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "Java Core & Java Collections Framework",
+        "Recursion, Backtracking & Divide and Conquer",
+        "Trees, Binary Search Trees, Tries & Heaps",
+        "Dynamic Programming & Greedy Algorithms",
+        "Graphs, Disjoint Set Union & Shortest Path",
+        "FAANG Interview Problem Patterns"
+      ],
+      "duration": "Live & Recorded",
+      "level": "Beginner to Advanced",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Aditya Tandon",
+        "title": "Lead Instructor, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": true,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 10,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:47.739Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399b0be430641da207f1",
+      "courseId": "fullstack-go",
+      "title": "Full Stack Development with Go",
+      "shortTitle": "Full Stack with Go",
+      "description": "Build ultra-fast, concurrent web applications, microservices, and modern frontend integrations with Golang and React.",
+      "philosophy": [],
+      "imageUrl": "",
+      "videoUrl": null,
+      "stats": "Upcoming Course",
+      "totalProblems": null,
+      "modules": [],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "Golang Fundamentals, Goroutines & Channels",
+        "High-Performance REST & gRPC Microservices",
+        "Database Integration with GORM & PostgreSQL",
+        "Authentication, JWT & Security Best Practices",
+        "Docker, Kubernetes & Production Deployment",
+        "Full Stack Integration with React & Tailwind"
+      ],
+      "duration": "Live & Recorded",
+      "level": "Beginner to Advanced",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": true,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 11,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:47.897Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399c0be430641da207f2",
+      "courseId": "hld",
+      "title": "HLD: High Level Design",
+      "shortTitle": "HLD",
+      "description": "Architect distributed, fault-tolerant, planetary-scale systems from load balancers to distributed databases and message brokers.",
+      "philosophy": [],
+      "imageUrl": "",
+      "videoUrl": null,
+      "stats": "Upcoming Course",
+      "totalProblems": null,
+      "modules": [],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "Scalability, Availability & CAP Theorem",
+        "Load Balancing, API Gateways & Reverse Proxies",
+        "Distributed Caching with Redis & Memcached",
+        "Message Queues (Kafka, RabbitMQ) & Event-Driven Architecture",
+        "Database Sharding, Replication & NoSQL vs SQL",
+        "Real Case Studies (Design YouTube, Uber, WhatsApp, TinyURL)"
+      ],
+      "duration": "Live & Recorded",
+      "level": "Intermediate to Advanced",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Aditya Tandon",
+        "title": "Lead Instructor, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": true,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 12,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:48.088Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399c0be430641da207f3",
+      "courseId": "dsa-cpp",
+      "title": "Data Structures & Algorithms in C++",
+      "shortTitle": "DSA in C++",
+      "description": "Master problem solving, competitive programming foundations, and tech interview questions in modern C++.",
+      "philosophy": [],
+      "imageUrl": "",
+      "videoUrl": null,
+      "stats": "Upcoming Course",
+      "totalProblems": null,
+      "modules": [],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "C++ STL Mastery (Vectors, Sets, Maps, Priority Queues)",
+        "Time & Space Complexity Analysis",
+        "Two Pointers, Sliding Window & Binary Search",
+        "Bit Manipulation & Math for Interviews",
+        "Trees, Graphs & Advanced Dynamic Programming",
+        "400+ Curated Problems from LeetCode & Codeforces"
+      ],
+      "duration": "Live & Recorded",
+      "level": "Beginner to Advanced",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Rohit Negi",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": true,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 13,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:48.265Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    },
+    {
+      "id": "6aa4399c0be430641da207f4",
+      "courseId": "spring boot",
+      "title": "Spring Boot Full Course",
+      "shortTitle": "spring boot",
+      "description": "Learn memory safety without garbage collection, concurrency without data races, and modern systems engineering with Rust.",
+      "philosophy": [],
+      "imageUrl": "",
+      "videoUrl": null,
+      "stats": "Upcoming Course",
+      "totalProblems": null,
+      "modules": [],
+      "capstoneProjects": [],
+      "courseInfo": [],
+      "highlights": [
+        "Rust Ownership, Borrowing & Lifetimes",
+        "Error Handling with Result & Option",
+        "Traits, Generics & Functional Language Features",
+        "Fearless Concurrency & Async Rust with Tokio",
+        "Building Fast CLI Tools & Network Servers",
+        "WebAssembly & Systems Programming with Rust"
+      ],
+      "duration": "Live & Recorded",
+      "level": "Beginner to Advanced",
+      "buyLink": "",
+      "price": 0,
+      "originalPrice": null,
+      "instructor": {
+        "name": "Aditya Tandon",
+        "title": "Lead Instructor & Founder, Strike",
+        "signatureUrl": "/rohit-sign.svg"
+      },
+      "isUpcoming": true,
+      "showOnLanding": false,
+      "cardBadgeLabel": null,
+      "cardIsPopular": false,
+      "cardEnrolledStudents": "",
+      "cardShowTopText": true,
+      "isComboCourse": false,
+      "displayOrder": 14,
+      "cardTitle": null,
+      "cardDescription": null,
+      "cardStats": null,
+      "cardDuration": null,
+      "cardLevel": null,
+      "cardImageUrl": null,
+      "createdAt": "2026-09-11T17:25:48.425Z",
+      "updatedAt": "2026-09-15T07:36:12.822Z"
+    }
+  ],
+  "meta": {
+    "total": 15
+  }
+}
