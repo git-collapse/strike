@@ -14,6 +14,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import SaleDiscovery from './components/SaleDiscovery';
 import TerminalOverlay from './components/TerminalOverlay';
+import SectionDivider from './components/SectionDivider';
 import Login from './pages/Login';
 import { DeveloperBackground } from './components/DeveloperBackground';
 
@@ -33,8 +34,10 @@ const Home = () => {
         <CourseGrid />
         <WhyStrike />
         <Mentors />
+        <SectionDivider label="reviews" />
         <Testimonials />
         <FaangBand />
+        <SectionDivider label="faq" />
         <FAQ />
       </main>
       <Footer />
