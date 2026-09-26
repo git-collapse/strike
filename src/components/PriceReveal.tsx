@@ -1,8 +1,44 @@
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Brief "decrypting" scramble for the developer-grant price. Only the digits
+// are randomised (comma separators are preserved), so the string keeps its
+// width and there is zero layout shift while it settles. Honors reduced motion.
+const ScrambleNumber = ({ value, prefix }: { value: number; prefix: string }) => {
+  const target = value.toLocaleString('en-IN');
+  const [display, setDisplay] = useState(target);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setDisplay(target);
+      return;
+    }
+
+    const scramble = () => target.replace(/\d/g, () => String(Math.floor(Math.random() * 10)));
+    let iterations = 0;
+    const maxIterations = 12; // ~600ms at 50ms/frame
+
+    setDisplay(scramble());
+    const interval = setInterval(() => {
+      iterations++;
+      if (iterations >= maxIterations) {
+        clearInterval(interval);
+        setDisplay(target);
+      } else {
+        setDisplay(scramble());
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [target]);
+
+  return <>{prefix}{display}</>;
+};
 
 export const PriceReveal = ({ normalPrice, overclockedPrice, isOverclocked, className, prefix = '₹' }: { normalPrice: number | undefined, overclockedPrice: number | undefined, isOverclocked: boolean, className?: string, prefix?: string }) => {
   const currentPrice = isOverclocked ? overclockedPrice : normalPrice;
-  
+
   return (
     <div className={`relative flex flex-col justify-end overflow-hidden ${className || ''}`}>
       {/* Invisible placeholder to establish proper layout constraints */}
@@ -16,7 +52,7 @@ export const PriceReveal = ({ normalPrice, overclockedPrice, isOverclocked, clas
           {prefix}{(currentPrice || 0).toLocaleString('en-IN')}
         </div>
       </div>
-      
+
       <AnimatePresence mode="popLayout">
         {!isOverclocked ? (
           <motion.div
@@ -44,7 +80,7 @@ export const PriceReveal = ({ normalPrice, overclockedPrice, isOverclocked, clas
               Developer Grant
             </div>
             <div className="font-bold text-cyan-400 font-mono tabular-nums drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">
-              {prefix}{(overclockedPrice || 0).toLocaleString('en-IN')}
+              <ScrambleNumber value={overclockedPrice || 0} prefix={prefix} />
             </div>
           </motion.div>
         )}
