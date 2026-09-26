@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "puppeteer-core": "^25.12.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.4"
@@ -26,7 +25,6 @@
     "framer-motion": "^13.4.4",
     "lucide-react": "^1.48.0",
     "oxlint": "^1.81.0",
-    "playwright": "^1.63.0",
     "postcss": "^8.5.28",
     "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.3",
