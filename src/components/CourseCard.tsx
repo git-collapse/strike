@@ -173,7 +173,7 @@ const CourseCard = ({ course }: { course: CourseData }) => {
                 e.preventDefault();
                 setShowSyllabus(true);
               }}
-              className="text-cyan-500 text-xs font-semibold flex items-center gap-1.5 hover:text-cyan-400 transition-colors mb-4 w-fit py-3 -my-2 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
+              className="text-cyan-500 text-xs font-semibold flex items-center gap-1.5 hover:text-cyan-400 transition-colors mb-4 w-fit min-h-[44px] py-3 -my-2 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
             >
               <BookOpen size={14} /> View Syllabus
             </button>
