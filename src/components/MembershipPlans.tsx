@@ -10,6 +10,7 @@ const membershipData = [
   {
     id: "6a9330626d983b17987de723",
     name: "Strike Plus",
+    tier: "silver",
     tagline: "All existing Strike courses with access for your selected duration.",
     variants: [
       { label: "2 Years", originalPrice: 19999, sellingPrice: 9999, buyUrl: "https://rohittnegi.akamai.net.in/new-courses/21" },
@@ -31,6 +32,7 @@ const membershipData = [
   {
     id: "6a9330aa6d983b17987de724",
     name: "Strike Ultra",
+    tier: "gold",
     tagline: "This plan includes all existing courses, plus upcoming courses for your selected duration.",
     isBestValue: true,
     variants: [
@@ -50,6 +52,26 @@ const membershipData = [
     ]
   }
 ];
+
+// Metallic tier treatments: Strike Plus = silver, Strike Ultra = gold,
+// matching how the real strikes.in distinguishes the two membership tiers.
+type Tier = 'silver' | 'gold';
+const TIER_THEME: Record<Tier, { border: string; name: string; pill: string; check: string; cta: string }> = {
+  silver: {
+    border: 'border-slate-300/25 hover:border-slate-200/50 hover:shadow-[0_0_35px_rgba(203,213,225,0.18)]',
+    name: 'bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400',
+    pill: 'text-slate-200 bg-slate-300/10 border-slate-300/25',
+    check: 'bg-slate-300/20 text-slate-200',
+    cta: 'bg-gradient-to-r from-slate-200 to-slate-400 text-black hover:from-slate-100 hover:to-slate-300 shadow-[0_0_18px_rgba(203,213,225,0.25)]',
+  },
+  gold: {
+    border: 'border-amber-400/40 shadow-[0_0_35px_rgba(251,191,36,0.15)] hover:shadow-[0_0_48px_rgba(251,191,36,0.3)] hover:border-amber-300',
+    name: 'bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500',
+    pill: 'text-amber-300 bg-amber-400/10 border-amber-400/25',
+    check: 'bg-amber-400/20 text-amber-300',
+    cta: 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black hover:from-amber-300 hover:to-yellow-400 shadow-[0_0_20px_rgba(251,191,36,0.35)] hover:shadow-[0_0_32px_rgba(251,191,36,0.5)]',
+  },
+};
 
 const MembershipPlans = () => {
   const { isOverclocked } = useOverclock();
@@ -86,6 +108,7 @@ const MembershipPlans = () => {
         {membershipData.map(plan => {
           const selectedIdx = selectedVariants[plan.id];
           const variant = plan.variants[selectedIdx];
+          const t = TIER_THEME[plan.tier as Tier];
           
           // Apply Overclock 15% discount if active
           const finalPrice = isOverclocked 
@@ -102,21 +125,19 @@ const MembershipPlans = () => {
                 clsx(
                   "relative flex flex-col bg-[#0a0a0c] rounded-3xl p-8 border transition-all duration-300 transform w-full",
                   "hover:-translate-y-2",
-                  plan.isBestValue 
-                    ? "border-cyan-500/50 shadow-[0_0_40px_rgba(34,211,238,0.15)] hover:shadow-[0_0_50px_rgba(34,211,238,0.3)] hover:border-cyan-400" 
-                    : "border-white/10 hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]",
+                  t.border,
                   isOverclocked && !plan.isBestValue && "ring-1 ring-cyan-500/30"
                 )
               )}
             >
               {plan.isBestValue && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-sm px-5 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold text-sm px-5 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
                   Best Value
                 </div>
               )}
-              
+
               <div className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Membership Plan</div>
-              <h3 className="text-3xl font-extrabold text-white mb-3 tracking-tight">{plan.name}</h3>
+              <h3 className={twMerge(clsx("text-3xl font-extrabold mb-3 tracking-tight text-transparent bg-clip-text", t.name))}>{plan.name}</h3>
               <p className="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">{plan.tagline}</p>
 
               {/* DURATION SELECTOR */}
@@ -178,7 +199,10 @@ const MembershipPlans = () => {
                       <span className="text-gray-500 line-through text-base font-medium">
                         ₹{variant.originalPrice.toLocaleString('en-IN')}
                       </span>
-                      <span className="text-cyan-400 font-bold text-sm bg-cyan-400/10 border border-cyan-400/20 px-2.5 py-0.5 rounded-full whitespace-nowrap">
+                      <span className={twMerge(clsx(
+                        "font-bold text-sm border px-2.5 py-0.5 rounded-full whitespace-nowrap",
+                        isOverclocked ? "text-cyan-400 bg-cyan-400/10 border-cyan-400/20" : t.pill
+                      ))}>
                         {discountPercent}% OFF
                       </span>
                     </motion.div>
@@ -194,11 +218,9 @@ const MembershipPlans = () => {
                 className={twMerge(
                   clsx(
                     "w-full py-4 rounded-xl font-bold text-center transition-all mb-8 text-lg focus:outline-none focus:ring-2 focus:ring-cyan-500",
-                    isOverclocked 
-                      ? "bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white border border-cyan-500/30 hover:shadow-[0_0_25px_rgba(34,211,238,0.5)]" 
-                      : (plan.isBestValue 
-                        ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:opacity-90 shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)]"
-                        : "bg-white text-black hover:bg-gray-200 shadow-[0_0_15px_rgba(255,255,255,0.1)]")
+                    isOverclocked
+                      ? "bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white border border-cyan-500/30 hover:shadow-[0_0_25px_rgba(34,211,238,0.5)]"
+                      : t.cta
                   )
                 )}
               >
@@ -212,8 +234,8 @@ const MembershipPlans = () => {
                 </div>
                 {plan.features.map((feature, idx) => (
                   <div key={idx} className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/20 flex items-center justify-center">
-                      <Check size={12} className="text-cyan-400" />
+                    <div className={twMerge(clsx("flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center", t.check))}>
+                      <Check size={12} />
                     </div>
                     <span className="text-gray-300 text-sm">{feature}</span>
                   </div>
