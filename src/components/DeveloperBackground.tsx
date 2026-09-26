@@ -85,7 +85,7 @@ export const DeveloperBackground = () => {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
           setIsVisible(false);
-        }, 1500); // Disappear if cursor stops moving for 1.5s
+        }, 1000); // Disappear quickly if cursor stops moving
 
         isThrottled = false;
       });
@@ -121,16 +121,16 @@ export const DeveloperBackground = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[40] select-none font-mono text-xs sm:text-sm text-slate-300/80 bg-black/40 backdrop-blur-md border border-cyan-500/20 p-3.5 rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.15)]"
+      className="fixed top-0 left-0 pointer-events-none z-[30] select-none font-mono text-[11px] sm:text-xs text-slate-400/70 bg-black/30 backdrop-blur-sm border border-cyan-500/10 px-3 py-2 rounded-lg"
       style={{
         x: smoothX,
         y: smoothY,
-        translateX: '20px',
-        translateY: '20px',
+        translateX: '22px',
+        translateY: '22px',
       }}
       initial={{ opacity: 0 }}
-      animate={{ opacity: isVisible ? 1 : 0 }}
-      transition={{ duration: 0.5 }}
+      animate={{ opacity: isVisible ? 0.55 : 0 }}
+      transition={{ duration: 0.45 }}
     >
       <div className="whitespace-pre leading-relaxed flex flex-col gap-0.5">
         {snippet.map((line, i) => (

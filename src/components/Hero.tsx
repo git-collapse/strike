@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { HeroMascot } from './HeroMascot';
+import HeroCodePanel from './HeroCodePanel';
 
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -51,15 +52,14 @@ const Hero = () => {
               <Link to="/login" className="px-6 py-2 sm:px-8 sm:py-3.5 rounded-full text-white font-medium cursor-pointer text-base bg-gradient-to-r from-zinc-800 to-zinc-900 border border-white/20 shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/40 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white">
                 Join Us
               </Link>
-              <Link to="/login" className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-blue-600 hover:bg-blue-500 px-4 py-2 sm:px-8 sm:py-3.5 text-base font-semibold transition-all duration-300 rounded-full hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] text-white focus:outline-none focus:ring-2 focus:ring-white">
-                Get Started
-              </Link>
             </motion.div>
           </motion.div>
 
           <HeroMascot />
-          
+
         </div>
+
+        <HeroCodePanel />
       </div>
     </div>
   );

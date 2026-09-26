@@ -4,10 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { OverclockProvider, useOverclock } from './context/OverclockContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import StatsBand from './components/StatsBand';
-import WhyStrike from './components/WhyStrike';
 import MembershipPlans from './components/MembershipPlans';
 import CourseGrid from './components/CourseGrid';
+import WhyStrike from './components/WhyStrike';
+import Mentors from './components/Mentors';
+import Testimonials from './components/Testimonials';
+import FaangBand from './components/FaangBand';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import SaleDiscovery from './components/SaleDiscovery';
@@ -27,10 +29,12 @@ const Home = () => {
       <Navbar />
       <main className="flex-grow pt-16 empty-space-zone">
         <Hero />
-        <StatsBand />
-        <WhyStrike />
         <MembershipPlans />
         <CourseGrid />
+        <WhyStrike />
+        <Mentors />
+        <Testimonials />
+        <FaangBand />
         <FAQ />
       </main>
       <Footer />

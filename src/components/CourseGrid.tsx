@@ -311,7 +311,7 @@ const allCourses: CourseData[] = [
   {
     id: 'spring boot',
     title: 'Spring Boot Full Course',
-    description: 'Learn memory safety without garbage collection, concurrency without data races, and modern systems engineering with Rust.',
+    description: 'Build production-grade Java backends with Spring Boot — REST APIs, dependency injection, Spring Data JPA, authentication, and deployment-ready microservices.',
     
     duration: 'Live & Recorded',
     hours: 'Upcoming Course',

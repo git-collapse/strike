@@ -1,13 +1,13 @@
 import { useOverclock } from '../context/OverclockContext';
 import { motion } from 'framer-motion';
-import { Radio, Bot, Hammer, Swords, UserCheck, BadgeCheck } from 'lucide-react';
+import { GraduationCap, Bot, Radio, Hammer, Swords, BadgeCheck } from 'lucide-react';
 
 const features = [
+  { icon: GraduationCap, title: 'Interview Preparation', desc: 'Learn faster with hands-on tracks and mentor feedback.' },
+  { icon: Bot, title: 'AI Support', desc: 'An AI copilot woven into every course to explain, review, and unblock you.' },
   { icon: Radio, title: 'Live Doubt Sessions', desc: 'Real-time doubt solving with mentors so you are never stuck for long.' },
-  { icon: Bot, title: 'Gen AI-Integrated Learning', desc: 'An AI copilot woven into every course to explain, review, and unblock you.' },
   { icon: Hammer, title: 'Industry-Grade Projects', desc: 'Ship production-style projects that actually belong on your resume.' },
-  { icon: Swords, title: 'CodeArena & Contests', desc: 'Sharpen skills with 1200K+ practice problems, quizzes, and rated contests.' },
-  { icon: UserCheck, title: 'Mentorship & Resume Review', desc: 'Personal guidance and resume reviews from engineers who have been there.' },
+  { icon: Swords, title: 'CodeArena & Contests', desc: 'Sharpen skills with practice problems, quizzes, and rated contests.' },
   { icon: BadgeCheck, title: 'Certificates That Count', desc: 'Earn verifiable certificates that signal real, job-ready competence.' },
 ];
 
@@ -25,10 +25,11 @@ const WhyStrike = () => {
       >
         <h4 className="text-cyan-400 font-bold tracking-widest uppercase text-sm mb-2">Why Strike</h4>
         <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-5 tracking-tight">
-          Built for engineers who ship
+          Why Choose Us
         </h2>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-          Not just video lectures — a complete system to take you from fundamentals to production-ready.
+          Learn smarter with modern tools, guided mentors, and a platform built to help you grow your
+          skills faster, setting a new benchmark for modern coding excellence.
         </p>
       </motion.div>
 
