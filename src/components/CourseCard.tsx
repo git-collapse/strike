@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useOverclock } from '../context/OverclockContext';
 import { ExternalLink, BookOpen, X } from 'lucide-react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring, useReducedMotion, useTransform } from 'framer-motion';
 import { PriceReveal } from './PriceReveal';
 
 export interface CourseData {
@@ -29,6 +29,30 @@ const CourseCard = ({ course }: { course: CourseData }) => {
   const { isOverclocked } = useOverclock();
   const [showSyllabus, setShowSyllabus] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Subtle pointer-driven 3D tilt (desktop only). Pointer position is mapped to
+  // a small rotation and smoothed by a spring; all transform-based, so there is
+  // no layout shift. Disabled for reduced-motion and coarse-pointer devices.
+  const cardRef = useRef<HTMLDivElement>(null);
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+  const springCfg = { stiffness: 220, damping: 22, mass: 0.4 };
+  const rotateX = useSpring(useTransform(py, [0, 1], [5, -5]), springCfg);
+  const rotateY = useSpring(useTransform(px, [0, 1], [-5, 5]), springCfg);
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (shouldReduceMotion || e.pointerType !== 'mouse') return;
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    px.set((e.clientX - rect.left) / rect.width);
+    py.set((e.clientY - rect.top) / rect.height);
+  };
+
+  const resetTilt = () => {
+    px.set(0.5);
+    py.set(0.5);
+  };
 
   const isEligibleForGrant = isOverclocked && (course.grantPrice !== undefined && course.grantPrice > 0);
   
