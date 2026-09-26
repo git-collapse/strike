@@ -105,12 +105,17 @@ const CourseCard = ({ course }: { course: CourseData }) => {
 
   return (
     <>
-      <div className={twMerge(
+      <motion.div
+        ref={cardRef}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={resetTilt}
+        style={shouldReduceMotion ? undefined : { rotateX, rotateY, transformPerspective: 900 }}
+        className={twMerge(
         clsx(
-          "flex flex-col bg-[#0a0a0c] rounded-2xl overflow-hidden transition-all duration-500 transform h-full w-full relative",
-          "hover:-translate-y-2 group",
-          isOverclocked 
-            ? "border border-cyan-500/30 shadow-[0_0_20px_rgba(34,211,238,0.1)] hover:shadow-[0_0_35px_rgba(34,211,238,0.3)] hover:border-cyan-400" 
+          "flex flex-col bg-[#0a0a0c] rounded-2xl overflow-hidden transition-colors duration-500 h-full w-full relative [transform-style:preserve-3d]",
+          "group",
+          isOverclocked
+            ? "border border-cyan-500/30 shadow-[0_0_20px_rgba(34,211,238,0.1)] hover:shadow-[0_0_35px_rgba(34,211,238,0.3)] hover:border-cyan-400"
             : "border border-white/10 hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]"
         )
       )}>
@@ -232,7 +237,7 @@ const CourseCard = ({ course }: { course: CourseData }) => {
               href={course.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shrink-0 bg-gray-800 text-gray-400 border border-white/5 hover:bg-gray-700 hover:text-white uppercase tracking-wider"
+              className="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shrink-0 bg-gray-800 text-gray-400 border border-white/5 hover:bg-gray-700 hover:text-white uppercase tracking-wider active:scale-[0.98]"
             >
               Coming Soon <ExternalLink size={16} />
             </a>
@@ -243,7 +248,7 @@ const CourseCard = ({ course }: { course: CourseData }) => {
               rel="noopener noreferrer"
               className={twMerge(
                 clsx(
-                  "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shrink-0",
+                  "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shrink-0 active:scale-[0.98]",
                   "bg-red-600 text-white hover:bg-red-700 hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
                 )
               )}
@@ -257,9 +262,9 @@ const CourseCard = ({ course }: { course: CourseData }) => {
               rel="noopener noreferrer"
               className={twMerge(
                 clsx(
-                  "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shrink-0",
-                  isOverclocked 
-                    ? "bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white border border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]" 
+                  "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shrink-0 active:scale-[0.98]",
+                  isOverclocked
+                    ? "bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white border border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
                     : "bg-white text-black hover:bg-gray-200 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                 )
               )}
@@ -268,7 +273,7 @@ const CourseCard = ({ course }: { course: CourseData }) => {
             </a>
           )}
         </div>
-      </div>
+      </motion.div>
 
       {/* SYLLABUS MODAL */}
       <AnimatePresence>

@@ -217,7 +217,7 @@ const MembershipPlans = () => {
                 rel="noopener noreferrer"
                 className={twMerge(
                   clsx(
-                    "w-full py-4 rounded-xl font-bold text-center transition-all mb-8 text-lg focus:outline-none focus:ring-2 focus:ring-cyan-500",
+                    "w-full py-4 rounded-xl font-bold text-center transition-all mb-8 text-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 active:scale-[0.98]",
                     isOverclocked
                       ? "bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white border border-cyan-500/30 hover:shadow-[0_0_25px_rgba(34,211,238,0.5)]"
                       : t.cta

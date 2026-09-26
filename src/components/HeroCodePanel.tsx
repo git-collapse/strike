@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Play, Loader2, Sparkles, Bug, CheckCircle2 } from 'lucide-react';
 
 type Tok = { t: string; c?: string };
@@ -49,7 +49,13 @@ const HeroCodePanel = () => {
   };
 
   return (
-    <div className="mt-16 max-w-6xl mx-auto px-1">
+    <motion.div
+      className="mt-16 max-w-6xl mx-auto px-1"
+      initial={reduce ? false : { opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+    >
       <div className="grid lg:grid-cols-[1.4fr_1fr] rounded-2xl border border-white/10 bg-[#0b0b0f] overflow-hidden shadow-[0_0_60px_rgba(6,182,212,0.08)]">
         {/* Editor pane */}
         <div className="border-b lg:border-b-0 lg:border-r border-white/10">
@@ -72,14 +78,22 @@ const HeroCodePanel = () => {
               </div>
             ))}
           </pre>
-          {phase === 'done' && (
-            <div className="border-t border-white/10 bg-black/50 px-4 py-3 font-mono text-[12.5px] leading-6">
-              {OUTPUT.map((o) => (
-                <div key={o} className="text-slate-300"><span className="text-cyan-500">&gt;</span> {o}</div>
-              ))}
-              <div className="text-emerald-400 flex items-center gap-1.5 mt-1"><CheckCircle2 size={14} /> {'{ status: "success" }'}</div>
-            </div>
-          )}
+          <AnimatePresence>
+            {phase === 'done' && (
+              <motion.div
+                initial={reduce ? false : { opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={reduce ? undefined : { opacity: 0, height: 0 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className="border-t border-white/10 bg-black/50 px-4 py-3 font-mono text-[12.5px] leading-6 overflow-hidden"
+              >
+                {OUTPUT.map((o) => (
+                  <div key={o} className="text-slate-300"><span className="text-cyan-500">&gt;</span> {o}</div>
+                ))}
+                <div className="text-emerald-400 flex items-center gap-1.5 mt-1"><CheckCircle2 size={14} /> {'{ status: "success" }'}</div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
         {/* AI Assistant pane */}
         <div className="flex flex-col bg-[#0a0a0e]">
@@ -87,9 +101,9 @@ const HeroCodePanel = () => {
             <span className={`inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider ${phase === 'running' ? 'text-amber-400' : 'text-emerald-400'}`}>
               <span className="w-1.5 h-1.5 rounded-full bg-current" /> {phase === 'running' ? 'Running' : phase === 'done' ? 'Done' : 'Ready'}
             </span>
-            <button onClick={runCode} aria-label="Run code" className="inline-flex items-center gap-2 rounded-lg bg-white/10 hover:bg-white/15 border border-white/10 px-3.5 py-1.5 text-sm font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400">
+            <motion.button onClick={runCode} whileTap={reduce ? undefined : { scale: 0.95 }} aria-label="Run code" className="inline-flex items-center gap-2 rounded-lg bg-white/10 hover:bg-white/15 border border-white/10 px-3.5 py-1.5 text-sm font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400">
               {phase === 'running' ? <Loader2 size={15} className="animate-spin" /> : <Play size={15} className="text-cyan-400" />} Run Code
-            </button>
+            </motion.button>
           </div>
           <div className="flex items-center gap-1 px-3 pt-3">
             <button onClick={() => setTab('ai')} className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${tab === 'ai' ? 'bg-white/10 text-white' : 'text-slate-400 hover:text-white'}`}><Sparkles size={14} className="text-cyan-400" /> AI Assistant</button>
@@ -122,7 +136,7 @@ const HeroCodePanel = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
