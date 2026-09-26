@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
 // never "reset" on refresh — every browser computes the same remaining time
 // from the current wall clock. To change the deadline, edit this one value.
 // ============================================================================
-export const OFFER_END_TIMESTAMP = 1790533686279;
+export const OFFER_END_TIMESTAMP = 1792348140000;
 
 const STORAGE_KEY = 'strike_overclock_active';
 

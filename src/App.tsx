@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import MembershipPlans from './components/MembershipPlans';
 import CourseGrid from './components/CourseGrid';
+import ProgressTracker from './components/ProgressTracker';
 import WhyStrike from './components/WhyStrike';
 import Mentors from './components/Mentors';
 import Testimonials from './components/Testimonials';
@@ -32,6 +33,7 @@ const Home = () => {
         <Hero />
         <MembershipPlans />
         <CourseGrid />
+        <ProgressTracker />
         <WhyStrike />
         <Mentors />
         <SectionDivider label="reviews" />
