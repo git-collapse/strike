@@ -101,7 +101,7 @@ const TerminalOverlay = ({ isOpen, onClose }: TerminalOverlayProps) => {
                 </span>
                 <button 
                   onClick={handleSkip} 
-                  className="text-gray-400 hover:text-white flex items-center gap-1 transition-colors px-3 py-1 bg-white/5 hover:bg-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                  className="text-gray-400 hover:text-white flex items-center justify-center gap-1 transition-colors px-4 min-h-[44px] bg-white/5 hover:bg-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 >
                   Skip <X size={16} />
                 </button>

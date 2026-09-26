@@ -94,7 +94,7 @@ const SaleDiscovery: React.FC<SaleDiscoveryProps> = ({ onTrigger }) => {
               animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="relative w-full sm:max-w-[600px] bg-[#0a0a0c] border-t sm:border border-cyan-500/50 rounded-t-3xl sm:rounded-3xl shadow-[0_-10px_50px_rgba(34,211,238,0.2)] sm:shadow-[0_0_60px_rgba(34,211,238,0.2)] overflow-hidden pointer-events-auto z-10 pb-safe sm:pb-0"
+              className="relative w-full sm:max-w-[600px] max-h-[92dvh] overflow-y-auto bg-[#0a0a0c] border-t sm:border border-cyan-500/50 rounded-t-3xl sm:rounded-3xl shadow-[0_-10px_50px_rgba(34,211,238,0.2)] sm:shadow-[0_0_60px_rgba(34,211,238,0.2)] pointer-events-auto z-10 pb-safe sm:pb-0"
               role="dialog"
               aria-modal="true"
             >
@@ -106,7 +106,7 @@ const SaleDiscovery: React.FC<SaleDiscoveryProps> = ({ onTrigger }) => {
               <div className="p-6 sm:p-8">
                 <button 
                   onClick={() => setIsOfferOpen(false)}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-colors focus:ring-2 focus:ring-cyan-400 focus:outline-none"
+                  className="absolute top-4 right-4 flex items-center justify-center min-w-[44px] min-h-[44px] text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-colors focus:ring-2 focus:ring-cyan-400 focus:outline-none"
                   aria-label="Close offer panel"
                 >
                   <X size={20} />
@@ -187,7 +187,7 @@ const SaleDiscovery: React.FC<SaleDiscoveryProps> = ({ onTrigger }) => {
                             <button 
                               onClick={handleCopy}
                               className={twMerge(clsx(
-                                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400 font-bold text-xs uppercase tracking-wider",
+                                "flex items-center justify-center gap-1.5 px-3 min-h-[44px] rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400 font-bold text-xs uppercase tracking-wider",
                                 copied ? "bg-green-500/20 text-green-400 border border-green-500/30" : "bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 border border-cyan-500/30"
                               ))}
                               title="Copy code"
@@ -267,8 +267,9 @@ const SaleDiscovery: React.FC<SaleDiscoveryProps> = ({ onTrigger }) => {
           
           {/* Robot Image Container */}
           <motion.div
-            animate={shouldReduceMotion ? {} : { 
+            animate={shouldReduceMotion ? {} : {
               y: isRobotActivated ? [0, -10, 0] : [0, -6, 0],
+              rotate: isRobotActivated ? [0, -3, 3, 0] : [0, -2, 2, 0],
               scale: isRobotActivated ? [1.1, 1.15, 1.1] : 1
             }}
             transition={{ repeat: Infinity, duration: isRobotActivated ? 2 : 4, ease: "easeInOut" }}

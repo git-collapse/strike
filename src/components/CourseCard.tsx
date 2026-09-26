@@ -173,7 +173,7 @@ const CourseCard = ({ course }: { course: CourseData }) => {
                 e.preventDefault();
                 setShowSyllabus(true);
               }}
-              className="text-cyan-500 text-xs font-semibold flex items-center gap-1.5 hover:text-cyan-400 transition-colors mb-5 w-fit"
+              className="text-cyan-500 text-xs font-semibold flex items-center gap-1.5 hover:text-cyan-400 transition-colors mb-4 w-fit py-3 -my-2 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
             >
               <BookOpen size={14} /> View Syllabus
             </button>
@@ -291,7 +291,7 @@ const CourseCard = ({ course }: { course: CourseData }) => {
                 <h3 className="text-xl font-bold text-white pr-4">{course.title} Syllabus</h3>
                 <button 
                   onClick={() => setShowSyllabus(false)}
-                  className="p-2 text-gray-400 hover:text-white transition-colors rounded-lg hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  className="flex items-center justify-center min-w-[44px] min-h-[44px] text-gray-400 hover:text-white transition-colors rounded-lg hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   aria-label="Close syllabus"
                 >
                   <X size={20} />

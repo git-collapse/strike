@@ -11,28 +11,32 @@ export const HeroMascot = () => {
   const shouldReduceMotion = useReducedMotion();
   
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.9, rotate: shouldReduceMotion ? 0 : -2 }}
       animate={{ opacity: 1, scale: 1, rotate: 0 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+      whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
       className="flex-1 w-full max-w-xl mx-auto lg:max-w-none lg:w-auto relative group mt-10 lg:mt-0"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Mascot Image with floating animation */}
+      {/* Mascot Image with floating animation. The subtle x drift + rotation
+          read as an idle "glance", so the mascot feels alive without moving
+          enough to distract or shift surrounding layout. */}
       <motion.div
-        animate={shouldReduceMotion ? {} : { 
+        animate={shouldReduceMotion ? {} : {
           y: isOverclocked ? [0, -12, 0] : [0, -6, 0],
-          rotate: [0, 0.5, -0.5, 0],
-          scale: isOverclocked ? [1.02, 1.05, 1.02] : [1, 1.005, 1] 
+          x: [0, 2, -2, 0],
+          rotate: [0, 0.6, -0.6, 0],
+          scale: isOverclocked ? [1.02, 1.05, 1.02] : [1, 1.005, 1]
         }}
         transition={{ repeat: Infinity, duration: isOverclocked ? 4 : 6, ease: "easeInOut" }}
         className="relative z-20"
       >
         <div className="relative">
-          <img 
-            src="/robot_mascot.jpg" 
-            alt="Strike Retro-Futuristic Robot Mascot" 
+          <img
+            src="/robot_mascot.jpg"
+            alt="Strike Retro-Futuristic Robot Mascot"
             className={twMerge(clsx(
               "w-full h-auto object-cover transition-all duration-700",
               isHovered ? "brightness-110" : "",
@@ -43,6 +47,26 @@ export const HeroMascot = () => {
               WebkitMaskImage: 'radial-gradient(circle at center, black 50%, transparent 100%)'
             }}
           />
+
+          {/* Periodic "scan" sweep — a soft cyan band drifts down the mascot on a
+              long cycle, evoking a robot idle-scanning/blinking. Masked to the
+              mascot silhouette and low-opacity so it stays subtle. */}
+          {!shouldReduceMotion && (
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 pointer-events-none overflow-hidden"
+              style={{
+                maskImage: 'radial-gradient(circle at center, black 50%, transparent 100%)',
+                WebkitMaskImage: 'radial-gradient(circle at center, black 50%, transparent 100%)'
+              }}
+            >
+              <motion.div
+                className="absolute left-0 w-full h-10 bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent"
+                animate={{ top: ['-15%', '115%'] }}
+                transition={{ repeat: Infinity, duration: isOverclocked ? 3.5 : 5, ease: 'linear', repeatDelay: isOverclocked ? 1.5 : 3.5 }}
+              />
+            </div>
+          )}
           
           {/* Ambient Tiny Particles / Technical Lines */}
           <AnimatePresence>
