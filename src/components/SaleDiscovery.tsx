@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useOverclock } from '../context/OverclockContext';
 import { Zap, X, Copy, Check, ChevronRight, TerminalSquare, Clock } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
@@ -9,44 +9,27 @@ interface SaleDiscoveryProps {
   onTrigger: () => void;
 }
 
-// ============================================================================
-// SALE CONFIGURATION
-// To change the sale deadline, update this single fixed timestamp.
-// Currently set to ~1 day 1 hour 30 mins from the initial implementation.
-// ============================================================================
-export const OFFER_END_TIMESTAMP = 1790533686279; 
-
 const SaleDiscovery: React.FC<SaleDiscoveryProps> = ({ onTrigger }) => {
-  const { isOverclocked, deactivateOverclock, activateOverclock } = useOverclock();
+  // Countdown + expiry are owned by OverclockContext (single source of truth),
+  // so the timer is shared with pricing logic and is refresh-proof by design.
+  const { isOverclocked, deactivateOverclock, activateOverclock, isExpired, timeLeft } = useOverclock();
   const [isHovered, setIsHovered] = useState(false);
   const [isRobotHovered, setIsRobotHovered] = useState(false);
   const [isOfferOpen, setIsOfferOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
-  // Timer State
-  const [timeLeft, setTimeLeft] = useState<number>(0);
-  const [isExpired, setIsExpired] = useState<boolean>(false);
-
+  // Auto-reveal the grant panel (coupon + countdown) the moment Overclock
+  // activates via the terminal, completing the "notice → terminal → grant" story.
+  // The ref is seeded with the initial value so a grant restored from a previous
+  // session (localStorage) does NOT re-open the panel on load.
+  const prevOverclocked = useRef(isOverclocked);
   useEffect(() => {
-    const updateTimer = () => {
-      const now = Date.now();
-      const remaining = OFFER_END_TIMESTAMP - now;
-      
-      if (remaining <= 0) {
-        setTimeLeft(0);
-        setIsExpired(true);
-      } else {
-        setTimeLeft(remaining);
-        setIsExpired(false);
-      }
-    };
-    
-    // Run immediately, then every second
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    if (!prevOverclocked.current && isOverclocked) {
+      setIsOfferOpen(true);
+    }
+    prevOverclocked.current = isOverclocked;
+  }, [isOverclocked]);
 
   const formatTime = (ms: number) => {
     const totalSeconds = Math.max(0, Math.floor(ms / 1000));
@@ -77,6 +60,17 @@ const SaleDiscovery: React.FC<SaleDiscoveryProps> = ({ onTrigger }) => {
     }
     setIsOfferOpen(false);
     document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Robot mascot is the primary entry point into the unified funnel:
+  // fresh visitors get the cinematic terminal sequence; once the grant is
+  // unlocked (or has expired) it simply re-opens the status panel.
+  const handleRobotClick = () => {
+    if (isOverclocked || isExpired) {
+      setIsOfferOpen(true);
+    } else {
+      onTrigger();
+    }
   };
 
   const isRobotActivated = isOfferOpen || isOverclocked;
@@ -128,12 +122,12 @@ const SaleDiscovery: React.FC<SaleDiscoveryProps> = ({ onTrigger }) => {
                   </div>
                   
                   <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3 drop-shadow-md">
-                    {isExpired ? "Offer Ended" : "Claim 15% OFF"}
+                    {isExpired ? "Offer Ended" : "Grant Unlocked"}
                   </h2>
                   <p className="text-gray-400 text-sm sm:text-base max-w-md mb-8 leading-relaxed">
-                    {isExpired 
-                      ? "This developer grant has officially expired and can no longer be deployed. Keep an eye out for future signals." 
-                      : "You've successfully intercepted the hidden developer grant. Apply this code to unlock exclusive pricing on eligible Strike courses and memberships."}
+                    {isExpired
+                      ? "This developer grant has officially expired and can no longer be deployed. Keep an eye out for future signals."
+                      : "You've intercepted the hidden developer grant. Developer pricing is now live across eligible Strike courses and memberships — save up to 40% on courses and an extra 15% on plans."}
                   </p>
 
                   <div className="w-full flex flex-col gap-6">
@@ -253,7 +247,7 @@ const SaleDiscovery: React.FC<SaleDiscoveryProps> = ({ onTrigger }) => {
         </AnimatePresence>
 
         <button
-          onClick={() => setIsOfferOpen(true)}
+          onClick={handleRobotClick}
           onMouseEnter={() => setIsRobotHovered(true)}
           onMouseLeave={() => setIsRobotHovered(false)}
           onFocus={() => setIsRobotHovered(true)}

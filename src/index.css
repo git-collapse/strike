@@ -32,6 +32,21 @@
   --animate-glitch: glitch 6s infinite;
   --animate-fade-in: fadeIn 0.5s ease-out forwards;
   --animate-pulse-subtle: pulseSubtle 5s infinite;
+  --animate-gradient-x: gradient-x 3s ease infinite;
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Custom utilities referenced across components (Tailwind v4 @utility). */
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@utility scale-175 {
+  transform: scale(1.75);
 }
 
 @keyframes glitch {
