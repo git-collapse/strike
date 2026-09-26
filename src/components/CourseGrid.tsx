@@ -373,6 +373,7 @@ const CourseGrid = () => {
       {/* SINGLE DYNAMIC GRID */}
       {filteredCourses.length > 0 ? (
         <motion.div 
+          key={activeTab}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch empty-space-zone"
           initial="hidden"
           whileInView="show"
