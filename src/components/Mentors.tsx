@@ -8,6 +8,7 @@ const mentors = [
     name: 'Rohit Negi',
     role: 'Founder & Lead Instructor',
     initials: 'RN',
+    image: '/rohit_negi.jpg',
     blurb: 'Ex-Uber engineer and IIT Guwahati post-graduate (GATE-CSE 2020, AIR 202). Teaches DSA, System Design & core CS to lakhs of learners on Coder Army.',
     badges: ['Ex-Uber', 'IIT Graduate', '2 Cr+ Package'],
     ring: 'from-cyan-400 to-blue-600',
@@ -16,6 +17,7 @@ const mentors = [
     name: 'Aditya Tandon',
     role: 'Co-Founder & Senior Instructor',
     initials: 'AT',
+    image: '/aditya_tandon.jpg',
     blurb: 'Builds the Web Development, DevOps & GenAI tracks and mentors project cohorts from idea to deployment.',
     badges: ['Web Dev', 'DevOps', 'GenAI'],
     ring: 'from-fuchsia-400 to-purple-600',
@@ -58,8 +60,16 @@ const Mentors = () => {
                 />
               )}
               <div className={`relative p-[3px] rounded-full bg-gradient-to-br ${m.ring}`}>
-                <div className="w-28 h-28 rounded-full bg-[#0d0d12] flex items-center justify-center text-3xl font-black text-white tracking-wide">
-                  {m.initials}
+                <div className="relative w-28 h-28 rounded-full bg-[#0d0d12] flex items-center justify-center text-3xl font-black text-white tracking-wide overflow-hidden">
+                  <span className="absolute inset-0 flex items-center justify-center">{m.initials}</span>
+                  {m.image && (
+                    <img 
+                      src={m.image} 
+                      alt={`${m.name} - ${m.role}`} 
+                      className="absolute inset-0 w-full h-full object-cover z-10" 
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                  )}
                 </div>
               </div>
             </div>
