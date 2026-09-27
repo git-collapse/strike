@@ -11,6 +11,8 @@ const membershipData = [
     id: "6a9330626d983b17987de723",
     name: "Strike Plus",
     tier: "silver",
+    image: "/membership-plus.svg",
+    imageAlt: "Futuristic digital workspace with glowing cyan code — Strike Plus",
     tagline: "All existing Strike courses with access for your selected duration.",
     variants: [
       { label: "2 Years", originalPrice: 19999, sellingPrice: 9999, buyUrl: "https://rohittnegi.akamai.net.in/new-courses/21" },
@@ -33,6 +35,8 @@ const membershipData = [
     id: "6a9330aa6d983b17987de724",
     name: "Strike Ultra",
     tier: "gold",
+    image: "/membership-ultra.svg",
+    imageAlt: "Exclusive cyberpunk emblem with glowing gold accents — Strike Ultra",
     tagline: "This plan includes all existing courses, plus upcoming courses for your selected duration.",
     isBestValue: true,
     variants: [
@@ -53,16 +57,27 @@ const membershipData = [
   }
 ];
 
+// Featured mentors shown at the top of each membership card. These reuse the
+// authentic portraits already in the project (public/), the same photos used by
+// the "Meet With Our Mentors" section — no new/unrelated imagery.
+const CARD_MENTORS = [
+  { name: 'Rohit Negi', image: '/rohit_negi.jpg', initials: 'RN' },
+  { name: 'Aditya Tandon', image: '/aditya_tandon.jpg', initials: 'AT' },
+];
+
 // Metallic tier treatments: Strike Plus = silver, Strike Ultra = gold,
 // matching how the real strikes.in distinguishes the two membership tiers.
 type Tier = 'silver' | 'gold';
-const TIER_THEME: Record<Tier, { border: string; name: string; pill: string; check: string; cta: string }> = {
+const TIER_THEME: Record<Tier, { border: string; name: string; pill: string; check: string; cta: string; banner: string; bannerTint: string; avatarRing: string }> = {
   silver: {
     border: 'border-slate-300/25 hover:border-slate-200/50 hover:shadow-[0_0_35px_rgba(203,213,225,0.18)]',
     name: 'bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400',
     pill: 'text-slate-200 bg-slate-300/10 border-slate-300/25',
     check: 'bg-slate-300/20 text-slate-200',
     cta: 'bg-gradient-to-r from-slate-200 to-slate-400 text-black hover:from-slate-100 hover:to-slate-300 shadow-[0_0_18px_rgba(203,213,225,0.25)]',
+    banner: 'border-cyan-500/20 group-hover:border-cyan-400/50 group-hover:shadow-[0_0_28px_rgba(34,211,238,0.28)]',
+    bannerTint: 'bg-gradient-to-br from-cyan-500/20 via-blue-600/10 to-transparent',
+    avatarRing: 'from-cyan-400 to-blue-600',
   },
   gold: {
     border: 'border-amber-400/40 shadow-[0_0_35px_rgba(251,191,36,0.15)] hover:shadow-[0_0_48px_rgba(251,191,36,0.3)] hover:border-amber-300',
@@ -70,6 +85,9 @@ const TIER_THEME: Record<Tier, { border: string; name: string; pill: string; che
     pill: 'text-amber-300 bg-amber-400/10 border-amber-400/25',
     check: 'bg-amber-400/20 text-amber-300',
     cta: 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black hover:from-amber-300 hover:to-yellow-400 shadow-[0_0_20px_rgba(251,191,36,0.35)] hover:shadow-[0_0_32px_rgba(251,191,36,0.5)]',
+    banner: 'border-amber-400/25 group-hover:border-amber-300/60 group-hover:shadow-[0_0_32px_rgba(251,191,36,0.35)]',
+    bannerTint: 'bg-gradient-to-br from-amber-400/20 via-yellow-600/10 to-transparent',
+    avatarRing: 'from-amber-300 to-yellow-600',
   },
 };
 
@@ -123,7 +141,7 @@ const MembershipPlans = () => {
               key={plan.id}
               className={twMerge(
                 clsx(
-                  "relative flex flex-col bg-[#0a0a0c] rounded-3xl p-8 border transition-all duration-300 transform w-full",
+                  "group relative flex flex-col bg-[#0a0a0c] rounded-3xl p-8 border transition-all duration-300 transform w-full",
                   "hover:-translate-y-2",
                   t.border,
                   isOverclocked && !plan.isBestValue && "ring-1 ring-cyan-500/30"
@@ -131,10 +149,57 @@ const MembershipPlans = () => {
               )}
             >
               {plan.isBestValue && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold text-sm px-5 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold text-sm px-5 py-1.5 rounded-full uppercase tracking-widest shadow-lg z-20">
                   Best Value
                 </div>
               )}
+
+              {/* PREMIUM TIER VISUAL — authentic mentor portraits over a futuristic tier background */}
+              <div className={twMerge(clsx(
+                "relative -mx-2 -mt-2 mb-6 overflow-hidden rounded-2xl border bg-[#050505] transition-all duration-300",
+                t.banner
+              ))}>
+                {/* futuristic tier background illustration */}
+                <img
+                  src={plan.image}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover opacity-55 transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+                <div className={twMerge(clsx("absolute inset-0", t.bannerTint))} />
+                {/* fade the art into the card surface so portraits blend naturally */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-[#0a0a0c]/35 to-transparent" />
+
+                {/* mentor portraits */}
+                <div className="relative flex items-end justify-center gap-6 sm:gap-10 px-6 pt-7 pb-5">
+                  {CARD_MENTORS.map((m) => (
+                    <div key={m.name} className="flex flex-col items-center gap-2 transition-transform duration-300 group-hover:-translate-y-1">
+                      <div className="relative">
+                        <div className={twMerge(clsx(
+                          "absolute -inset-1 rounded-full bg-gradient-to-br blur-md opacity-50 transition-opacity duration-300 group-hover:opacity-90",
+                          t.avatarRing
+                        ))} />
+                        <div className={twMerge(clsx("relative rounded-full p-[2.5px] bg-gradient-to-br", t.avatarRing))}>
+                          <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#0d0d12] overflow-hidden flex items-center justify-center">
+                            <span className="absolute inset-0 flex items-center justify-center text-base sm:text-lg font-black text-white tracking-wide">{m.initials}</span>
+                            <img
+                              src={m.image}
+                              alt={`${m.name} — Strike mentor`}
+                              loading="lazy"
+                              decoding="async"
+                              className="relative z-10 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-semibold text-gray-100 tracking-tight drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">{m.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               <div className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Membership Plan</div>
               <h3 className={twMerge(clsx("text-3xl font-extrabold mb-3 tracking-tight text-transparent bg-clip-text", t.name))}>{plan.name}</h3>

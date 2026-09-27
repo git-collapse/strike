@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300" fill="none" role="img" aria-label="Strike Ultra — exclusive cyberpunk membership">
+  <defs>
+    <linearGradient id="ultra-bg" x1="0" y1="0" x2="800" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0b0805"/>
+      <stop offset="0.55" stop-color="#140f07"/>
+      <stop offset="1" stop-color="#0a0c10"/>
+    </linearGradient>
+    <linearGradient id="ultra-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="0.5" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="ultra-metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2a30"/>
+      <stop offset="1" stop-color="#101015"/>
+    </linearGradient>
+    <linearGradient id="ultra-bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#b45309"/>
+      <stop offset="1" stop-color="#fcd34d"/>
+    </linearGradient>
+    <pattern id="ultra-hex" width="56" height="48" patternUnits="userSpaceOnUse" patternTransform="scale(1)">
+      <path d="M14 0 L42 0 L56 24 L42 48 L14 48 L0 24 Z" fill="none" stroke="#f59e0b" stroke-opacity="0.10" stroke-width="1"/>
+    </pattern>
+    <filter id="ultra-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="13" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="300" fill="url(#ultra-bg)"/>
+  <rect width="800" height="300" fill="url(#ultra-hex)"/>
+
+  <!-- ambient gold + subtle cyan edge glow -->
+  <circle cx="400" cy="150" r="150" fill="#f59e0b" opacity="0.12" filter="url(#ultra-glow)"/>
+  <circle cx="90"  cy="250" r="90"  fill="#22d3ee" opacity="0.06" filter="url(#ultra-glow)"/>
+
+  <!-- metallic power lines -->
+  <g stroke="url(#ultra-gold)" stroke-width="1.5" opacity="0.55" fill="none">
+    <path d="M0 70 H120 L150 100 H250"/>
+    <path d="M800 235 H680 L650 205 H540"/>
+    <circle cx="250" cy="100" r="4" fill="#fcd34d" stroke="none"/>
+    <circle cx="540" cy="205" r="4" fill="#fcd34d" stroke="none"/>
+  </g>
+
+  <!-- exclusive gold diamond emblem on metallic plate -->
+  <g filter="url(#ultra-glow)">
+    <circle cx="400" cy="150" r="72" fill="url(#ultra-metal)" stroke="url(#ultra-gold)" stroke-width="2"/>
+  </g>
+  <g transform="translate(400 150)">
+    <path d="M0 -40 L34 -8 L0 46 L-34 -8 Z" fill="url(#ultra-gold)"/>
+    <path d="M0 -40 L34 -8 L0 46 L-34 -8 Z" fill="none" stroke="#fffbeb" stroke-opacity="0.5" stroke-width="1.5"/>
+    <path d="M-34 -8 H34 M0 -40 L0 46 M-17 -24 L0 -8 L17 -24" stroke="#7c4a06" stroke-opacity="0.6" stroke-width="1.5" fill="none"/>
+  </g>
+
+  <!-- premium ascending bars (taller than Plus) -->
+  <g>
+    <rect x="596" y="150" width="28" height="80"  rx="5" fill="url(#ultra-bar)" opacity="0.55"/>
+    <rect x="632" y="112" width="28" height="118" rx="5" fill="url(#ultra-bar)" opacity="0.78"/>
+    <rect x="668" y="70"  width="28" height="160" rx="5" fill="url(#ultra-bar)"/>
+    <path d="M600 146 L646 112 L688 64" stroke="#fde68a" stroke-width="2.5" fill="none"/>
+    <circle cx="688" cy="64" r="5" fill="#fde68a"/>
+  </g>
+
+  <!-- crown spark (exclusivity cue) -->
+  <g transform="translate(120 90)" fill="url(#ultra-gold)" opacity="0.9">
+    <path d="M0 22 L6 2 L16 16 L28 -2 L40 16 L50 2 L56 22 Z"/>
+    <rect x="0" y="22" width="56" height="7" rx="2"/>
+  </g>
+</svg>
