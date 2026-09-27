@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useOverclock } from '../context/OverclockContext';
-import { ExternalLink, BookOpen, X } from 'lucide-react';
+import { ExternalLink, BookOpen, X, Clock, Layers, GraduationCap, Info } from 'lucide-react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { motion, AnimatePresence, useMotionValue, useSpring, useReducedMotion, useTransform } from 'framer-motion';
@@ -13,6 +13,7 @@ export interface CourseData {
   thumbnail?: string;
   duration?: string;
   hours?: string;
+  prerequisites?: string;
   modules?: string;
   originalPrice?: number;
   currentPrice?: number;
@@ -36,6 +37,14 @@ const CourseCard = ({ course }: { course: CourseData }) => {
   const [showSyllabus, setShowSyllabus] = useState(false);
   const [imgError, setImgError] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+
+  // Premium quick-look reveal. Driven by hover on desktop (onHoverStart/End, which
+  // Framer only fires for real pointer hover, not touch) OR an explicit tap toggle
+  // on mobile. The panel is absolutely positioned over the thumbnail, so revealing
+  // it never changes card height or pushes neighbouring cards.
+  const [hovered, setHovered] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const reveal = hovered || detailsOpen;
 
   // Subtle pointer-driven 3D tilt (desktop only). Pointer position is mapped to
   // a small rotation and smoothed by a spring; all transform-based, so there is
@@ -109,12 +118,29 @@ const CourseCard = ({ course }: { course: CourseData }) => {
 
   const imageSrc = course.thumbnail && !imgError ? course.thumbnail : getFallbackImage();
 
+  // Some course fields already embed their own descriptor (e.g. "Validity: 2 Years").
+  // Strip a redundant leading label so the panel doesn't read "Duration: Validity: …".
+  const stripLabel = (s?: string) => (s ?? '').replace(/^\s*(validity|duration|hours?|time)\s*:\s*/i, '').trim();
+
+  // Prerequisite label for the quick-look panel. Prefer explicit data when present;
+  // otherwise derive conservatively from the level the course states about itself —
+  // no fabricated specifics, just a safe advisory.
+  const prerequisite = course.prerequisites ?? (
+    course.isUpcoming
+      ? 'Announced soon'
+      : /beginner|from scratch|zero to hero|from the basic|foundation|fundamental/i.test(`${course.title} ${course.description ?? ''}`)
+        ? 'No prior experience needed'
+        : 'Basic programming knowledge'
+  );
+
   return (
     <>
       <motion.div
         ref={cardRef}
         onPointerMove={handlePointerMove}
         onPointerLeave={resetTilt}
+        onHoverStart={() => setHovered(true)}
+        onHoverEnd={() => setHovered(false)}
         style={shouldReduceMotion ? undefined : { rotateX, rotateY, transformPerspective: 900 }}
         className={twMerge(
         clsx(
@@ -126,24 +152,82 @@ const CourseCard = ({ course }: { course: CourseData }) => {
         )
       )}>
         {/* THUMBNAIL (Fixed 16:9) */}
-        <a href={course.href} target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[16/9] block overflow-hidden border-b border-white/5 bg-[#050505] shrink-0">
-          <img 
-            src={imageSrc} 
-            alt={course.title}
-            loading="lazy"
-            onError={() => setImgError(true)}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-          {/* Overclock Inner Glow */}
-          {isOverclocked && (
-            <div className="absolute inset-0 bg-cyan-500/10 mix-blend-overlay pointer-events-none" />
-          )}
+        <div className="relative w-full aspect-[16/9] overflow-hidden border-b border-white/5 bg-[#050505] shrink-0">
+          <a href={course.href} target="_blank" rel="noopener noreferrer" className="absolute inset-0 block">
+            <img
+              src={imageSrc}
+              alt={course.title}
+              loading="lazy"
+              onError={() => setImgError(true)}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+            {/* Overclock Inner Glow */}
+            {isOverclocked && (
+              <div className="absolute inset-0 bg-cyan-500/10 mix-blend-overlay pointer-events-none" />
+            )}
+          </a>
+
           {course.isUpcoming && (
-            <div className="absolute top-3 left-3 bg-blue-600/90 backdrop-blur-md border border-blue-400 text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-widest rounded shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+            <div className="absolute top-3 left-3 z-30 bg-blue-600/90 backdrop-blur-md border border-blue-400 text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-widest rounded shadow-[0_0_15px_rgba(59,130,246,0.5)] pointer-events-none">
               Upcoming
             </div>
           )}
-        </a>
+
+          {/* Mobile-only tap toggle — hover handles the reveal on desktop */}
+          <button
+            type="button"
+            onClick={() => setDetailsOpen((v) => !v)}
+            aria-expanded={detailsOpen}
+            aria-label={detailsOpen ? 'Hide course details' : 'Show course details'}
+            className="pointer-fine:hidden absolute top-3 right-3 z-30 flex items-center justify-center w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-cyan-300 active:scale-95 transition-transform focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          >
+            {detailsOpen ? <X size={16} /> : <Info size={16} />}
+          </button>
+
+          {/* QUICK-LOOK REVEAL — surfaces existing course facts + a CTA over the
+              thumbnail. Absolutely positioned, so it never shifts layout. */}
+          <motion.div
+            aria-hidden={!reveal}
+            initial={false}
+            animate={reveal ? 'reveal' : 'rest'}
+            variants={{
+              rest: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
+              reveal: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: shouldReduceMotion ? 0.15 : 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className={clsx(
+              "absolute inset-0 z-20 flex flex-col justify-end gap-2.5 p-4 bg-gradient-to-t from-black via-black/85 to-black/10 backdrop-blur-[2px]",
+              reveal ? "pointer-events-auto" : "pointer-events-none"
+            )}
+          >
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2 text-[11px] text-gray-200">
+                <Clock size={13} className="text-cyan-400 shrink-0" />
+                <span className="font-semibold text-gray-400">Duration:</span>
+                <span className="truncate">{stripLabel(course.duration) || 'Self-paced'}</span>
+              </div>
+              <div className="flex items-center gap-2 text-[11px] text-gray-200">
+                <Layers size={13} className="text-cyan-400 shrink-0" />
+                <span className="font-semibold text-gray-400">Learning hours:</span>
+                <span className="truncate">{stripLabel(course.hours) || 'Full course'}</span>
+              </div>
+              <div className="flex items-center gap-2 text-[11px] text-gray-200">
+                <GraduationCap size={13} className="text-cyan-400 shrink-0" />
+                <span className="font-semibold text-gray-400">Prerequisites:</span>
+                <span className="truncate">{prerequisite}</span>
+              </div>
+            </div>
+            <a
+              href={course.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-cyan-500/90 hover:bg-cyan-400 text-black text-xs font-bold py-2 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-300"
+            >
+              Explore Course <ExternalLink size={13} />
+            </a>
+          </motion.div>
+        </div>
 
         {/* CONTENT */}
         <div className="flex flex-col flex-1 p-5 sm:p-6 relative z-10">
