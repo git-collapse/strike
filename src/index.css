@@ -12,19 +12,20 @@
     letter-spacing: -0.011em;
     text-rendering: optimizeLegibility;
   }
-  /* Global typographic hierarchy — all semantic headings use the Space Grotesk
-     display family with tight tracking. Per-component leading/tracking utilities
-     still override these defaults where a section needs a specific rhythm. */
+  /* Global typographic hierarchy — all semantic headings use the display family
+     (Gilroy → Poppins), matching strikes.in's geometric brand character with
+     tight tracking. Per-component leading/tracking utilities still override these
+     defaults where a section needs a specific rhythm. */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    letter-spacing: -0.022em;
+    letter-spacing: -0.018em;
     line-height: 1.12;
   }
 }
 
 @theme {
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', 'Fira Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Gilroy', 'Poppins', 'Inter', system-ui, sans-serif;
   --font-mono: 'Fira Code', 'Consolas', ui-monospace, monospace;
 
   --color-bg-base: #000000;
