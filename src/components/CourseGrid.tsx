@@ -179,58 +179,6 @@ const allCourses: CourseData[] = [
     ]
   },
   {
-    id: 'system-design',
-    title: 'High Level Design (HLD): System Design Mastery',
-    description: 'Master designing scalable, distributed, production-grade systems. Learn the HLD interview framework, architecture patterns, load balancing, caching, database design, message queues, and real-world system design problems from URL shorteners to YouTube, WhatsApp and Twitter.',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/1eaa1b1d-c354-4f80-81bf-d4c35cc2b5a2.jpeg',
-    duration: 'Recorded',
-    hours: 'Recorded Course',
-    
-    
-    
-    
-    isUpcoming: false,
-    category: 'free',
-    isYouTubeFree: true,
-
-    href: 'https://strikes.in/course/system-design',
-    syllabus: [
-      { title: 'Part 1: System Design Foundations' },
-      { title: 'Part 2: CAP Theorem, Consistency & Availability' },
-      { title: 'Part 3: Architecture Patterns' },
-      { title: 'Part 4: Load Balancing & Scaling' },
-      { title: 'Part 5: Caching & Performance' },
-      { title: 'Part 6: Database Design & Storage' },
-      { title: 'Part 7: Message Queues & Async Processing' },
-    ]
-  },
-  {
-    id: 'dsa-premium',
-    title: 'Data Structures & Algorithms (DSA) Mastery in C++',
-    description: 'Welcome to the ultimate guide to Data Structures and Algorithms (DSA) in C++! This comprehensive course takes you from the basics of programming all the way to advanced problem solving. Start with a solid C++ foundation, then master arrays, strings, recursion, linked lists, stacks, queues, trees, graphs, dynamic programming, tries and segment trees. Solve hundreds of curated problems and build the confidence to crack technical interviews and real-world challenges.',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/62ec6cfc-3d7c-4e82-a454-92a1970c0cca.jpeg',
-    duration: 'Recorded',
-    hours: '2024 Course | 80 Lectures',
-    
-    
-    
-    
-    isUpcoming: false,
-    category: 'free',
-    isYouTubeFree: true,
-
-    href: 'https://strikes.in/course/dsa-premium',
-    syllabus: [
-      { title: 'C++ Foundations for Programming' },
-      { title: 'Arrays & Sorting Algorithms' },
-      { title: 'Complexity Analysis & Binary Search' },
-      { title: 'Strings & KMP Algorithm' },
-      { title: 'Pointers & Recursion' },
-      { title: 'Object-Oriented Programming for DSA' },
-      { title: 'Linear Data Structures: Linked Lists, Stacks & Queues' },
-    ]
-  },
-  {
     id: 'lld',
     title: 'System Design',
     description: 'Master Object-Oriented Design, Design Patterns, SOLID Principles, and Schema Design with real-world case studies.',
