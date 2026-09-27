@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import clsx from 'clsx';
-import { Zap } from 'lucide-react';
+import { Zap, ArrowRight, Compass } from 'lucide-react';
 import { useOverclock } from '../context/OverclockContext';
 import { HeroMascot } from './HeroMascot';
 import HeroCodePanel from './HeroCodePanel';
@@ -41,6 +41,22 @@ const Hero = () => {
       y: 0,
       transition: { duration: 0.6 }
     }
+  };
+
+  // Smooth-scroll to the Courses section. A plain `#courses` hash anchor is
+  // unreliable here: the global `overflow-x: hidden` on <body> promotes it to a
+  // scroll container, so the browser's native hash jump can target the wrong
+  // scroller. We drive window.scrollTo manually (subtracting the fixed navbar's
+  // height) — the same pattern the Navbar uses — so "Explore Courses" always
+  // opens the actual Courses section. Falls back to the href if the node is
+  // missing. The Navbar's scroll-spy then reflects the new active section.
+  const scrollToCourses = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const el = document.getElementById('courses');
+    if (!el) return; // let the href fallback handle it
+    e.preventDefault();
+    const NAV_OFFSET = 88;
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+    window.scrollTo({ top: Math.max(top, 0), behavior: shouldReduceMotion ? 'auto' : 'smooth' });
   };
 
   return (
@@ -113,9 +129,18 @@ const Hero = () => {
               </span>
             </motion.div>
 
-            <motion.h1 variants={itemVariants} className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-[1.15]">
-              Take control of your <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Future With Strike</span>
+            <motion.h1 variants={itemVariants} className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-[1.08] text-balance">
+              Take control of your <br className="hidden sm:block" />
+              <span className="relative inline-block">
+                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-600">
+                  Future With Strike
+                </span>
+                {/* Soft bloom behind the gradient words for depth (decorative) */}
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 -bottom-2 h-4 bg-gradient-to-r from-cyan-500/30 to-blue-600/30 blur-2xl"
+                />
+              </span>
             </motion.h1>
             <motion.p variants={itemVariants} className="mt-6 text-lg sm:text-xl text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
               Master DSA, System Design & AI with interactive coding environments, premium mentorship, and industry-grade projects.
@@ -134,10 +159,28 @@ const Hero = () => {
             </motion.ul>
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link to="/login" className="px-6 py-2 sm:px-8 sm:py-3.5 rounded-full text-white font-medium cursor-pointer text-base bg-gradient-to-r from-zinc-800 to-zinc-900 border border-white/20 shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/40 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white">
-                Join Us
+              {/* Primary CTA — bright gradient, clearly the main action */}
+              <Link
+                to="/login"
+                className="group relative overflow-hidden px-7 py-3.5 rounded-full text-base font-bold text-white flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 shadow-[0_8px_30px_rgba(6,182,212,0.35)] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(6,182,212,0.5)] hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-[#08080a]"
+              >
+                {/* Sheen sweep on hover */}
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                />
+                <span className="relative z-10 flex items-center gap-2">
+                  Join Us
+                  <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
               </Link>
-              <a href="#courses" className="px-6 py-2 sm:px-8 sm:py-3.5 rounded-full text-gray-300 font-medium text-base bg-transparent border border-white/10 transition-all duration-300 hover:border-cyan-500/50 hover:text-cyan-300 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-cyan-400">
+              {/* Secondary CTA — glass outline, distinct weight; smooth-scrolls to Courses */}
+              <a
+                href="#courses"
+                onClick={scrollToCourses}
+                className="group px-7 py-3.5 rounded-full text-base font-semibold text-gray-200 flex items-center justify-center gap-2 bg-white/[0.04] border border-white/15 backdrop-blur-sm transition-all duration-300 hover:bg-white/[0.08] hover:border-cyan-500/50 hover:text-cyan-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-[#08080a]"
+              >
+                <Compass size={18} className="text-cyan-400 transition-transform duration-500 group-hover:rotate-45" />
                 Explore Courses
               </a>
             </motion.div>
