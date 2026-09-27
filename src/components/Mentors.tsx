@@ -1,9 +1,20 @@
 import { motion, useReducedMotion } from 'framer-motion';
 
 // Mentors shown on the real strikes.in "Meet With Our Mentors" section.
-// NOTE: we don't have licensed headshots, so avatars are initial-based
-// placeholders (see README known-limitations). Names/titles are accurate.
-const mentors = [
+// Avatars use each mentor's public profile photo (from their verified
+// channels/socials) with an initials fallback if the image fails to load.
+// Add a mentor by appending to this array — `image` is optional.
+type Mentor = {
+  name: string;
+  role: string;
+  initials: string;
+  image?: string; // optional public profile photo; falls back to initials
+  blurb: string;
+  badges: string[];
+  ring: string;
+};
+
+const mentors: Mentor[] = [
   {
     name: 'Rohit Negi',
     role: 'Founder & Lead Instructor',
