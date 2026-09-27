@@ -190,8 +190,8 @@ const allCourses: CourseData[] = [
     
     
     isUpcoming: false,
-    category: 'paid',
-    hidden: true, // Withdrawn from the Paid section/filter; record kept intact.
+    category: 'free',
+    isYouTubeFree: true,
 
     href: 'https://strikes.in/course/system-design',
     syllabus: [
@@ -216,8 +216,8 @@ const allCourses: CourseData[] = [
     
     
     isUpcoming: false,
-    category: 'paid',
-    hidden: true, // Withdrawn from the Paid section/filter; record kept intact.
+    category: 'free',
+    isYouTubeFree: true,
 
     href: 'https://strikes.in/course/dsa-premium',
     syllabus: [
