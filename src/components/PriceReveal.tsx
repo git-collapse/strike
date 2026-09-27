@@ -63,7 +63,7 @@ export const PriceReveal = ({ normalPrice, overclockedPrice, isOverclocked, clas
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="absolute bottom-0 left-0 flex flex-col justify-end"
           >
-            <div className="font-bold text-white tabular-nums">
+            <div className="font-display font-bold text-white tabular-nums tracking-tight">
               {prefix}{(normalPrice || 0).toLocaleString('en-IN')}
             </div>
           </motion.div>

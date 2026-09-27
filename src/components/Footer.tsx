@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 text-white mb-6">
               <Zap size={24} fill="currentColor" className="text-accent-primary" />
-              <span className="text-xl font-black tracking-tight">STRIKE</span>
+              <span className="font-display text-xl font-bold tracking-tight">STRIKE</span>
             </div>
             <p className="text-gray-400 max-w-sm">
               Empowering developers with cutting-edge tools and resources. Powered by Coder Army, Strike

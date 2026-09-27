@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Fira+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @layer base {
@@ -7,12 +6,26 @@
   }
   body {
     @apply bg-bg-base text-text-primary font-sans antialiased overflow-x-hidden;
+    /* Inter fine-tuning: contextual ligatures + slight negative tracking for a
+       crisper, more premium read at body sizes. */
+    font-feature-settings: "cv11", "ss01", "calt", "liga";
+    letter-spacing: -0.011em;
+    text-rendering: optimizeLegibility;
+  }
+  /* Global typographic hierarchy — all semantic headings use the Space Grotesk
+     display family with tight tracking. Per-component leading/tracking utilities
+     still override these defaults where a section needs a specific rhythm. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+    line-height: 1.12;
   }
 }
 
 @theme {
-  --font-sans: 'Fira Sans', system-ui, sans-serif;
-  --font-mono: 'Fira Code', 'Consolas', monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-mono: 'Fira Code', 'Consolas', ui-monospace, monospace;
 
   --color-bg-base: #000000;
   --color-bg-surface: #111111;

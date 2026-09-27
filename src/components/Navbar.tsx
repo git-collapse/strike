@@ -92,7 +92,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2">
             <Link to="/" onClick={() => handleLinkClick('Home', '/')} className="flex items-center gap-2 text-white group focus:outline-none">
               <Zap size={28} fill="currentColor" className="text-cyan-400 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
-              <span className="text-2xl font-black tracking-tight transition-colors group-hover:text-cyan-400">STRIKE</span>
+              <span className="font-display text-2xl font-bold tracking-tight transition-colors group-hover:text-cyan-400">STRIKE</span>
             </Link>
           </div>
 
