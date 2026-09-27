@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import MembershipPlans from './components/MembershipPlans';
 import CourseGrid from './components/CourseGrid';
+import ProjectsBasedLearning from './components/ProjectsBasedLearning';
 import ProgressTracker from './components/ProgressTracker';
 import WhyStrike from './components/WhyStrike';
 import Mentors from './components/Mentors';
@@ -37,6 +38,7 @@ const Home = () => {
         <Hero />
         <MembershipPlans />
         <CourseGrid />
+        <ProjectsBasedLearning />
         <ProgressTracker />
         <WhyStrike />
         <Mentors />
