@@ -26,8 +26,9 @@ the behaviour the product wants from its audience.
 
 ## User flow
 
-1. **Land on the homepage.** Hero, live-count stats band, "Why Strike" features,
-   membership plans, course catalog, and an FAQ — all standard pricing.
+1. **Land on the homepage.** Hero, membership plans, course catalog, a "Track Your
+   Progress" dashboard preview, "Why Strike" features, mentors, testimonials, a FAANG
+   placement band, and an FAQ — all standard pricing.
 2. **Notice the signals.** A floating robot mascot (right edge) nudges *"Psst… I've got
    a surprise for you"*, and a `System: Standard` pill sits bottom-right.
 3. **Trigger the terminal.** Clicking the robot (or the pill) boots a bottom-sheet
@@ -63,9 +64,11 @@ the behaviour the product wants from its audience.
 | Responsive (mobile → desktop) | ✅ | Tailwind breakpoints; bottom-sheet on mobile, centered modal on desktop |
 | Accessible / reduced motion | ✅ | `useReducedMotion`, `matchMedia`, focus rings, `aria-*`, dialog roles |
 
-Beyond the brief, the homepage adds a **stats/social-proof band**, a **"Why Strike"
-features grid**, and an **FAQ accordion** (one of which explains how to redeem the
-grant) to round the page out into a complete, on-brand landing experience.
+Beyond the brief, the homepage adds a **"Track Your Progress" dashboard preview**
+(animated weekly-activity chart + streak line, clearly labelled *Preview*), a **"Why
+Strike" features grid**, a **mentors** section, **testimonials**, a **FAANG placement
+band**, and an **FAQ accordion** (one of which explains how to redeem the grant) to
+round the page out into a complete, on-brand landing experience.
 
 ---
 
@@ -114,14 +117,16 @@ Requires Node 18+ (Vite 8). No environment variables or backend are needed.
 
 - **Demo authentication only.** The Login/Signup/Forgot-password routes are UI mocks.
   There is no real backend, session, or credential storage beyond front-end state.
-- **Illustrative stats.** The numbers in the stats band (learners, problems solved,
-  ratings, course count) are *representative placeholder figures for this frontend
-  demo* — they are **not** verified live metrics from strikes.in.
+- **Illustrative dashboard preview.** The "Track Your Progress" weekly-activity chart
+  is a *product-feature mockup* labelled **Preview** — it depicts what the learner
+  dashboard looks like, not real user activity or verified platform metrics.
+- **Placeholder mentor avatars.** The mentors section uses generated initial-avatars
+  rather than real photographs.
 - **Simulated sale.** Pricing, discounts, and the `OVERCLOCK` coupon are front-end
   simulations for the hackathon; nothing is charged or validated server-side.
 - **Clipboard copy** depends on the browser's `navigator.clipboard` API (secure
   contexts); it fails gracefully where unavailable.
-- The production bundle currently ships as a single chunk (~510 kB / ~159 kB gzip),
+- The production bundle currently ships as a single chunk (~534 kB / ~165 kB gzip),
   which triggers Vite's chunk-size advisory — acceptable for a demo, code-splittable
   later if needed.
 
@@ -136,7 +141,8 @@ src/
     SaleDiscovery.tsx            # robot mascot, System pill, grant panel, coupon, countdown UI
     TerminalOverlay.tsx          # cinematic activation sequence
     PriceReveal.tsx              # scramble-decrypt price component
-    Hero / StatsBand / WhyStrike / MembershipPlans / CourseGrid / FAQ / Navbar / Footer
+    ProgressTracker.tsx          # "Track Your Progress" dashboard preview (chart + streak line)
+    Hero / MembershipPlans / CourseGrid / WhyStrike / Mentors / Testimonials / FaangBand / FAQ / Navbar / Footer
   pages/Login.tsx                # demo auth screens
 ```
 

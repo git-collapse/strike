@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { OverclockProvider, useOverclock } from './context/OverclockContext';
 import Navbar from './components/Navbar';
@@ -16,8 +16,11 @@ import Footer from './components/Footer';
 import SaleDiscovery from './components/SaleDiscovery';
 import TerminalOverlay from './components/TerminalOverlay';
 import SectionDivider from './components/SectionDivider';
-import Login from './pages/Login';
 import { DeveloperBackground } from './components/DeveloperBackground';
+
+// The auth screens live on their own routes and aren't needed for the homepage,
+// so we code-split them out of the main bundle (loaded on demand).
+const Login = lazy(() => import('./pages/Login'));
 
 const Home = () => {
   return (
@@ -107,12 +110,14 @@ const MainLayout = () => {
 
       <div className="relative z-10 flex flex-col min-h-screen empty-space-zone">
         <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Login />} />
-            <Route path="/forgot-password" element={<Login />} />
-          </Routes>
+          <Suspense fallback={<div className="min-h-screen" aria-hidden="true" />}>
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Login />} />
+              <Route path="/forgot-password" element={<Login />} />
+            </Routes>
+          </Suspense>
         </AnimatePresence>
       </div>
 

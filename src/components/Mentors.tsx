@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 // Mentors shown on the real strikes.in "Meet With Our Mentors" section.
 // NOTE: we don't have licensed headshots, so avatars are initial-based
@@ -21,6 +21,7 @@ const mentors = [
 ];
 
 const Mentors = () => {
+  const reduce = useReducedMotion();
   return (
     <section className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto empty-space-zone" id="mentors">
       <motion.h2
@@ -44,9 +45,20 @@ const Mentors = () => {
             whileHover={{ y: -6 }}
             className="flex flex-col items-center text-center gap-4 rounded-2xl border border-white/10 bg-[#0a0a0c] p-8 transition-all duration-300 hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(34,211,238,0.12)]"
           >
-            <div className={`p-[3px] rounded-full bg-gradient-to-br ${m.ring}`}>
-              <div className="w-28 h-28 rounded-full bg-[#0d0d12] flex items-center justify-center text-3xl font-black text-white tracking-wide">
-                {m.initials}
+            <div className="relative">
+              {/* Slow rotating conic glow behind the avatar — premium touch, paused for reduced-motion */}
+              {!reduce && (
+                <motion.div
+                  aria-hidden="true"
+                  className={`absolute -inset-1.5 rounded-full bg-gradient-to-br ${m.ring} opacity-40 blur-md`}
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 8, ease: 'linear' }}
+                />
+              )}
+              <div className={`relative p-[3px] rounded-full bg-gradient-to-br ${m.ring}`}>
+                <div className="w-28 h-28 rounded-full bg-[#0d0d12] flex items-center justify-center text-3xl font-black text-white tracking-wide">
+                  {m.initials}
+                </div>
               </div>
             </div>
             <div>
