@@ -65,13 +65,20 @@ const Navbar = () => {
   const handleLinkClick = (name: string, href: string) => {
     setActiveLink(name);
     setIsOpen(false);
-    
-    // Smooth scrolling for internal anchor links
+
+    // Smooth scrolling for internal anchor links. We compute the target position
+    // manually and drive window.scrollTo instead of Element.scrollIntoView: the
+    // global `overflow-x: hidden` on <body> promotes it to a scroll container, so
+    // scrollIntoView can target the wrong scroller. window.scrollTo always moves
+    // the viewport, and we subtract the fixed navbar height (h-20 = 80px) plus a
+    // little breathing room so section headings aren't hidden underneath it.
     if (href.startsWith('/#')) {
       const id = href.split('#')[1];
       const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        const NAV_OFFSET = 88;
+        const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+        window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
       }
     } else if (href === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
