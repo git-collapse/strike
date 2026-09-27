@@ -134,7 +134,7 @@ const Navbar = () => {
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
                       />
                     )}
-                    <span className={clsx("relative z-10", isActive ? "text-white" : "text-gray-300 hover:text-white")}>
+                    <span className={clsx("relative z-10 transition-colors", isActive ? "text-cyan-400" : "text-gray-400 hover:text-white")}>
                       {link.name}
                     </span>
                   </a>
