@@ -68,7 +68,7 @@ const CARD_MENTORS = [
 // Metallic tier treatments: Strike Plus = silver, Strike Ultra = gold,
 // matching how the real strikes.in distinguishes the two membership tiers.
 type Tier = 'silver' | 'gold';
-const TIER_THEME: Record<Tier, { border: string; name: string; pill: string; check: string; cta: string; banner: string; bannerTint: string; avatarRing: string }> = {
+const TIER_THEME: Record<Tier, { border: string; name: string; pill: string; check: string; cta: string; banner: string; bannerTint: string; avatarRing: string; glow: string }> = {
   silver: {
     border: 'border-slate-300/25 hover:border-slate-200/50 hover:shadow-[0_0_35px_rgba(203,213,225,0.18)]',
     name: 'bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400',
@@ -78,6 +78,7 @@ const TIER_THEME: Record<Tier, { border: string; name: string; pill: string; che
     banner: 'border-cyan-500/20 group-hover:border-cyan-400/50 group-hover:shadow-[0_0_28px_rgba(34,211,238,0.28)]',
     bannerTint: 'bg-gradient-to-br from-cyan-500/20 via-blue-600/10 to-transparent',
     avatarRing: 'from-cyan-400 to-blue-600',
+    glow: 'bg-cyan-500/25',
   },
   gold: {
     border: 'border-amber-400/40 shadow-[0_0_35px_rgba(251,191,36,0.15)] hover:shadow-[0_0_48px_rgba(251,191,36,0.3)] hover:border-amber-300',
@@ -88,6 +89,7 @@ const TIER_THEME: Record<Tier, { border: string; name: string; pill: string; che
     banner: 'border-amber-400/25 group-hover:border-amber-300/60 group-hover:shadow-[0_0_32px_rgba(251,191,36,0.35)]',
     bannerTint: 'bg-gradient-to-br from-amber-400/20 via-yellow-600/10 to-transparent',
     avatarRing: 'from-amber-300 to-yellow-600',
+    glow: 'bg-amber-400/25',
   },
 };
 
@@ -154,9 +156,10 @@ const MembershipPlans = () => {
                 </div>
               )}
 
-              {/* PREMIUM TIER VISUAL — authentic mentor portraits over a futuristic tier background */}
+              {/* PREMIUM CINEMATIC TIER VISUAL — large mentor portraits side by side,
+                  edges masked into the dark card, with the plan name overlaid between them. */}
               <div className={twMerge(clsx(
-                "relative -mx-2 -mt-2 mb-6 overflow-hidden rounded-2xl border bg-[#050505] transition-all duration-300",
+                "relative -mx-2 -mt-2 mb-6 h-56 sm:h-60 overflow-hidden rounded-2xl border bg-[#050505] transition-all duration-300",
                 t.banner
               ))}>
                 {/* futuristic tier background illustration */}
@@ -166,43 +169,62 @@ const MembershipPlans = () => {
                   aria-hidden="true"
                   loading="lazy"
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover opacity-55 transition-transform duration-500 ease-out group-hover:scale-105"
+                  className="absolute inset-0 h-full w-full object-cover opacity-40 transition-transform duration-500 ease-out group-hover:scale-105"
                 />
+                {/* tier-colored glow behind the portraits for depth */}
+                <div className={twMerge(clsx("absolute left-1/2 top-8 h-40 w-40 -translate-x-1/2 rounded-full blur-3xl opacity-60 transition-opacity duration-300 group-hover:opacity-90", t.glow))} />
                 <div className={twMerge(clsx("absolute inset-0", t.bannerTint))} />
-                {/* fade the art into the card surface so portraits blend naturally */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-[#0a0a0c]/35 to-transparent" />
 
-                {/* mentor portraits */}
-                <div className="relative flex items-end justify-center gap-6 sm:gap-10 px-6 pt-7 pb-5">
-                  {CARD_MENTORS.map((m) => (
-                    <div key={m.name} className="flex flex-col items-center gap-2 transition-transform duration-300 group-hover:-translate-y-1">
-                      <div className="relative">
-                        <div className={twMerge(clsx(
-                          "absolute -inset-1 rounded-full bg-gradient-to-br blur-md opacity-50 transition-opacity duration-300 group-hover:opacity-90",
-                          t.avatarRing
-                        ))} />
-                        <div className={twMerge(clsx("relative rounded-full p-[2.5px] bg-gradient-to-br", t.avatarRing))}>
-                          <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#0d0d12] overflow-hidden flex items-center justify-center">
-                            <span className="absolute inset-0 flex items-center justify-center text-base sm:text-lg font-black text-white tracking-wide">{m.initials}</span>
-                            <img
-                              src={m.image}
-                              alt={`${m.name} — Strike mentor`}
-                              loading="lazy"
-                              decoding="async"
-                              className="relative z-10 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                              onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <span className="text-[11px] font-semibold text-gray-100 tracking-tight drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">{m.name}</span>
-                    </div>
-                  ))}
+                {/* mentor portraits — large, upper-body, blended into the dark surface */}
+                {CARD_MENTORS.map((m, i) => (
+                  <div
+                    key={m.name}
+                    className={clsx(
+                      "absolute bottom-0 w-1/2 h-[88%] transition-transform duration-500 ease-out group-hover:scale-[1.04]",
+                      i === 0 ? "left-0 origin-bottom-left" : "right-0 origin-bottom-right"
+                    )}
+                  >
+                    <img
+                      src={m.image}
+                      alt={`${m.name} — Strike mentor`}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover object-top"
+                      style={{
+                        maskImage:
+                          i === 0
+                            ? 'radial-gradient(120% 130% at 70% 40%, #000 45%, transparent 78%)'
+                            : 'radial-gradient(120% 130% at 30% 40%, #000 45%, transparent 78%)',
+                        WebkitMaskImage:
+                          i === 0
+                            ? 'radial-gradient(120% 130% at 70% 40%, #000 45%, transparent 78%)'
+                            : 'radial-gradient(120% 130% at 30% 40%, #000 45%, transparent 78%)',
+                      }}
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                  </div>
+                ))}
+
+                {/* fade the portraits into the card surface on every edge */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-[#0a0a0c]/25 to-[#0a0a0c]/40" />
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0a0c] to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0a0a0c] to-transparent" />
+
+                {/* overlaid bold plan title, sitting between the portraits */}
+                <div className="absolute inset-x-0 bottom-0 flex flex-col items-center px-4 pb-4 text-center">
+                  <h3 className={twMerge(clsx(
+                    "text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]",
+                    t.name
+                  ))}>
+                    {plan.name}
+                  </h3>
+                  <div className="mt-1 flex items-center gap-2 text-[11px] font-semibold text-gray-300 tracking-tight drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                    {CARD_MENTORS.map((m) => m.name).join(' · ')}
+                  </div>
                 </div>
               </div>
 
               <div className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Membership Plan</div>
-              <h3 className={twMerge(clsx("text-3xl font-extrabold mb-3 tracking-tight text-transparent bg-clip-text", t.name))}>{plan.name}</h3>
               <p className="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">{plan.tagline}</p>
 
               {/* DURATION SELECTOR */}
