@@ -191,7 +191,8 @@ const allCourses: CourseData[] = [
     
     isUpcoming: false,
     category: 'paid',
-    
+    hidden: true, // Withdrawn from the Paid section/filter; record kept intact.
+
     href: 'https://strikes.in/course/system-design',
     syllabus: [
       { title: 'Part 1: System Design Foundations' },
@@ -216,7 +217,8 @@ const allCourses: CourseData[] = [
     
     isUpcoming: false,
     category: 'paid',
-    
+    hidden: true, // Withdrawn from the Paid section/filter; record kept intact.
+
     href: 'https://strikes.in/course/dsa-premium',
     syllabus: [
       { title: 'C++ Foundations for Programming' },
@@ -232,7 +234,7 @@ const allCourses: CourseData[] = [
     id: 'lld',
     title: 'System Design',
     description: 'Master Object-Oriented Design, Design Patterns, SOLID Principles, and Schema Design with real-world case studies.',
-    
+    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/1eaa1b1d-c354-4f80-81bf-d4c35cc2b5a2.jpeg',
     duration: 'Live & Recorded',
     hours: 'Upcoming Course',
     
@@ -296,7 +298,7 @@ const allCourses: CourseData[] = [
     id: 'dsa-cpp',
     title: 'Data Structures & Algorithms in C++',
     description: 'Master problem solving, competitive programming foundations, and tech interview questions in modern C++.',
-    
+    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/caa46009-ca64-4dce-94d7-7357e6bdc251.png',
     duration: 'Live & Recorded',
     hours: 'Upcoming Course',
     
@@ -330,6 +332,7 @@ const CourseGrid = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'paid' | 'free' | 'upcoming'>('all');
 
   const filteredCourses = allCourses.filter(course => {
+    if (course.hidden) return false; // withdrawn courses never render
     if (activeTab === 'all') return true;
     return course.category === activeTab;
   });

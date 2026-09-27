@@ -23,6 +23,9 @@ export interface CourseData {
   isUpcoming?: boolean;
   category: 'paid' | 'free' | 'upcoming';
   isYouTubeFree?: boolean;
+  // When true the course data is retained but withheld from every rendered
+  // list (used to pull a course from the catalog without deleting its record).
+  hidden?: boolean;
   href: string;
   syllabus?: { title: string; modules?: number; }[];
 }
