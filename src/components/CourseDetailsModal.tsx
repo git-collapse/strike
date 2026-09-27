@@ -89,7 +89,9 @@ const CourseDetailsModal = ({ course, onClose, onSelectCourse }: CourseDetailsMo
             {(() => {
               const mentor = course.mentor ? MENTORS[course.mentor] : undefined;
               const related = relatedCourses(course);
-              const isFree = course.isYouTubeFree || course.currentPrice === 0;
+              // Upcoming courses carry currentPrice: 0 as a placeholder, so
+              // they must show "Coming Soon" rather than reading as free.
+              const isFree = !course.isUpcoming && (course.isYouTubeFree || course.currentPrice === 0);
               const modules = course.syllabus ?? [];
               const visibleModules = showAllModules ? modules : modules.slice(0, 5);
               return (

@@ -82,7 +82,9 @@ const CourseCard = ({ course, onViewDetails }: CourseCardProps) => {
 
   const imageSrc = course.thumbnail && !imgError ? course.thumbnail : getFallbackImage(course);
   const cat = CATEGORY_META[course.category];
-  const isFree = course.isYouTubeFree || course.currentPrice === 0;
+  // Upcoming courses use currentPrice: 0 as a placeholder (price not set yet),
+  // so they must never read as "Free" — they show "Coming Soon" instead.
+  const isFree = !course.isUpcoming && (course.isYouTubeFree || course.currentPrice === 0);
   const discountPct =
     course.originalPrice && course.currentPrice && course.originalPrice > course.currentPrice
       ? Math.round((1 - course.currentPrice / course.originalPrice) * 100)
