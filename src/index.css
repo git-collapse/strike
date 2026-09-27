@@ -47,11 +47,19 @@
   --animate-fade-in: fadeIn 0.5s ease-out forwards;
   --animate-pulse-subtle: pulseSubtle 5s infinite;
   --animate-gradient-x: gradient-x 3s ease infinite;
+  --animate-marquee: marquee 32s linear infinite;
 }
 
 @keyframes gradient-x {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+/* Continuous logo marquee (FaangBand). The track holds the logo set twice, so
+   translating by -50% lands exactly on the second copy for a seamless loop. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 /* Custom utilities referenced across components (Tailwind v4 @utility). */

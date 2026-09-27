@@ -1,14 +1,17 @@
 import { motion } from 'framer-motion';
 
 // "Get All Premium Questions Asked In FAANG Companies" band from strikes.in.
-// Company names are rendered as styled wordmarks (not official logo assets).
-// Kept to the four companies verified from the live strikes.in band —
-// Oracle, Google, Facebook, Amazon — rather than inventing an extended lineup.
-const companies = [
-  { name: 'Oracle', className: 'text-red-500' },
-  { name: 'Google', className: 'text-white' },
-  { name: 'Facebook', className: 'text-blue-500' },
-  { name: 'amazon', className: 'text-orange-400' },
+// The company marks are the official monochrome brand glyphs (from the CC0
+// simple-icons set, stored in /public/logos) used referentially to name the
+// companies whose interview questions the practice track covers — the same
+// lineup the live strikes.in band shows, extended to a familiar big-tech set.
+const logos = [
+  { name: 'Google', src: '/logos/google.svg' },
+  { name: 'Amazon', src: '/logos/amazon.svg' },
+  { name: 'Apple', src: '/logos/apple.svg' },
+  { name: 'Meta', src: '/logos/meta.svg' },
+  { name: 'Netflix', src: '/logos/netflix.svg' },
+  { name: 'Oracle', src: '/logos/oracle.svg' },
 ];
 
 const FaangBand = () => {
@@ -27,22 +30,32 @@ const FaangBand = () => {
           Companies
         </motion.h2>
 
+        {/* Continuous logo marquee — pauses on hover, static when reduced motion.
+            overflow-hidden + edge-fade mask keep it premium and prevent any
+            horizontal page overflow. */}
         <motion.div
-          initial="hidden"
-          whileInView="show"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-60px' }}
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
-          className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 mb-12"
+          transition={{ duration: 0.6 }}
+          className="group relative mb-12 overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
         >
-          {companies.map((c) => (
-            <motion.span
-              key={c.name}
-              variants={{ hidden: { opacity: 0, scale: 0.9 }, show: { opacity: 1, scale: 1 } }}
-              className={`text-2xl sm:text-3xl font-black tracking-tight ${c.className} opacity-80 hover:opacity-100 transition-opacity`}
-            >
-              {c.name}
-            </motion.span>
-          ))}
+          <ul className="flex w-max animate-marquee items-center group-hover:[animation-play-state:paused] motion-reduce:w-full motion-reduce:animate-none motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:gap-y-6">
+            {[...logos, ...logos].map((logo, i) => {
+              const clone = i >= logos.length;
+              return (
+                <li key={i} className="flex shrink-0 items-center px-8 sm:px-10" aria-hidden={clone}>
+                  <img
+                    src={logo.src}
+                    alt={clone ? '' : logo.name}
+                    loading="lazy"
+                    draggable={false}
+                    className="h-7 w-auto select-none opacity-55 grayscale transition-all duration-300 [filter:brightness(0)_invert(1)] hover:scale-110 hover:opacity-100 sm:h-8"
+                  />
+                </li>
+              );
+            })}
+          </ul>
         </motion.div>
 
         <motion.div
