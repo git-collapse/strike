@@ -18,7 +18,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Scroll spy for sections
+  // Scroll spy for sections. We use scroll position (not IntersectionObserver):
+  // the global `overflow-x: hidden` on <body> splits the scroll container, and a
+  // thin intersection band never reliably fires because the tall Memberships
+  // section sits between Home and Courses. Instead we pick the last section whose
+  // top has scrolled under the fixed navbar — deterministic and robust.
   useEffect(() => {
     if (location.pathname !== '/') return;
 
@@ -26,25 +30,24 @@ const Navbar = () => {
       { id: 'home', name: 'Home' },
       { id: 'courses', name: 'Courses' }
     ];
+    const NAV_OFFSET = 120; // fixed navbar (80px) + a little into the section
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const section = sections.find(s => s.id === entry.target.id);
-            if (section) setActiveLink(section.name);
-          }
-        });
-      },
-      { rootMargin: '-30% 0px -60% 0px' }
-    );
+    const handleSpy = () => {
+      const y = window.scrollY + NAV_OFFSET;
+      let current = 'Home';
+      for (const sec of sections) {
+        const el = document.getElementById(sec.id);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          if (top <= y) current = sec.name;
+        }
+      }
+      setActiveLink(current);
+    };
 
-    sections.forEach(sec => {
-      const el = document.getElementById(sec.id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    handleSpy();
+    window.addEventListener('scroll', handleSpy, { passive: true });
+    return () => window.removeEventListener('scroll', handleSpy);
   }, [location.pathname]);
 
   // Initial load logic for Hash
