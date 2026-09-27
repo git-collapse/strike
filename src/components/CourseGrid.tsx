@@ -1,379 +1,281 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
+import { Search, X, SlidersHorizontal, BookOpen, Layers, Gift } from 'lucide-react';
 import CourseCard from './CourseCard';
-import type { CourseData } from './CourseCard';
+import CourseDetailsModal from './CourseDetailsModal';
+import { allCourses, availableTopics, MENTORS, type CourseData, type CourseTopic } from '../data/courses';
 
-// VERIFIED COURSE CATALOG
-const allCourses: CourseData[] = [
-  {
-    id: 'thunder-web',
-    title: 'Thunder: 100 Days of Code',
-    description: 'Web Development + System Design + Security + DevOps',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/028bc14e-679b-4ca7-8ee8-22ce93a522d6.png',
-    duration: 'Validity: 2 Years',
-    hours: '100+ Hours',
-    
-    originalPrice: 7999,
-    currentPrice: 5499,
-    grantPrice: 3499,
-    isUpcoming: false,
-    category: 'paid',
-    
-    href: 'https://strikes.in/course/thunder-web',
-    syllabus: [
-      { title: 'PHASE 1: JavaScript Mastery - Module 1: Introduction to JavaScript' },
-      { title: 'Module 2: JavaScript Fundamentals' },
-      { title: 'Module 3: Control Flow' },
-      { title: 'Module 4: Functions and Execution Context' },
-      { title: 'Module 5: Call Stack and Closures' },
-      { title: 'Module 6: Data Types Deep Dive' },
-      { title: 'Module 7: Objects in JavaScript' },
-    ]
-  },
-  {
-    id: 'devops',
-    title: 'DevOps: From Foundations to Production',
-    description: 'Linux + Git + CI/CD + Docker + Kubernetes + Terraform + Cloud + Observability',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/3047d244-fa7e-4a7b-8dc4-4169948a9742.png',
-    duration: 'Validity: 2 Years',
-    hours: '40+ Hours | 12 Modules',
-    
-    originalPrice: 4999,
-    currentPrice: 2999,
-    grantPrice: 1799,
-    isUpcoming: false,
-    category: 'paid',
-    
-    href: 'https://strikes.in/course/devops',
-    syllabus: [
-      { title: 'Module 1: DevOps Foundations & Linux' },
-      { title: 'Module 2: Git & Version Control Mastery' },
-      { title: 'Module 3: Networking, DNS & TLS Essentials' },
-      { title: 'Module 4: CI/CD with Jenkins & GitHub Actions' },
-      { title: 'Module 5: Docker & Containerisation' },
-      { title: 'Module 6: Kubernetes Core' },
-      { title: 'Module 7: Kubernetes in Production' },
-    ]
-  },
-  {
-    id: 'combo',
-    title: 'Complete DSA + GenAI Combo: From Algorithms to AI Agents',
-    description: 'Master the complete tech stack! This comprehensive combo course combines Data Structures & Algorithms with Generative AI Engineering. Start with C++ and DSA fundamentals, solve 300+ problems, then dive into building autonomous AI agents. Perfect for those who want to become full-stack AI engineers with strong algorithmic foundations.',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/61baa760-861e-4fbc-bce4-557dc37bd941.png',
-    duration: 'Validity : 3 years',
-    hours: '100+ hrs',
-    
-    originalPrice: 7999,
-    currentPrice: 5499,
-    grantPrice: 3999,
-    isUpcoming: false,
-    category: 'paid',
-    
-    href: 'https://strikes.in/course/combo',
-    syllabus: [
-      { title: 'Getting Started: Your Journey Overview' },
-      { title: 'Part 1: C++ & DSA Fundamentals' },
-      { title: 'Part 2: Data Structures Deep Dive' },
-      { title: 'Part 3: Advanced Algorithms' },
-      { title: 'Part 4: AI Fundamentals & Theory' },
-      { title: 'Part 5: Building AI Applications' },
-      { title: 'Part 6: Advanced AI & Multi-Agent Systems' },
-    ]
-  },
-  {
-    id: '689ecf2b6793e719cdee9efc',
-    title: 'Data Structures and Algorithms in C++: From Beginner to Advanced',
-    description: 'Welcome to the ultimate guide to Data Structures and Algorithms (DSA) in C++! This comprehensive course is designed to take you from the basic principles of programming to a level of proficiency where you can confidently solve complex computational problems. We will start with a solid foundation in C++, explore fundamental and advanced data structures, master key algorithmic paradigms, and even touch upon modern applications.',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/caa46009-ca64-4dce-94d7-7357e6bdc251.png',
-    duration: 'Validity: 3 Years',
-    hours: '100+ hrs',
-    
-    originalPrice: 4999,
-    currentPrice: 3999,
-    grantPrice: 2499,
-    isUpcoming: false,
-    category: 'paid',
-    
-    href: 'https://strikes.in/course/689ecf2b6793e719cdee9efc',
-    syllabus: [
-      { title: 'C++ Foundations for DSA' },
-      { title: 'Core Concepts of Algorithmic Analysis' },
-      { title: 'Basic Data Structures & Algorithms' },
-      { title: 'The C++ Standard Template Library (STL)' },
-      { title: 'Object-Oriented Programming (OOP) for Data Structures' },
-      { title: 'Linear Data Structures' },
-      { title: 'Non-Linear Data Structures' },
-    ]
-  },
-  {
-    id: '689ee05f1d8fc292bd27df7c',
-    title: 'The Complete Generative AI Engineering Bootcamp: Build & Deploy Autonomous AI Agents',
-    description: 'This is the definitive course for anyone serious about building the next generation of AI. We will take you on a comprehensive journey from zero to hero, starting with the fundamental concepts of Generative AI and the Transformer architecture. You will then immediately apply this knowledge to build, test, and deploy sophisticated, autonomous AI agents capable of reasoning, planning, and using tools to solve complex problems.',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/e5d4d382-6966-4928-bd0b-955b56fdbf14.jpg',
-    duration: 'Validity: 3 Years',
-    hours: '50+ hrs',
-    
-    originalPrice: 4999,
-    currentPrice: 3999,
-    grantPrice: 2399,
-    isUpcoming: false,
-    category: 'paid',
-    
-    href: 'https://strikes.in/course/689ee05f1d8fc292bd27df7c',
-    syllabus: [
-      { title: 'The New Age of AI: Introduction to Generative AI' },
-      { title: 'How Language Models Think: Tokens, Prompts, and Predictions' },
-      { title: 'Unlocking the Black Box: An Intuition for Deep Learning' },
-      { title: 'The Engine of Modern LLMs: The Transformer Architecture' },
-      { title: 'Representing Meaning: Embeddings & Vector Databases' },
-      { title: 'The Modern AI Stack: Introduction to LangChain' },
-      { title: 'Building the Knowledge Base for Agents: RAG In-Depth' },
-    ]
-  },
-  {
-    id: 'nexus-webdev',
-    title: 'Web Development',
-    description: 'Complete recorded course on Web Development from Beginner to Advance Level. Gain hands-on experience in HTML, CSS, JavaScript and full-stack development with React, TypeScript, Next.js, Node.js and MongoDB. Build robust web applications, launch them to production, and develop the skills to become a sought-after developer.',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/d3f702b7-3268-4796-8d50-2a74b9825272.png',
-    duration: 'Recorded',
-    hours: '2024 Course',
-    originalPrice: 5999,
-    currentPrice: 3999,
-    grantPrice: 2999,
-    isUpcoming: false,
-    category: 'paid',
-    
-    href: 'https://strikes.in/course/nexus-webdev',
-    syllabus: [
-      { title: 'Part 1: Web Development - Internet, HTML & CSS' },
-      { title: 'Part 2: Web Development - JavaScript Fundamentals' },
-      { title: 'Part 3: Web Development - React, TypeScript & Next.js' },
-      { title: 'Part 4: Web Development - Backend & Databases' },
-      { title: 'Part 5: Web Development - Advance Projects with Deployment' },
-      { title: 'Part 6: Web Development - Testing, Deployment & Career Launch' },
-    ]
-  },
-  {
-    id: 'nexus-blockchain',
-    title: 'Blockchain',
-    description: 'Complete recorded course on Blockchain from fundamentals to advanced. Explore blockchain internals, cryptography, Ethereum, Solana, smart contracts with Solidity, and Rust. Build and deploy full decentralized applications (dApps) and gain in-demand blockchain skills.',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/55c5eb3f-0b95-47c0-aa58-55868156d8c8.png',
-    duration: 'Recorded',
-    hours: 'Recorded Course',
-    
-    originalPrice: 5999,
-    currentPrice: 3999,
-    grantPrice: 2999,
-    
-    isUpcoming: false,
-    category: 'paid',
-    
-    href: 'https://strikes.in/course/nexus-blockchain',
-    syllabus: [
-      { title: 'Part 1: Blockchain - Fundamentals & Cryptography' },
-      { title: 'Part 2: Blockchain - Ethereum, Solana & Smart Contracts' },
-      { title: 'Part 3: Blockchain - Rust, Advance & Deployment' },
-      { title: 'Part 4: Blockchain - Security, DeFi & Real-World dApps' },
-    ]
-  },
-  {
-    id: 'lld',
-    title: 'System Design',
-    description: 'Master Object-Oriented Design, Design Patterns, SOLID Principles, and Schema Design with real-world case studies.',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/1eaa1b1d-c354-4f80-81bf-d4c35cc2b5a2.jpeg',
-    duration: 'Live & Recorded',
-    hours: 'Upcoming Course',
-    
-    
-    
-    
-    isUpcoming: false,
-    category: 'free',
-    isYouTubeFree: true,
-    href: 'https://youtube.com/playlist?list=PLQEaRBV9gAFvzp6XhcNFpk1WdOcyVo9qT',
-  },
-  {
-    id: 'dsa-java',
-    title: 'Data Structures & Algorithms in Java',
-    description: 'Complete DSA from scratch to advanced in Java covering Collections framework, algorithmic paradigms, and interview problems.',
-    
-    duration: 'Live & Recorded',
-    hours: 'Upcoming Course',
-    
-    
-    currentPrice: 0,
-    
-    isUpcoming: true,
-    category: 'upcoming',
-    
-    href: 'https://strikes.in/course/dsa-java',
-  },
-  {
-    id: 'fullstack-go',
-    title: 'Full Stack Development with Go',
-    description: 'Build ultra-fast, concurrent web applications, microservices, and modern frontend integrations with Golang and React.',
-    
-    duration: 'Live & Recorded',
-    hours: 'Upcoming Course',
-    
-    
-    currentPrice: 0,
-    
-    isUpcoming: true,
-    category: 'upcoming',
-    
-    href: 'https://strikes.in/course/fullstack-go',
-  },
-  {
-    id: 'hld',
-    title: 'HLD: High Level Design',
-    description: 'Architect distributed, fault-tolerant, planetary-scale systems from load balancers to distributed databases and message brokers.',
-    
-    duration: 'Live & Recorded',
-    hours: 'Upcoming Course',
-    
-    
-    currentPrice: 0,
-    
-    isUpcoming: true,
-    category: 'upcoming',
-    
-    href: 'https://strikes.in/course/hld',
-  },
-  {
-    id: 'dsa-cpp',
-    title: 'Data Structures & Algorithms in C++',
-    description: 'Master problem solving, competitive programming foundations, and tech interview questions in modern C++.',
-    thumbnail: 'https://dolia18uq98lp.cloudfront.net/course/caa46009-ca64-4dce-94d7-7357e6bdc251.png',
-    duration: 'Live & Recorded',
-    hours: 'Upcoming Course',
-    
-    
-    
-    
-    isUpcoming: false,
-    category: 'free',
-    isYouTubeFree: true,
-    href: 'https://www.youtube.com/playlist?list=PLQEaRBV9gAFu4ovJ41PywklqI7IyXwr01',
-  },
-  {
-    id: 'spring boot',
-    title: 'Spring Boot Full Course',
-    description: 'Build production-grade Java backends with Spring Boot — REST APIs, dependency injection, Spring Data JPA, authentication, and deployment-ready microservices.',
-    
-    duration: 'Live & Recorded',
-    hours: 'Upcoming Course',
-    
-    
-    currentPrice: 0,
-    
-    isUpcoming: true,
-    category: 'upcoming',
-    
-    href: 'https://strikes.in/course/spring%20boot',
-  }
+type StatusTab = 'all' | 'paid' | 'free' | 'upcoming';
+type SortKey = 'featured' | 'price-asc' | 'price-desc' | 'name';
+
+const STATUS_TABS: { id: StatusTab; label: string }[] = [
+  { id: 'all', label: 'All Courses' },
+  { id: 'paid', label: 'Paid' },
+  { id: 'free', label: 'Free' },
+  { id: 'upcoming', label: 'Upcoming' },
 ];
 
-const CourseGrid = () => {
-  const [activeTab, setActiveTab] = useState<'all' | 'paid' | 'free' | 'upcoming'>('all');
+const SORT_OPTIONS: { id: SortKey; label: string }[] = [
+  { id: 'featured', label: 'Featured' },
+  { id: 'price-asc', label: 'Price: Low to High' },
+  { id: 'price-desc', label: 'Price: High to Low' },
+  { id: 'name', label: 'Name: A–Z' },
+];
 
-  const filteredCourses = allCourses.filter(course => {
-    if (course.hidden) return false; // withdrawn courses never render
-    if (activeTab === 'all') return true;
-    return course.category === activeTab;
-  });
+// Effective price used only for sorting (free / upcoming sort as 0).
+const priceOf = (c: CourseData) => c.currentPrice ?? c.originalPrice ?? 0;
+
+const CourseGrid = () => {
+  const [status, setStatus] = useState<StatusTab>('all');
+  const [topics, setTopics] = useState<Set<CourseTopic>>(new Set());
+  const [query, setQuery] = useState('');
+  const [sort, setSort] = useState<SortKey>('featured');
+  const [selected, setSelected] = useState<CourseData | null>(null);
+
+  const visible = useMemo(() => allCourses.filter((c) => !c.hidden), []);
+  const topicOptions = useMemo(() => availableTopics(visible), [visible]);
+  const featured = useMemo(() => visible.find((c) => c.featured), [visible]);
+
+  // Real, non-fabricated catalog stats.
+  const stats = useMemo(() => ({
+    total: visible.length,
+    free: visible.filter((c) => c.category === 'free').length,
+    tracks: topicOptions.length,
+  }), [visible, topicOptions]);
+
+  const toggleTopic = (t: CourseTopic) => {
+    setTopics((prev) => {
+      const next = new Set(prev);
+      next.has(t) ? next.delete(t) : next.add(t);
+      return next;
+    });
+  };
+
+  const clearAll = () => { setStatus('all'); setTopics(new Set()); setQuery(''); setSort('featured'); };
+
+  const isDefaultView = status === 'all' && topics.size === 0 && query.trim() === '' && sort === 'featured';
+  const hasActiveFilters = status !== 'all' || topics.size > 0 || query.trim() !== '' || sort !== 'featured';
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    let list = visible.filter((c) => {
+      if (status !== 'all' && c.category !== status) return false;
+      if (topics.size > 0 && !(c.tags ?? []).some((t) => topics.has(t))) return false;
+      if (q) {
+        const mentorName = c.mentor ? MENTORS[c.mentor]?.name ?? '' : '';
+        const haystack = [c.title, c.description ?? '', mentorName, ...(c.tags ?? [])].join(' ').toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+      return true;
+    });
+    if (sort === 'price-asc') list = [...list].sort((a, b) => priceOf(a) - priceOf(b));
+    else if (sort === 'price-desc') list = [...list].sort((a, b) => priceOf(b) - priceOf(a));
+    else if (sort === 'name') list = [...list].sort((a, b) => a.title.localeCompare(b.title));
+    return list;
+  }, [visible, status, topics, query, sort]);
 
   return (
     <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-black min-h-screen scroll-mt-24 empty-space-zone" id="courses">
-      
-      {/* HEADER & FILTER BAR */}
-      <div className="mb-12 text-center md:text-left empty-space-zone">
-        <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Strike coding courses</h2>
-        <p className="mt-3 text-gray-400 text-base md:text-lg max-w-2xl mx-auto md:mx-0 mb-8">
-          Learn from the best with hands-on projects and guided practice.
+      {/* ===== Hero header ===== */}
+      <div className="mb-10 text-center md:text-left empty-space-zone">
+        <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-cyan-400/80">Strike Learning Platform</p>
+        <h2 className="mt-2 text-3xl md:text-5xl font-extrabold text-white tracking-tight">Master in-demand skills</h2>
+        <p className="mt-3 text-gray-400 text-base md:text-lg max-w-2xl mx-auto md:mx-0">
+          Industry-grade courses in DSA, System Design, Web Development, DevOps &amp; more — built with hands-on projects and guided practice.
         </p>
 
-        {/* Category Filter Buttons — animated sliding pill marks the active tab */}
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+        {/* Real catalog stats */}
+        <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-3">
           {[
-            { id: 'all', label: 'All Courses' },
-            { id: 'paid', label: 'Paid Courses' },
-            { id: 'free', label: 'Free Courses' },
-            { id: 'upcoming', label: 'Upcoming Courses' }
-          ].map(tab => {
-            const active = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
-                aria-pressed={active}
-                className={twMerge(
-                  clsx(
-                    "relative px-5 py-2.5 rounded-full text-sm font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black",
-                    active ? "text-black" : "bg-white/5 border border-white/10 text-white hover:bg-white/10"
-                  )
-                )}
-              >
-                {active && (
-                  <motion.span
-                    layoutId="courseFilterPill"
-                    className="absolute inset-0 rounded-full bg-white"
-                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
-                  />
-                )}
-                <span className="relative z-10">{tab.label}</span>
-              </button>
-            );
-          })}
+            { icon: BookOpen, value: stats.total, label: 'Courses' },
+            { icon: Gift, value: stats.free, label: 'Free' },
+            { icon: Layers, value: stats.tracks, label: 'Tracks' },
+          ].map((s) => (
+            <div key={s.label} className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5">
+              <s.icon size={16} className="text-cyan-400" />
+              <span className="text-lg font-extrabold text-white">{s.value}</span>
+              <span className="text-xs text-gray-500">{s.label}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Search bar */}
+        <div className="mt-6 relative max-w-xl mx-auto md:mx-0">
+          <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search courses, mentors, or topics…"
+            aria-label="Search courses"
+            className="w-full rounded-xl border border-white/10 bg-white/[0.04] py-3 pl-11 pr-11 text-sm text-white placeholder:text-gray-500 transition-colors focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery('')}
+              aria-label="Clear search"
+              className="absolute right-3 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            >
+              <X size={15} />
+            </button>
+          )}
         </div>
       </div>
-
-      {/* SINGLE DYNAMIC GRID — keyed remount swaps content instantly, then the
-          new set animates in (no dependency on an exit animation completing). */}
-      {filteredCourses.length > 0 ? (
+      {/* ===== Featured course (default view only) ===== */}
+      {isDefaultView && featured && (
         <motion.div
-          key={activeTab}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 overflow-hidden rounded-3xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/[0.07] via-[#0c0c0f] to-[#0c0c0f] shadow-[0_0_60px_rgba(6,182,212,0.08)]"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="relative min-h-[220px] overflow-hidden lg:min-h-full">
+              <img src={featured.thumbnail} alt={featured.title} className="h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0f] via-transparent to-transparent lg:bg-gradient-to-r" />
+              <span className="absolute left-4 top-4 rounded-full bg-cyan-500 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-black">★ Featured</span>
+            </div>
+            <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
+              <div className="flex flex-wrap gap-2">
+                {featured.tags?.map((t) => (
+                  <span key={t} className="rounded-md bg-white/[0.06] px-2 py-0.5 text-[11px] font-medium text-gray-300 ring-1 ring-white/10">{t}</span>
+                ))}
+              </div>
+              <h3 className="text-2xl font-extrabold leading-tight text-white sm:text-3xl">{featured.title}</h3>
+              <p className="text-sm leading-relaxed text-gray-400">{featured.description}</p>
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <a
+                  href={featured.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 text-sm font-bold text-white transition-all hover:shadow-[0_0_22px_rgba(6,182,212,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+                >
+                  Enroll Now
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setSelected(featured)}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-gray-200 transition-colors hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+      {/* ===== Filter / control bar ===== */}
+      <div className="mb-6 flex flex-col gap-4">
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Status tabs */}
+          <div className="flex flex-wrap items-center gap-2">
+            {STATUS_TABS.map((tab) => {
+              const active = status === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setStatus(tab.id)}
+                  aria-pressed={active}
+                  className={twMerge(clsx(
+                    'relative px-4 py-2 rounded-full text-sm font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white',
+                    active ? 'text-black' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                  ))}
+                >
+                  {active && (
+                    <motion.span layoutId="courseFilterPill" className="absolute inset-0 rounded-full bg-white" transition={{ type: 'spring', stiffness: 400, damping: 32 }} />
+                  )}
+                  <span className="relative z-10">{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Sort */}
+          <div className="ml-auto flex items-center gap-2">
+            <SlidersHorizontal size={15} className="text-gray-500" />
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+              aria-label="Sort courses"
+              className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-sm font-semibold text-gray-200 focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            >
+              {SORT_OPTIONS.map((o) => (
+                <option key={o.id} value={o.id} className="bg-[#111] text-white">{o.label}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Topic chips */}
+        {topicOptions.length > 0 && (
+          <div className="flex flex-wrap items-center gap-2">
+            {topicOptions.map((t) => {
+              const on = topics.has(t);
+              return (
+                <button
+                  key={t}
+                  onClick={() => toggleTopic(t)}
+                  aria-pressed={on}
+                  className={twMerge(clsx(
+                    'rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400',
+                    on ? 'border-cyan-500/50 bg-cyan-500/15 text-cyan-200' : 'border-white/10 bg-white/[0.03] text-gray-400 hover:text-white hover:border-white/20'
+                  ))}
+                >
+                  {t}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Results count + clear */}
+        <div className="flex items-center justify-between text-sm">
+          <p className="text-gray-500">
+            Showing <span className="font-bold text-white">{results.length}</span> {results.length === 1 ? 'course' : 'courses'}
+          </p>
+          {hasActiveFilters && (
+            <button onClick={clearAll} className="inline-flex items-center gap-1.5 font-semibold text-cyan-400 transition-colors hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded">
+              <X size={14} /> Clear all
+            </button>
+          )}
+        </div>
+      </div>
+      {/* ===== Grid / empty state ===== */}
+      {results.length > 0 ? (
+        <motion.div
+          key={`${status}-${sort}-${[...topics].join(',')}-${query}`}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch empty-space-zone"
           initial="hidden"
           animate="show"
-          variants={{
-            hidden: {},
-            show: {
-              transition: {
-                staggerChildren: 0.06
-              }
-            }
-          }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }}
         >
-          {filteredCourses.map(course => (
+          {results.map((course) => (
             <motion.div
               key={course.id}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
-              }}
-              whileHover={{ y: -5 }}
+              variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } } }}
               className="flex h-full"
             >
-              <CourseCard course={course} />
+              <CourseCard course={course} onViewDetails={setSelected} />
             </motion.div>
           ))}
         </motion.div>
       ) : (
         <div className="text-center py-20 bg-[#111] rounded-2xl border border-white/5 flex flex-col items-center justify-center animate-in fade-in duration-300">
+          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/[0.04] ring-1 ring-white/10">
+            <Search size={24} className="text-gray-500" />
+          </div>
           <p className="text-xl font-bold text-gray-300 mb-2">No courses found</p>
-          <p className="text-gray-500">There are currently no courses matching this category.</p>
-          <button
-            onClick={() => setActiveTab('all')}
-            className="mt-6 text-accent-primary hover:text-white transition-colors text-sm font-bold"
-          >
-            Clear Filter
+          <p className="text-gray-500 max-w-sm">No courses match your current search and filters. Try broadening your search or clearing the filters.</p>
+          <button onClick={clearAll} className="mt-6 inline-flex items-center gap-1.5 text-accent-primary hover:text-white transition-colors text-sm font-bold">
+            <X size={15} /> Clear all filters
           </button>
         </div>
       )}
-
+      <CourseDetailsModal course={selected} onClose={() => setSelected(null)} onSelectCourse={(c) => setSelected(c)} />
     </section>
   );
 };
