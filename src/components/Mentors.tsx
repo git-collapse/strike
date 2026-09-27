@@ -8,14 +8,16 @@ const mentors = [
     name: 'Rohit Negi',
     role: 'Founder & Lead Instructor',
     initials: 'RN',
-    blurb: 'Ex-Uber. Teaches DSA, System Design & core CS to lakhs of learners on Coder Army.',
+    blurb: 'Ex-Uber engineer and IIT Guwahati post-graduate (GATE-CSE 2020, AIR 202). Teaches DSA, System Design & core CS to lakhs of learners on Coder Army.',
+    badges: ['Ex-Uber', 'IIT Graduate', '2 Cr+ Package'],
     ring: 'from-cyan-400 to-blue-600',
   },
   {
     name: 'Aditya Tandon',
     role: 'Co-Founder & Senior Instructor',
     initials: 'AT',
-    blurb: 'Builds the Web Development, DevOps & GenAI tracks and mentors project cohorts.',
+    blurb: 'Builds the Web Development, DevOps & GenAI tracks and mentors project cohorts from idea to deployment.',
+    badges: ['Web Dev', 'DevOps', 'GenAI'],
     ring: 'from-fuchsia-400 to-purple-600',
   },
 ];
@@ -66,6 +68,16 @@ const Mentors = () => {
               <p className="text-cyan-400 text-sm font-semibold mt-1">{m.role}</p>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">{m.blurb}</p>
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-1">
+              {m.badges.map((badge) => (
+                <span
+                  key={badge}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-gray-200"
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
           </motion.div>
         ))}
       </div>

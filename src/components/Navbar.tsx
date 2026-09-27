@@ -6,7 +6,6 @@ import clsx from 'clsx';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState('Home');
   const location = useLocation();
@@ -87,8 +86,8 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          
+        <div className="relative flex items-center justify-between h-20">
+
           {/* Logo */}
           <div className="flex items-center gap-2">
             <Link to="/" onClick={() => handleLinkClick('Home', '/')} className="flex items-center gap-2 text-white group focus:outline-none">
@@ -97,54 +96,38 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden xl:block">
-            <div className="ml-10 flex items-center space-x-1 relative" onMouseLeave={() => setHoveredIndex(null)}>
-              {links.map((link, index) => {
+          {/* Desktop Nav — centered floating pill (matches strikes.in signature nav) */}
+          <div className="hidden xl:flex absolute left-1/2 -translate-x-1/2">
+            <div className="flex items-center gap-0.5 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-md px-2 py-1.5 shadow-lg shadow-black/20">
+              {links.map((link) => {
                 const isActive = activeLink === link.name;
-                const isHovered = hoveredIndex === index;
-                
-                return (
-                  <div key={link.name} className="relative px-4 py-2" onMouseEnter={() => setHoveredIndex(index)}>
-                    {/* Hover Pill Background */}
-                    {isHovered && (
-                      <motion.div
-                        layoutId="nav-hover-pill"
-                        className="absolute inset-0 bg-cyan-500/10 rounded-lg pointer-events-none"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                    
-                    {/* Active Underline - THIS IS THE SLIDING INDICATOR */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="nav-active-underline"
-                        className="absolute bottom-0 left-3 right-3 h-0.5 bg-cyan-400 rounded-t-full shadow-[0_-2px_10px_rgba(34,211,238,0.6)]"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      />
-                    )}
 
-                    <a 
-                      href={link.href}
-                      target={link.href.startsWith('/') ? undefined : "_blank"}
-                      rel={link.href.startsWith('/') ? undefined : "noopener noreferrer"}
-                      onClick={(e) => {
-                        if (link.href.startsWith('/')) {
-                          e.preventDefault();
-                        }
-                        handleLinkClick(link.name, link.href);
-                      }}
-                      className={clsx(
-                        "relative z-10 transition-colors duration-200 text-sm font-semibold tracking-wide flex items-center",
-                        isActive ? "text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]" : "text-gray-300 hover:text-white"
-                      )}
-                    >
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target={link.href.startsWith('/') ? undefined : "_blank"}
+                    rel={link.href.startsWith('/') ? undefined : "noopener noreferrer"}
+                    onClick={(e) => {
+                      if (link.href.startsWith('/')) {
+                        e.preventDefault();
+                      }
+                      handleLinkClick(link.name, link.href);
+                    }}
+                    className="relative px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  >
+                    {/* Active filled pill — the sliding indicator */}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-active-pill"
+                        className="absolute inset-0 bg-white/10 rounded-full shadow-[0_0_12px_rgba(34,211,238,0.2)] pointer-events-none"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                    <span className={clsx("relative z-10", isActive ? "text-white" : "text-gray-300 hover:text-white")}>
                       {link.name}
-                    </a>
-                  </div>
+                    </span>
+                  </a>
                 );
               })}
             </div>
