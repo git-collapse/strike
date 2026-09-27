@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
+import clsx from 'clsx';
+import { Zap } from 'lucide-react';
+import { useOverclock } from '../context/OverclockContext';
 import { HeroMascot } from './HeroMascot';
 import HeroCodePanel from './HeroCodePanel';
 
@@ -18,6 +21,7 @@ const FRAGMENTS = [
 
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
+  const { isOverclocked } = useOverclock();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -83,6 +87,32 @@ const Hero = () => {
             animate="visible"
             className="text-center lg:text-left flex-1 max-w-2xl mx-auto lg:mx-0 mt-4 lg:mt-0"
           >
+            {/* Premium promo pill — a subtle, honest teaser for the discoverable
+                System Overclock easter egg. No countdowns, deadlines, or fake
+                urgency: it hints at a hidden perk and, once unlocked, reflects
+                the real grant state. Reduced-motion safe (ping dot disabled). */}
+            <motion.div variants={itemVariants} className="flex justify-center lg:justify-start mb-6">
+              <span
+                className={clsx(
+                  'inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold whitespace-nowrap backdrop-blur-md transition-colors',
+                  isOverclocked
+                    ? 'border-cyan-400/40 bg-cyan-500/10 text-cyan-200'
+                    : 'border-white/10 bg-white/[0.04] text-gray-300 hover:border-cyan-500/40 hover:text-cyan-200'
+                )}
+              >
+                <span className="relative flex h-2 w-2" aria-hidden="true">
+                  {!shouldReduceMotion && (
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60" />
+                  )}
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
+                </span>
+                <Zap size={13} className="text-cyan-300 shrink-0" fill={isOverclocked ? 'currentColor' : 'none'} />
+                {isOverclocked
+                  ? 'System Overclock engaged — grant live'
+                  : 'Hidden System Overclock inside'}
+              </span>
+            </motion.div>
+
             <motion.h1 variants={itemVariants} className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-[1.15]">
               Take control of your <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Future With Strike</span>

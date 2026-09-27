@@ -2,12 +2,13 @@ import { motion } from 'framer-motion';
 
 // "Get All Premium Questions Asked In FAANG Companies" band from strikes.in.
 // Company names are rendered as styled wordmarks (not official logo assets).
+// Kept to the four companies verified from the live strikes.in band —
+// Oracle, Google, Facebook, Amazon — rather than inventing an extended lineup.
 const companies = [
   { name: 'Oracle', className: 'text-red-500' },
   { name: 'Google', className: 'text-white' },
-  { name: 'Meta', className: 'text-blue-500' },
+  { name: 'Facebook', className: 'text-blue-500' },
   { name: 'amazon', className: 'text-orange-400' },
-  { name: 'Microsoft', className: 'text-cyan-300' },
 ];
 
 const FaangBand = () => {
