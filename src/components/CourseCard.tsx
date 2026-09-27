@@ -1,10 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useOverclock } from '../context/OverclockContext';
-import { ExternalLink, BookOpen, X, Clock, Layers, GraduationCap, Info } from 'lucide-react';
+import { ExternalLink, BookOpen, X, Clock, Layers, GraduationCap } from 'lucide-react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { motion, AnimatePresence, useMotionValue, useSpring, useReducedMotion, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PriceReveal } from './PriceReveal';
+import { FlipCard } from './FlipCard';
 
 export interface CourseData {
   id: string;
@@ -36,41 +37,9 @@ const CourseCard = ({ course }: { course: CourseData }) => {
   const { isOverclocked } = useOverclock();
   const [showSyllabus, setShowSyllabus] = useState(false);
   const [imgError, setImgError] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
-
-  // Premium quick-look reveal. Driven by hover on desktop (onHoverStart/End, which
-  // Framer only fires for real pointer hover, not touch) OR an explicit tap toggle
-  // on mobile. The panel is absolutely positioned over the thumbnail, so revealing
-  // it never changes card height or pushes neighbouring cards.
-  const [hovered, setHovered] = useState(false);
-  const [detailsOpen, setDetailsOpen] = useState(false);
-  const reveal = hovered || detailsOpen;
-
-  // Subtle pointer-driven 3D tilt (desktop only). Pointer position is mapped to
-  // a small rotation and smoothed by a spring; all transform-based, so there is
-  // no layout shift. Disabled for reduced-motion and coarse-pointer devices.
-  const cardRef = useRef<HTMLDivElement>(null);
-  const px = useMotionValue(0.5);
-  const py = useMotionValue(0.5);
-  const springCfg = { stiffness: 220, damping: 22, mass: 0.4 };
-  const rotateX = useSpring(useTransform(py, [0, 1], [5, -5]), springCfg);
-  const rotateY = useSpring(useTransform(px, [0, 1], [-5, 5]), springCfg);
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion || e.pointerType !== 'mouse') return;
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    px.set((e.clientX - rect.left) / rect.width);
-    py.set((e.clientY - rect.top) / rect.height);
-  };
-
-  const resetTilt = () => {
-    px.set(0.5);
-    py.set(0.5);
-  };
 
   const isEligibleForGrant = isOverclocked && (course.grantPrice !== undefined && course.grantPrice > 0);
-  
+
   // Calculate a reliable discount percentage dynamically if missing
   const activeCurrentPrice = isEligibleForGrant ? course.grantPrice : course.currentPrice;
   const calculatedDiscount = (course.originalPrice && activeCurrentPrice && course.originalPrice > activeCurrentPrice)
@@ -80,7 +49,7 @@ const CourseCard = ({ course }: { course: CourseData }) => {
   const getFallbackImage = () => {
     const words = course.title.replace(/[^a-zA-Z0-9\s+]/g, '').split(' ');
     let acronym = words.slice(0, 3).map(w => w.substring(0, 3).toUpperCase()).join(' ');
-    
+
     if (course.title.includes('Thunder')) acronym = 'THUNDER';
     else if (course.title.includes('DSA')) acronym = 'DSA';
     else if (course.title.includes('System Design') || course.title.includes('HLD')) acronym = 'SYS DESIGN';
@@ -92,7 +61,7 @@ const CourseCard = ({ course }: { course: CourseData }) => {
     const hues = [210, 260, 340, 150, 30, 190];
     const hue = hues[hash % hues.length];
     const color = `hsl(${hue}, 80%, 60%)`;
-    
+
     const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
       <rect width="800" height="450" fill="#050505"/>
       <defs>
@@ -111,20 +80,18 @@ const CourseCard = ({ course }: { course: CourseData }) => {
       <rect x="350" y="270" width="100" height="4" fill="${color}" rx="2"/>
       <text x="50%" y="310" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="${color}" letter-spacing="4">STRIKE // ${course.id.toUpperCase()}</text>
     </svg>`;
-    
+
     const base64 = btoa(unescape(encodeURIComponent(svgStr)));
     return `data:image/svg+xml;base64,${base64}`;
   };
 
   const imageSrc = course.thumbnail && !imgError ? course.thumbnail : getFallbackImage();
 
-  // Some course fields already embed their own descriptor (e.g. "Validity: 2 Years").
-  // Strip a redundant leading label so the panel doesn't read "Duration: Validity: …".
+  // Strip an embedded descriptor so the back panel doesn't read "Duration: Validity: 2 Years".
   const stripLabel = (s?: string) => (s ?? '').replace(/^\s*(validity|duration|hours?|time)\s*:\s*/i, '').trim();
 
-  // Prerequisite label for the quick-look panel. Prefer explicit data when present;
-  // otherwise derive conservatively from the level the course states about itself —
-  // no fabricated specifics, just a safe advisory.
+  // Prerequisite label. Prefer explicit data; else derive conservatively from the
+  // level the course states about itself — no fabricated specifics.
   const prerequisite = course.prerequisites ?? (
     course.isUpcoming
       ? 'Announced soon'
@@ -133,292 +100,187 @@ const CourseCard = ({ course }: { course: CourseData }) => {
         : 'Basic programming knowledge'
   );
 
+  const surface = isOverclocked ? 'border border-cyan-500/30' : 'border border-white/10';
+  const rootGlow = isOverclocked
+    ? 'shadow-[0_0_20px_rgba(34,211,238,0.1)] group-hover:shadow-[0_0_35px_rgba(34,211,238,0.3)]'
+    : 'group-hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]';
+
+  const categoryChip = (
+    <span className={twMerge(clsx(
+      'text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border',
+      CATEGORY_META[course.category].cls
+    ))}>
+      {CATEGORY_META[course.category].label}
+    </span>
+  );
+
+  // ---- FRONT FACE: thumbnail + category + title + price + primary CTA ----
+  const front = (
+    <div className={clsx('flex flex-col h-full w-full rounded-2xl overflow-hidden bg-[#0a0a0c] transition-colors duration-500', surface)}>
+      <a href={course.href} target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[16/9] block overflow-hidden border-b border-white/5 bg-[#050505] shrink-0">
+        <img src={imageSrc} alt={course.title} loading="lazy" onError={() => setImgError(true)} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        {isOverclocked && <div className="absolute inset-0 bg-cyan-500/10 mix-blend-overlay pointer-events-none" />}
+        {course.isUpcoming && (
+          <div className="absolute top-3 left-3 bg-blue-600/90 backdrop-blur-md border border-blue-400 text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-widest rounded shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+            Upcoming
+          </div>
+        )}
+      </a>
+
+      <div className="flex flex-col flex-1 p-5 sm:p-6">
+        <div className="flex flex-wrap gap-2 mb-3 min-h-[28px]">{categoryChip}</div>
+        <a href={course.href} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors block">
+          <h3 className="text-lg sm:text-xl font-bold text-white line-clamp-2 leading-tight min-h-[3.5rem]" title={course.title}>
+            {course.title}
+          </h3>
+        </a>
+
+        <div className="flex-1" />
+
+        <div className="mb-5">
+          <div className="flex items-center gap-2 h-5 mb-1">
+            {course.originalPrice && !course.isUpcoming && course.originalPrice !== activeCurrentPrice && (
+              <>
+                <span className="text-xs text-gray-500 line-through font-medium">₹{course.originalPrice.toLocaleString('en-IN')}</span>
+                {calculatedDiscount && (
+                  <span className="text-[10px] font-bold text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-1.5 py-0.5 rounded">{calculatedDiscount}</span>
+                )}
+              </>
+            )}
+          </div>
+          <div className="flex items-center h-8">
+            {course.isYouTubeFree ? (
+              <span className="text-xl font-bold text-red-500 uppercase tracking-widest flex items-center gap-2">
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                FREE
+              </span>
+            ) : course.isUpcoming ? (
+              <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">To Be Announced</span>
+            ) : course.currentPrice === 0 ? (
+              <span className="text-2xl font-bold text-green-400 uppercase tracking-widest">FREE</span>
+            ) : (
+              <PriceReveal normalPrice={course.currentPrice} overclockedPrice={course.grantPrice} isOverclocked={isOverclocked} className="text-2xl" />
+            )}
+          </div>
+        </div>
+
+        {course.isUpcoming ? (
+          <a href={course.href} target="_blank" rel="noopener noreferrer" className="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shrink-0 bg-gray-800 text-gray-400 border border-white/5 hover:bg-gray-700 hover:text-white uppercase tracking-wider active:scale-[0.98] transition-all">
+            Coming Soon <ExternalLink size={16} />
+          </a>
+        ) : course.isYouTubeFree ? (
+          <a href={course.href} target="_blank" rel="noopener noreferrer" className="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shrink-0 active:scale-[0.98] transition-all bg-red-600 text-white hover:bg-red-700 hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]">
+            Watch Free <ExternalLink size={16} />
+          </a>
+        ) : (
+          <a href={course.href} target="_blank" rel="noopener noreferrer" className={twMerge(clsx(
+            'w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shrink-0 active:scale-[0.98] transition-all',
+            isOverclocked ? 'bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white border border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]' : 'bg-white text-black hover:bg-gray-200 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]'
+          ))}>
+            {isOverclocked ? 'Deploy Grant' : 'Enroll Now'} <ExternalLink size={16} />
+          </a>
+        )}
+      </div>
+    </div>
+  );
+
+  // ---- BACK FACE: description + specs + syllabus + Explore CTA ----
+  const back = (
+    <div className={clsx('relative flex flex-col h-full w-full rounded-2xl overflow-hidden bg-gradient-to-br from-[#0b0b10] to-[#0d0d16] p-5 sm:p-6', surface)}>
+      <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-cyan-400 via-blue-500 to-yellow-400" />
+
+      <div className="flex items-center gap-2 mb-3 pt-1 pr-10">
+        {categoryChip}
+        <h3 className="text-sm font-bold text-white line-clamp-1" title={course.title}>{course.title}</h3>
+      </div>
+
+      <p className="text-sm text-gray-400 leading-relaxed line-clamp-4 mb-4">
+        {course.description || 'A hands-on STRIKE program with structured modules, live guidance and real-world projects.'}
+      </p>
+
+      <div className="space-y-2.5 mb-4">
+        <div className="flex items-center gap-2.5 text-xs text-gray-200">
+          <Clock size={14} className="text-cyan-400 shrink-0" />
+          <span className="font-semibold text-gray-400 w-24 shrink-0">Duration</span>
+          <span className="truncate">{stripLabel(course.duration) || 'Self-paced'}</span>
+        </div>
+        <div className="flex items-center gap-2.5 text-xs text-gray-200">
+          <Layers size={14} className="text-cyan-400 shrink-0" />
+          <span className="font-semibold text-gray-400 w-24 shrink-0">Learning hours</span>
+          <span className="truncate">{stripLabel(course.hours) || 'Full course'}</span>
+        </div>
+        <div className="flex items-center gap-2.5 text-xs text-gray-200">
+          <GraduationCap size={14} className="text-yellow-400 shrink-0" />
+          <span className="font-semibold text-gray-400 w-24 shrink-0">Prerequisites</span>
+          <span className="truncate">{prerequisite}</span>
+        </div>
+      </div>
+
+      <div className="flex-1" />
+
+      <div className="flex flex-col gap-2">
+        {course.syllabus && course.syllabus.length > 0 && (
+          <button onClick={() => setShowSyllabus(true)} className="w-full py-2.5 rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 border border-white/10 text-gray-200 hover:bg-white/5 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400">
+            <BookOpen size={14} /> View Syllabus
+          </button>
+        )}
+        <a href={course.href} target="_blank" rel="noopener noreferrer" className="w-full py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 bg-cyan-500 text-black hover:bg-cyan-400 transition-colors active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+          Explore Course <ExternalLink size={15} />
+        </a>
+      </div>
+    </div>
+  );
+
   return (
     <>
-      <motion.div
-        ref={cardRef}
-        onPointerMove={handlePointerMove}
-        onPointerLeave={resetTilt}
-        onHoverStart={() => setHovered(true)}
-        onHoverEnd={() => setHovered(false)}
-        style={shouldReduceMotion ? undefined : { rotateX, rotateY, transformPerspective: 900 }}
-        className={twMerge(
-        clsx(
-          "flex flex-col bg-[#0a0a0c] rounded-2xl overflow-hidden transition-colors duration-500 h-full w-full relative [transform-style:preserve-3d]",
-          "group",
-          isOverclocked
-            ? "border border-cyan-500/30 shadow-[0_0_20px_rgba(34,211,238,0.1)] hover:shadow-[0_0_35px_rgba(34,211,238,0.3)] hover:border-cyan-400"
-            : "border border-white/10 hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]"
-        )
-      )}>
-        {/* THUMBNAIL (Fixed 16:9) */}
-        <div className="relative w-full aspect-[16/9] overflow-hidden border-b border-white/5 bg-[#050505] shrink-0">
-          <a href={course.href} target="_blank" rel="noopener noreferrer" className="absolute inset-0 block">
-            <img
-              src={imageSrc}
-              alt={course.title}
-              loading="lazy"
-              onError={() => setImgError(true)}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-            {/* Overclock Inner Glow */}
-            {isOverclocked && (
-              <div className="absolute inset-0 bg-cyan-500/10 mix-blend-overlay pointer-events-none" />
-            )}
-          </a>
+      <FlipCard
+        className={clsx('h-full w-full rounded-2xl transition-shadow duration-500', rootGlow)}
+        detailsLabel="course details"
+        front={front}
+        back={back}
+      />
 
-          {course.isUpcoming && (
-            <div className="absolute top-3 left-3 z-30 bg-blue-600/90 backdrop-blur-md border border-blue-400 text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-widest rounded shadow-[0_0_15px_rgba(59,130,246,0.5)] pointer-events-none">
-              Upcoming
-            </div>
-          )}
-
-          {/* Mobile-only tap toggle — hover handles the reveal on desktop */}
-          <button
-            type="button"
-            onClick={() => setDetailsOpen((v) => !v)}
-            aria-expanded={detailsOpen}
-            aria-label={detailsOpen ? 'Hide course details' : 'Show course details'}
-            className="pointer-fine:hidden absolute top-3 right-3 z-30 flex items-center justify-center w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-cyan-300 active:scale-95 transition-transform focus:outline-none focus:ring-2 focus:ring-cyan-400"
-          >
-            {detailsOpen ? <X size={16} /> : <Info size={16} />}
-          </button>
-
-          {/* QUICK-LOOK REVEAL — surfaces existing course facts + a CTA over the
-              thumbnail. Absolutely positioned, so it never shifts layout. */}
-          <motion.div
-            aria-hidden={!reveal}
-            initial={false}
-            animate={reveal ? 'reveal' : 'rest'}
-            variants={{
-              rest: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
-              reveal: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: shouldReduceMotion ? 0.15 : 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className={clsx(
-              "absolute inset-0 z-20 flex flex-col justify-end gap-2.5 p-4 bg-gradient-to-t from-black via-black/85 to-black/10 backdrop-blur-[2px]",
-              reveal ? "pointer-events-auto" : "pointer-events-none"
-            )}
-          >
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2 text-[11px] text-gray-200">
-                <Clock size={13} className="text-cyan-400 shrink-0" />
-                <span className="font-semibold text-gray-400">Duration:</span>
-                <span className="truncate">{stripLabel(course.duration) || 'Self-paced'}</span>
-              </div>
-              <div className="flex items-center gap-2 text-[11px] text-gray-200">
-                <Layers size={13} className="text-cyan-400 shrink-0" />
-                <span className="font-semibold text-gray-400">Learning hours:</span>
-                <span className="truncate">{stripLabel(course.hours) || 'Full course'}</span>
-              </div>
-              <div className="flex items-center gap-2 text-[11px] text-gray-200">
-                <GraduationCap size={13} className="text-cyan-400 shrink-0" />
-                <span className="font-semibold text-gray-400">Prerequisites:</span>
-                <span className="truncate">{prerequisite}</span>
-              </div>
-            </div>
-            <a
-              href={course.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-cyan-500/90 hover:bg-cyan-400 text-black text-xs font-bold py-2 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-300"
-            >
-              Explore Course <ExternalLink size={13} />
-            </a>
-          </motion.div>
-        </div>
-
-        {/* CONTENT */}
-        <div className="flex flex-col flex-1 p-5 sm:p-6 relative z-10">
-          <a href={course.href} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors block mb-3 group-hover:text-cyan-50">
-            <h3 className="text-lg sm:text-xl font-bold text-white line-clamp-2 leading-tight min-h-[3.5rem]" title={course.title}>
-              {course.title}
-            </h3>
-          </a>
-          
-          <p className="text-sm text-gray-400 line-clamp-2 leading-relaxed mb-4 min-h-[2.5rem]" title={course.description}>
-            {course.description}
-          </p>
-
-          {/* META TAGS */}
-          <div className="flex flex-wrap gap-2 mb-5 min-h-[28px]">
-            <span className={twMerge(clsx(
-              "text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border",
-              CATEGORY_META[course.category].cls
-            ))}>
-              {CATEGORY_META[course.category].label}
-            </span>
-            {course.duration && (
-              <span className="text-[10px] font-bold text-gray-300 uppercase tracking-wider bg-white/5 border border-white/10 px-2 py-1 rounded">
-                {course.duration}
-              </span>
-            )}
-            {course.hours && (
-              <span className="text-[10px] font-bold text-gray-300 uppercase tracking-wider bg-white/5 border border-white/10 px-2 py-1 rounded">
-                {course.hours}
-              </span>
-            )}
-          </div>
-          
-          <div className="flex-1"></div>
-
-          {course.syllabus && course.syllabus.length > 0 && (
-            <button 
-              onClick={(e) => {
-                e.preventDefault();
-                setShowSyllabus(true);
-              }}
-              className="text-cyan-500 text-xs font-semibold flex items-center gap-1.5 hover:text-cyan-400 transition-colors mb-4 w-fit min-h-[44px] py-3 -my-2 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
-            >
-              <BookOpen size={14} /> View Syllabus
-            </button>
-          )}
-          
-          {/* PRICING BLOCK */}
-          <div className="mt-auto mb-5 relative">
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2 h-5 mb-1">
-                <AnimatePresence mode="popLayout">
-                  {course.originalPrice && !course.isUpcoming && course.originalPrice !== activeCurrentPrice && (
-                    <motion.div
-                      key="discount-meta"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                      className="flex items-center gap-2"
-                    >
-                      <span className="text-xs text-gray-500 line-through font-medium">
-                        ₹{course.originalPrice.toLocaleString('en-IN')}
-                      </span>
-                      {calculatedDiscount && (
-                        <span className="text-[10px] font-bold text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-1.5 py-0.5 rounded">
-                          {calculatedDiscount}
-                        </span>
-                      )}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-              
-              <div className="flex items-center h-8">
-                {course.isYouTubeFree ? (
-                  <span className="text-xl font-bold text-red-500 uppercase tracking-widest flex items-center gap-2">
-                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                    FREE ON YOUTUBE
-                  </span>
-                ) : course.isUpcoming ? (
-                  <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">
-                    To Be Announced
-                  </span>
-                ) : course.currentPrice === 0 ? (
-                  <span className="text-2xl font-bold text-green-400 uppercase tracking-widest">
-                    FREE
-                  </span>
-                ) : (
-                  <PriceReveal 
-                    normalPrice={course.currentPrice} 
-                    overclockedPrice={course.grantPrice} 
-                    isOverclocked={isOverclocked} 
-                    className="text-2xl"
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* CTA BUTTON */}
-          {course.isUpcoming ? (
-            <a 
-              href={course.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shrink-0 bg-gray-800 text-gray-400 border border-white/5 hover:bg-gray-700 hover:text-white uppercase tracking-wider active:scale-[0.98]"
-            >
-              Coming Soon <ExternalLink size={16} />
-            </a>
-          ) : course.isYouTubeFree ? (
-            <a 
-              href={course.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={twMerge(
-                clsx(
-                  "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shrink-0 active:scale-[0.98]",
-                  "bg-red-600 text-white hover:bg-red-700 hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
-                )
-              )}
-            >
-              Watch Free Course <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-          ) : (
-            <a 
-              href={course.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={twMerge(
-                clsx(
-                  "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shrink-0 active:scale-[0.98]",
-                  isOverclocked
-                    ? "bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white border border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
-                    : "bg-white text-black hover:bg-gray-200 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
-                )
-              )}
-            >
-              {isOverclocked ? "Deploy Grant" : "Enroll Now"} <ExternalLink size={16} />
-            </a>
-          )}
-        </div>
-      </motion.div>
-
-      {/* SYLLABUS MODAL */}
       <AnimatePresence>
         {showSyllabus && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowSyllabus(false)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-[#08080a] border border-white/10 rounded-2xl w-full max-w-lg max-h-[85vh] flex flex-col shadow-2xl overflow-hidden relative"
+              exit={{ opacity: 0, scale: 0.95, y: 12 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-lg max-h-[80vh] overflow-y-auto rounded-2xl border border-cyan-500/25 bg-[#0a0a0c] p-6 shadow-[0_0_40px_rgba(34,211,238,0.15)]"
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600" />
-              
-              <div className="flex items-center justify-between p-6 border-b border-white/10 shrink-0">
-                <h3 className="text-xl font-bold text-white pr-4">{course.title} Syllabus</h3>
-                <button 
-                  onClick={() => setShowSyllabus(false)}
-                  className="flex items-center justify-center min-w-[44px] min-h-[44px] text-gray-400 hover:text-white transition-colors rounded-lg hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                  aria-label="Close syllabus"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-              
-              <div className="p-6 overflow-y-auto flex-1 custom-scrollbar">
-                <div className="space-y-3">
-                  {course.syllabus?.map((phase, idx) => (
-                    <div key={idx} className="bg-white/5 border border-white/5 rounded-xl p-4 hover:bg-white/10 transition-colors">
-                      <h4 className="text-white font-semibold text-sm mb-1">{phase.title}</h4>
-                      {phase.modules && (
-                        <p className="text-cyan-400 text-xs font-mono">{phase.modules} Modules</p>
+              <button
+                onClick={() => setShowSyllabus(false)}
+                aria-label="Close syllabus"
+                className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              >
+                <X size={16} />
+              </button>
+              <h4 className="text-lg font-bold text-white mb-1 pr-8">{course.title}</h4>
+              <p className="text-xs uppercase tracking-widest text-cyan-400 font-semibold mb-4">Syllabus</p>
+              <ol className="space-y-2">
+                {course.syllabus?.map((mod, i) => (
+                  <li key={i} className="flex items-start gap-3 rounded-lg border border-white/5 bg-white/[0.02] px-3 py-2.5">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-300 text-xs font-bold">{i + 1}</span>
+                    <div className="min-w-0">
+                      <p className="text-sm text-gray-100 font-medium leading-snug">{mod.title}</p>
+                      {mod.modules !== undefined && (
+                        <p className="text-[11px] text-gray-500 mt-0.5">{mod.modules} modules</p>
                       )}
                     </div>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="p-6 border-t border-white/10 bg-black/50 shrink-0">
-                <a 
-                  href={course.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 bg-white text-black hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                >
-                  View Full Details on Strike <ExternalLink size={16} />
-                </a>
-              </div>
+                  </li>
+                ))}
+              </ol>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
