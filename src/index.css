@@ -96,5 +96,14 @@
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
+
+/* ===== CodeArena syntax-highlight tokens =====
+   Consumed by the highlighted <pre> layer behind the editor textarea
+   (src/components/codearena/highlight.ts → tok-* span classes). */
+.ca-highlight .tok-comment { color: #6b7280; font-style: italic; }
+.ca-highlight .tok-string  { color: #86efac; }
+.ca-highlight .tok-number  { color: #fca5a5; }
+.ca-highlight .tok-keyword { color: #67e8f9; }
+.ca-highlight .tok-literal { color: #c084fc; }

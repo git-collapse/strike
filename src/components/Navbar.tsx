@@ -16,7 +16,7 @@ const LINKS = [
   { name: 'Home', href: '/', icon: Home, internal: true },
   { name: 'Courses', href: '/#courses', icon: BookOpen, internal: true },
   { name: 'Practice', href: 'https://strikes.in/practice', icon: Code2, internal: false },
-  { name: 'CodeArena', href: 'https://strikes.in/codearena', icon: Swords, internal: false },
+  { name: 'CodeArena', href: '/codearena', icon: Swords, internal: true },
   { name: 'Quiz', href: 'https://strikes.in/quiz', icon: Brain, internal: false },
   { name: 'System Design', href: 'https://strikes.in/system-design', icon: Network, internal: false },
   { name: 'Contests', href: 'https://strikes.in/contests', icon: Trophy, internal: false },
@@ -97,6 +97,12 @@ const Navbar = () => {
     setActiveLink(link.name);
     if (link.href === '/') {
       if (location.pathname !== '/') navigate('/');
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    // Plain internal route (no hash), e.g. /codearena — route in-SPA.
+    if (!link.href.includes('#')) {
+      if (location.pathname !== link.href) navigate(link.href);
       else window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }

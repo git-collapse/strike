@@ -21,6 +21,7 @@ import { DeveloperBackground } from './components/DeveloperBackground';
 // The auth screens live on their own routes and aren't needed for the homepage,
 // so we code-split them out of the main bundle (loaded on demand).
 const Login = lazy(() => import('./pages/Login'));
+const CodeArena = lazy(() => import('./pages/CodeArena'));
 
 const Home = () => {
   return (
@@ -113,6 +114,7 @@ const MainLayout = () => {
           <Suspense fallback={<div className="min-h-screen" aria-hidden="true" />}>
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
+              <Route path="/codearena" element={<CodeArena />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Login />} />
               <Route path="/forgot-password" element={<Login />} />
