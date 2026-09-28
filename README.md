@@ -1,14 +1,24 @@
+<div align="center">
+
 # STRIKE — Overclock Edition ⚡
 
-A polished reimagining of the [STRIKE](https://strikes.in) ed-tech homepage, built for
-**THUNDER HACKATHON 6.0 — Frontend Task**. It reproduces STRIKE's dark, high-energy
-developer aesthetic and layers on a signature interaction the original doesn't have:
-a hidden **"System Overclock"** developer-terminal easter egg that unlocks a
-time-limited **Developer Grant** sale.
+**A polished reimagining of the [STRIKE](https://strikes.in) ed-tech homepage, with a hidden developer-terminal sale easter egg.**
+Built for **THUNDER HACKATHON 6.0 — Frontend Task**.
+
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38BDF8?logo=tailwindcss&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-13-0055FF?logo=framer&logoColor=white)
+![Hackathon](https://img.shields.io/badge/THUNDER-Hackathon_6.0-06B6D4)
+
+[The idea](#the-idea) · [User flow](#user-flow) · [Feature checklist](#feature-checklist) · [Technical approach](#technical-approach) · [Getting started](#getting-started) · [Project structure](#project-structure) · [Known limitations](#known-limitations)
+
+</div>
 
 > The whole experience is a single-page React app — no backend. The "auth" pages and
 > the sale are front-end simulations designed to showcase UX, animation, and state
-> management. See **Known limitations** below.
+> management. See **[Known limitations](#known-limitations)** below.
 
 ---
 
@@ -26,9 +36,9 @@ the behaviour the product wants from its audience.
 
 ## User flow
 
-1. **Land on the homepage.** Hero, membership plans, course catalog, a "Track Your
-   Progress" dashboard preview, "Why Strike" features, mentors, testimonials, a FAANG
-   placement band, and an FAQ — all standard pricing.
+1. **Land on the homepage.** Hero, membership plans, course catalog, a **Projects Based
+   Learning** showcase, a "Track Your Progress" dashboard preview, "Why Strike" features,
+   mentors, testimonials, an animated **FAANG** logo band, and an FAQ — all standard pricing.
 2. **Notice the signals.** A floating robot mascot (right edge) nudges *"Psst… I've got
    a surprise for you"*, and a `System: Standard` pill sits bottom-right.
 3. **Trigger the terminal.** Clicking the robot (or the pill) boots a bottom-sheet
@@ -47,7 +57,12 @@ the behaviour the product wants from its audience.
 
 ---
 
-## Feature checklist (task requirements → where they live)
+## Feature checklist
+
+Task requirements → where they live. <sub>(click to expand)</sub>
+
+<details open>
+<summary><strong>Core sale requirements</strong></summary>
 
 | Requirement | Status | Where |
 |---|---|---|
@@ -64,15 +79,27 @@ the behaviour the product wants from its audience.
 | Responsive (mobile → desktop) | ✅ | Tailwind breakpoints; bottom-sheet on mobile, centered modal on desktop |
 | Accessible / reduced motion | ✅ | `useReducedMotion`, `matchMedia`, focus rings, `aria-*`, dialog roles |
 
-Beyond the brief, the homepage adds a **"Track Your Progress" dashboard preview**
-(animated weekly-activity chart + streak line, clearly labelled *Preview*), a **"Why
-Strike" features grid**, a **mentors** section, **testimonials**, a **FAANG placement
-band**, and an **FAQ accordion** (one of which explains how to redeem the grant) to
-round the page out into a complete, on-brand landing experience.
+</details>
+
+<details>
+<summary><strong>Beyond the brief — full homepage build</strong></summary>
+
+To round the page out into a complete, on-brand landing experience:
+
+- **Projects Based Learning** — six portfolio-ready project cards, each grounded in a real course track (`ProjectsBasedLearning.tsx`).
+- **"Track Your Progress" dashboard preview** — animated weekly-activity chart + streak line, clearly labelled *Preview* (`ProgressTracker.tsx`).
+- **Animated FAANG placement band** — a continuous, hover-pausing logo marquee of real company brand glyphs, respecting `prefers-reduced-motion` (`FaangBand.tsx`).
+- **"Why Strike" features grid**, a **mentors** section, **testimonials**, and an **FAQ accordion** (one entry explains how to redeem the grant).
+- **CodeArena** — a standalone in-browser code editor page at `/codearena` with syntax highlighting.
+
+</details>
 
 ---
 
 ## Technical approach
+
+<details open>
+<summary><strong>Architecture &amp; key decisions</strong></summary>
 
 - **Single source of truth.** `OverclockContext` owns `isOverclocked`, `isExpired`,
   and `timeLeft`. Because the countdown and the pricing logic read the same context,
@@ -88,11 +115,16 @@ round the page out into a complete, on-brand landing experience.
 - **Zero-layout-shift decrypt.** `ScrambleNumber` animates by replacing only digits
   (`/\d/g`) in the formatted `en-IN` string, preserving separators so the price never
   jitters as it settles.
+- **CSS-only logo marquee.** The FAANG band loops a duplicated track via a `@theme`
+  keyframe (`translateX(-50%)`), pauses on hover, and collapses to a static grid under
+  reduced motion — no JS animation loop.
 - **Motion, done responsibly.** Framer Motion powers the terminal drawer, staggered
   `whileInView` reveals, `layout` transitions, and count-ups — all gated behind
   reduced-motion checks.
-- **Stack.** React 19 + TypeScript + Vite 8, Tailwind CSS v4 (CSS-first `@theme`),
-  Framer Motion, React Router, lucide-react.
+
+</details>
+
+**Stack:** React 19 · TypeScript · Vite 8 (rolldown) · Tailwind CSS v4 (CSS-first `@theme`) · Framer Motion · React Router 7 · lucide-react.
 
 ---
 
@@ -100,7 +132,7 @@ round the page out into a complete, on-brand landing experience.
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
+npm run dev      # http://localhost:5173 (Vite picks the next free port if taken)
 ```
 
 ```bash
@@ -109,26 +141,33 @@ npm run preview  # serve the built output
 npm run lint     # oxlint
 ```
 
-Requires Node 18+ (Vite 8). No environment variables or backend are needed.
+Requires **Node 20.19+** (Vite 8). No environment variables or backend are needed.
 
 ---
 
 ## Known limitations
+
+<details>
+<summary><strong>What's simulated vs. real</strong> <sub>(click to expand)</sub></summary>
 
 - **Demo authentication only.** The Login/Signup/Forgot-password routes are UI mocks.
   There is no real backend, session, or credential storage beyond front-end state.
 - **Illustrative dashboard preview.** The "Track Your Progress" weekly-activity chart
   is a *product-feature mockup* labelled **Preview** — it depicts what the learner
   dashboard looks like, not real user activity or verified platform metrics.
-- **Placeholder mentor avatars.** The mentors section uses generated initial-avatars
-  rather than real photographs.
+- **Illustrative project showcase.** The "Projects Based Learning" cards describe
+  representative projects grounded in real course tracks, not a fixed enrolled curriculum.
+- **Company logos are referential.** The FAANG band uses CC0 brand glyphs to name the
+  companies whose interview questions the practice track covers — no endorsement implied.
 - **Simulated sale.** Pricing, discounts, and the `OVERCLOCK` coupon are front-end
   simulations for the hackathon; nothing is charged or validated server-side.
 - **Clipboard copy** depends on the browser's `navigator.clipboard` API (secure
   contexts); it fails gracefully where unavailable.
-- The production bundle currently ships as a single chunk (~534 kB / ~165 kB gzip),
-  which triggers Vite's chunk-size advisory — acceptable for a demo, code-splittable
-  later if needed.
+
+</details>
+
+The production build is **code-split** into app + vendor chunks (React and Framer Motion
+are isolated so they cache independently), keeping the main bundle under Vite's advisory.
 
 ---
 
@@ -141,13 +180,23 @@ src/
     SaleDiscovery.tsx            # robot mascot, System pill, grant panel, coupon, countdown UI
     TerminalOverlay.tsx          # cinematic activation sequence
     PriceReveal.tsx              # scramble-decrypt price component
+    ProjectsBasedLearning.tsx    # "Projects Based Learning" project showcase
     ProgressTracker.tsx          # "Track Your Progress" dashboard preview (chart + streak line)
-    Hero / MembershipPlans / CourseGrid / WhyStrike / Mentors / Testimonials / FaangBand / FAQ / Navbar / Footer
-  pages/Login.tsx                # demo auth screens
+    FaangBand.tsx                # animated FAANG logo marquee (real brand glyphs)
+    Hero / MembershipPlans / CourseGrid / WhyStrike / Mentors / Testimonials / FAQ / Navbar / Footer
+    codearena/                   # in-browser code editor building blocks (editor, highlight, runner)
+  data/courses.ts                # course catalog + mentor lookup (single source of course data)
+  pages/
+    Login.tsx                    # demo auth screens
+    CodeArena.tsx                # /codearena — standalone code editor page
+  public/logos/                  # CC0 company brand glyphs used by the FAANG marquee
 ```
 
 ---
 
+<div align="center">
+
 *Built as a hackathon submission. STRIKE branding is used for a design-fidelity
 exercise; this is not an official STRIKE product.*
 
+</div>
